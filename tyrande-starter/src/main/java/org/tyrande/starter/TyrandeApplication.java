@@ -1,4 +1,4 @@
-package org.tyrande;
+package org.tyrande.starter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
