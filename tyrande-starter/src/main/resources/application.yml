@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /tyrande
+
+spring:
+  application:
+    name: tyrande
+  profiles:
+    active: dev
+    include: common
+  cache:
+    type: caffeine
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 20MB

@@ -13,9 +13,11 @@
     <description>web服务入口</description>
 
     <dependencies>
+
+        <!-- 数据库驱动 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
         <!-- 通用工具 -->

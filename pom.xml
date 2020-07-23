@@ -26,7 +26,9 @@
         <tyrande.version>1.0.0</tyrande.version>
         <springboot.version>2.3.1.RELEASE</springboot.version>
         <lombok.version>1.18.12</lombok.version>
-        <velocity.version>2.2</velocity.version>
+        <mybatisplus.version>3.3.2</mybatisplus.version>
+        <hutool.version>5.3.9</hutool.version>
+        <freemarker.version>2.3.1.RELEASE</freemarker.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -41,14 +43,26 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- velocity代码生成模板 -->
+            <!-- Mybatis Plus -->
             <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>${velocity.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.version}</version>
             </dependency>
 
-            <!-- 通用工具 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- 通用工具模块 -->
             <dependency>
                 <groupId>org.tyrande</groupId>
                 <artifactId>tyrande-common</artifactId>
@@ -105,6 +119,16 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 
