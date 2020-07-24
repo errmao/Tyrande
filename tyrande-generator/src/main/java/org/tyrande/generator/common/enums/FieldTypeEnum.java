@@ -8,6 +8,10 @@ package org.tyrande.generator.common.enums;
 public enum FieldTypeEnum {
 
     /**
+     * 日期
+     */
+    DATETIME("datetime", "Date"),
+    /**
      * 字符类型
      */
     LONGTEXT("longtext", "String"),

@@ -22,4 +22,9 @@ public class GeneratorFieldModel {
      * 字段名称
      */
     private String javaField;
+
+    /**
+     * 数据库字段
+     */
+    private String columnField;
 }

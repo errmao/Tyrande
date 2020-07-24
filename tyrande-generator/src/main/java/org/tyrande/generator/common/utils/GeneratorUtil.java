@@ -58,7 +58,10 @@ public class GeneratorUtil {
         Template template = TemplateUtil.getTemplate(typeEnum.getFileName());
         String fileName = typeEnum.getFileName();
         int index = fileName.indexOf(".ftl");
-        File file = FileUtil.touch("D://data/" + generatorDataModel.getClassName() + typeEnum.getFileName().substring(0, index));
+        String path = new StringBuffer("D://data/").append(typeEnum.getType()).append(NormalConstants.SLASH)
+                .append(generatorDataModel.getClassNameLower()).append(NormalConstants.SLASH)
+                .append(generatorDataModel.getClassName()).append(typeEnum.getFileName(), 0, index).toString();
+        File file = FileUtil.touch(path);
         // try with 关闭资源
         try (FileOutputStream fos = new FileOutputStream(file);
              Writer out = new BufferedWriter(new OutputStreamWriter(fos, StandardCharsets.UTF_8), 10240)) {
@@ -148,6 +151,7 @@ public class GeneratorUtil {
                 String jdbcType = columnType.substring(0, index);
                 generatorFieldModel.setJavaType(FieldTypeEnum.getJavaType(jdbcType));
             }
+            generatorFieldModel.setColumnField(columnInfo.getColumnName());
             generatorFieldModel.setColumnComment(columnInfo.getColumnComment());
             generatorFieldModel.setJavaField(StringChangeUtil.underlineToHump(columnInfo.getColumnName()));
             list.add(generatorFieldModel);

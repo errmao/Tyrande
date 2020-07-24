@@ -7,6 +7,17 @@ package org.tyrande.generator.common.enums;
  */
 public enum TemplateTypeEnum {
 
+    /**
+     * 接口实现
+     */
+    SERVICE_IMPL("service", "ServiceImpl.java.ftl"),
+    /**
+     * 接口
+     */
+    SERVICE("service", "Service.java.ftl"),
+    /**
+     * 实体
+     */
     MODLE("model", "Model.java.ftl");
 
     private final String type;

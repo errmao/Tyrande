@@ -11,16 +11,18 @@ public class NormalConstants {
      * 包名
      */
     public static final String PROJECT_PRE = "org.tyrande";
-
     /**
      * 点
      */
     public static final String POINT = ".";
-
     /**
      * 下划线
      */
     public static final String UNDER_LINE = "_";
+    /**
+     * 斜杠
+     */
+    public static final String SLASH = "/";
     /**
      * 创建时间
      */
