@@ -1,10 +1,13 @@
 package org.tyrande.generator.service;
 
 import org.springframework.stereotype.Service;
+import org.tyrande.generator.common.utils.GeneratorUtil;
 import org.tyrande.generator.dao.GeneratorDao;
-import org.tyrande.generator.model.GeneratorConfigProperty;
+import org.tyrande.generator.model.queryinfo.ColumnInfo;
+import org.tyrande.generator.model.queryinfo.TableInfo;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 代码生成 service 实现类
@@ -15,31 +18,19 @@ import javax.annotation.Resource;
 public class GeneratorServiceImpl implements GeneratorService {
 
     @Resource
-    private GeneratorConfigProperty generatorConfigProperty;
-
-    @Resource
     private GeneratorDao generatorDao;
 
     /**
      * 代码生成
      *
-     * @param tableName 表名
+     * @param tableName  表名
+     * @param moduleName 模块名
      */
     @Override
-    public void generatorCode(String tableName) {
-        System.out.println(generatorDao.getTableInfo("sys_user").toString());
-        generatorDao.getColumnInfo("sys_user").forEach(e -> System.err.println(e.toString()));
-        System.err.println(generatorConfigProperty);
+    public void generatorCode(String tableName, String moduleName) {
+        TableInfo tableInfo = generatorDao.getTableInfo(tableName);
+        List<ColumnInfo> columns = generatorDao.getColumnInfo(tableName);
+        GeneratorUtil.processCreateFile(tableInfo, columns, moduleName);
     }
 
-    /*public static void main(String[] args) throws IOException, TemplateException {
-        Template template = GeneratorUtil.getTemplate("Model.ftl");
-
-        File file = FileUtil.touch ("D://data/TestModel.java");
-        FileOutputStream fos = new FileOutputStream(file);
-        Map<String,Object> dataMap = new HashMap<>();
-        dataMap.put("packageName","org.dddd");
-        Writer out = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"),10240);
-        template.process(dataMap,out);
-    }*/
 }

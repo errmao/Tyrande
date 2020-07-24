@@ -29,7 +29,7 @@ public class ExceptionGlobalHandler {
      */
     @ExceptionHandler(CustomException.class)
     public R businessException(CustomException e) {
-        log.error("[业务异常] -> {}", e.getMessage());
+        log.error("[业务异常 -> {}]", e.getMessage(), e);
         return R.failed(new IErrorCode() {
             @Override
             public long getCode() {
@@ -48,7 +48,7 @@ public class ExceptionGlobalHandler {
      */
     @ExceptionHandler(BindException.class)
     public R validatedBindException(BindException e) {
-        log.error("[参数绑定异常] -> {}", e.getMessage());
+        log.error("[参数绑定异常 -> {}]", e.getMessage(), e);
         String message = e.getAllErrors().get(0).getDefaultMessage();
         return R.failed(message);
     }
@@ -58,7 +58,7 @@ public class ExceptionGlobalHandler {
      */
     @ExceptionHandler(ValidationException.class)
     public R handleValidationException(ValidationException e) {
-        log.error("[参数校验异常] -> {}", e.getMessage());
+        log.error("[参数校验异常 -> {}]", e.getMessage(), e);
         return R.failed(e.getMessage());
     }
 
@@ -67,7 +67,7 @@ public class ExceptionGlobalHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Object validExceptionHandler(MethodArgumentNotValidException e) {
-        log.error("[自定义验证异常] -> {}", e.getMessage());
+        log.error("[自定义验证异常 -> {}]", e.getMessage(), e);
         String message = e.getBindingResult().getFieldError().getDefaultMessage();
         return R.failed(message);
     }
@@ -77,7 +77,7 @@ public class ExceptionGlobalHandler {
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public R handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
-        log.error("[Controller 参数绑定错误] -> {}", e.getMessage());
+        log.error("[Controller 参数绑定错误 -> {}]", e.getMessage(), e);
         return R.failed(e.getMessage());
     }
 
@@ -86,7 +86,7 @@ public class ExceptionGlobalHandler {
      */
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     public R handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        log.error("[请求类型不支持异常] -> {}", e.getMessage());
+        log.error("[请求类型不支持异常 -> {}]", e.getMessage(), e);
         return R.failed("请求类型不支持");
     }
 
@@ -98,7 +98,7 @@ public class ExceptionGlobalHandler {
      */
     @ExceptionHandler(ConstraintViolationException.class)
     public R handleConstraintViolationException(ConstraintViolationException e) {
-        log.error("[约束违例异常] -> {}", e.getMessage());
+        log.error("[约束违例异常 -> {}]", e.getMessage(), e);
         return R.failed(e.getMessage());
     }
 
@@ -107,7 +107,7 @@ public class ExceptionGlobalHandler {
      */
     @ExceptionHandler(value = Exception.class)
     public R otherErrHandler(Exception e) {
-        log.error("[发生异常] -> {}", e.getMessage());
-        return R.failed(e.getMessage());
+        log.error("[发生异常 -> {}]", e.getMessage(), e);
+        return R.failed("系统异常");
     }
 }

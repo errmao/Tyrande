@@ -10,7 +10,8 @@ public interface GeneratorService {
     /**
      * 代码生成
      *
-     * @param tableName 表名
+     * @param tableName  表名
+     * @param moduleName 模块名
      */
-    void generatorCode(String tableName);
+    void generatorCode(String tableName, String moduleName);
 }

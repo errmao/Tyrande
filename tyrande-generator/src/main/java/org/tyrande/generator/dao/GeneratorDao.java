@@ -2,8 +2,8 @@ package org.tyrande.generator.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.tyrande.generator.model.ColumnInfo;
-import org.tyrande.generator.model.TableInfo;
+import org.tyrande.generator.model.queryinfo.ColumnInfo;
+import org.tyrande.generator.model.queryinfo.TableInfo;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.tyrande.generator.model;
+package org.tyrande.generator.model.queryinfo;
 
 import lombok.Data;
 

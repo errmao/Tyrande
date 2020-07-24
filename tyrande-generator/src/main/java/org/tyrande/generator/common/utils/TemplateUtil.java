@@ -1,4 +1,4 @@
-package org.tyrande.generator.utils;
+package org.tyrande.generator.common.utils;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.NullCacheStorage;
@@ -44,8 +44,7 @@ public class TemplateUtil {
         try {
             return CONFIGURATION.getTemplate(templateName);
         } catch (IOException e) {
-            log.error("获取模板对象失败");
-            throw new CustomException("获取模板对象失败");
+            throw new CustomException("获取模板对象失败", e);
         }
     }
 

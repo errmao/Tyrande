@@ -1,4 +1,4 @@
-package org.tyrande.generator.model;
+package org.tyrande.generator.model.queryinfo;
 
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class ColumnInfo {
     /**
      * 是否主键
      */
-    private Integer isPk;
+    private Boolean isPk;
     /**
      * 顺序
      */

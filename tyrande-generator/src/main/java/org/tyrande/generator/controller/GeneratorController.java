@@ -28,12 +28,14 @@ public class GeneratorController {
     /**
      * 根据表名生成代码
      *
-     * @param tableName 表名
+     * @param tableName  表名
+     * @param moduleName 模块名
      * @return
      */
     @GetMapping("generatorCode")
-    public R generatorCode(@NotNull(message = "表名不能为空") String tableName) {
-        generatorService.generatorCode(tableName);
+    public R generatorCode(@NotNull(message = "表名不能为空") String tableName,
+                           @NotNull(message = "模块不能为空") String moduleName) {
+        generatorService.generatorCode(tableName, moduleName);
         return R.ok("代码生成成功");
     }
 }
