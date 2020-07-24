@@ -1,4 +1,4 @@
-package org.tyrande.starter.exception.customize;
+package org.tyrande.common.exception.customize;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package org.tyrande.starter.exception;
+package org.tyrande.common.exception;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.api.IErrorCode;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.tyrande.starter.exception.customize.CustomException;
+import org.tyrande.common.exception.customize.CustomException;
 
 import javax.validation.ConstraintViolationException;
 import javax.xml.bind.ValidationException;

@@ -7,21 +7,22 @@ import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.tyrande.common.exception.customize.CustomException;
 
 import java.io.IOException;
 
 /**
- * 模板引擎工具类
+ * 模板工具类
  *
  * @author Tyrande
  */
 @Slf4j
-public class GeneratorUtil {
+public class TemplateUtil {
 
     /**
      * 私有构造方法
      */
-    private GeneratorUtil() {
+    private TemplateUtil() {
     }
 
     private static final Configuration CONFIGURATION = new Configuration(Configuration.VERSION_2_3_30);
@@ -38,22 +39,20 @@ public class GeneratorUtil {
      * 获取模板对象
      *
      * @param templateName 模板名称
-     * @return
-     * @throws IOException
      */
-    public static Template getTemplate(String templateName) throws IOException {
+    public static Template getTemplate(String templateName) {
         try {
             return CONFIGURATION.getTemplate(templateName);
         } catch (IOException e) {
             log.error("获取模板对象失败");
-            throw new RuntimeException("获取模板对象失败");
+            throw new CustomException("获取模板对象失败");
         }
     }
 
     /**
      * 清空模板对象的缓存
      */
-    public static void clearCache() {
+    public static void clearTemplateCache() {
         CONFIGURATION.clearTemplateCache();
     }
 }
