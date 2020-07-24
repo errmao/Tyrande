@@ -17,10 +17,6 @@ mybatis-plus:
   mapper-locations: classpath:/mappers/**/*.xml
 
 # 日志
-logging:
-  file:
-    path: d://tyrande_log
-    name: tyrande.log
-  level:
-    org.tyrande.*.dao: debug
-
+#logging:
+#  level:
+#     org.tyrande.*.dao: debug

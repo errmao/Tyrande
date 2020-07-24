@@ -2,6 +2,7 @@ package org.tyrande.generator.service;
 
 import org.springframework.stereotype.Service;
 import org.tyrande.generator.dao.GeneratorDao;
+import org.tyrande.generator.model.GeneratorConfigProperty;
 
 import javax.annotation.Resource;
 
@@ -12,6 +13,9 @@ import javax.annotation.Resource;
  */
 @Service
 public class GeneratorServiceImpl implements GeneratorService {
+
+    @Resource
+    private GeneratorConfigProperty generatorConfigProperty;
 
     @Resource
     private GeneratorDao generatorDao;
@@ -25,6 +29,7 @@ public class GeneratorServiceImpl implements GeneratorService {
     public void generatorCode(String tableName) {
         System.out.println(generatorDao.getTableInfo("sys_user").toString());
         generatorDao.getColumnInfo("sys_user").forEach(e -> System.err.println(e.toString()));
+        System.err.println(generatorConfigProperty);
     }
 
     /*public static void main(String[] args) throws IOException, TemplateException {

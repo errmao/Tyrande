@@ -14,12 +14,6 @@
 
     <dependencies>
 
-        <!-- 数据库驱动 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
         <!-- 通用工具 -->
         <dependency>
             <groupId>org.tyrande</groupId>

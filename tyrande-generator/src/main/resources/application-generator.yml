@@ -3,5 +3,5 @@ tyrande:
     # 作者
     author: Tyrande
     # 排除前缀
-    exclude-prefix: true
+    excludePrefix: true
 

@@ -1,5 +1,6 @@
 package org.tyrande.generator.model;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,5 +11,16 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "tyrande.generator")
+@Data
 public class GeneratorConfigProperty {
+
+    /**
+     * 作者
+     */
+    private String author;
+
+    /**
+     * 是否去除前缀
+     */
+    private Boolean excludePrefix;
 }
