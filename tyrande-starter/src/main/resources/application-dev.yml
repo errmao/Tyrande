@@ -15,8 +15,3 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   mapper-locations: classpath:/mappers/**/*.xml
-
-# 日志
-#logging:
-#  level:
-#     org.tyrande.*.dao: debug
