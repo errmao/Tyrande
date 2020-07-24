@@ -48,9 +48,14 @@ public class GeneratorDataModel {
     private String className;
 
     /**
-     * 小写类名前缀
+     * 全类名小写类名前缀
      */
     private String classNameLower;
+
+    /**
+     * 首字母小写类名
+     */
+    private String classFirstNameLower;
 
     /**
      * 实体字段

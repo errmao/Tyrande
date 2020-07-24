@@ -42,7 +42,8 @@ public class GeneratorUtil {
         processCreateFile(generatorDataModel, TemplateTypeEnum.MODLE);
         // 生成 service
         processCreateFile(generatorDataModel, TemplateTypeEnum.SERVICE);
-
+        // 生成 service 实现类
+        processCreateFile(generatorDataModel, TemplateTypeEnum.SERVICE_IMPL);
     }
 
     /**
@@ -105,6 +106,7 @@ public class GeneratorUtil {
             generatorDataModel.setClassNameLower(
                     StringChangeUtil.upperTable(tableInfo.getTableName()).toLowerCase());
         }
+        generatorDataModel.setClassFirstNameLower(StringChangeUtil.toLowerCaseFirstOne(generatorDataModel.getClassName()));
         // 模块名
         generatorDataModel.setModuleName(moduleName);
         // 包名
