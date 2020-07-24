@@ -37,24 +37,23 @@ public class GeneratorUtil {
      * @param moduleName 模块名
      */
     public static void processCreateFile(TableInfo tableInfo, List<ColumnInfo> columns, String moduleName) {
-
+        GeneratorDataModel generatorDataModel = processDataModel(tableInfo, columns, moduleName);
         // 生成 model
-        processCreateFile(tableInfo, columns, moduleName, TemplateTypeEnum.MODLE);
+        processCreateFile(generatorDataModel, TemplateTypeEnum.MODLE);
+        // 生成 service
+        processCreateFile(generatorDataModel, TemplateTypeEnum.SERVICE);
+
     }
 
     /**
      * 创建对应文件
      *
-     * @param tableInfo  表信息
-     * @param columns    列信息
-     * @param moduleName 模块名
-     * @param typeEnum   类型
+     * @param generatorDataModel 数据
+     * @param typeEnum           类型
      */
-    private static void processCreateFile(TableInfo tableInfo,
-                                          List<ColumnInfo> columns,
-                                          String moduleName,
+    private static void processCreateFile(GeneratorDataModel generatorDataModel,
                                           TemplateTypeEnum typeEnum) {
-        GeneratorDataModel generatorDataModel = processDataModel(tableInfo, columns, moduleName, typeEnum);
+
         Template template = TemplateUtil.getTemplate(typeEnum.getFileName());
         String fileName = typeEnum.getFileName();
         int index = fileName.indexOf(".ftl");
@@ -79,13 +78,11 @@ public class GeneratorUtil {
      * @param tableInfo  表信息
      * @param columns    表字段信息
      * @param moduleName 模块名
-     * @param typeEnum   类型
      * @return
      */
     private static GeneratorDataModel processDataModel(TableInfo tableInfo,
                                                        List<ColumnInfo> columns,
-                                                       String moduleName,
-                                                       TemplateTypeEnum typeEnum) {
+                                                       String moduleName) {
         GeneratorConfigProperty generatorConfigProperty =
                 (GeneratorConfigProperty) SpringContextUtil.getBean("generatorConfigProperty");
 
@@ -112,9 +109,7 @@ public class GeneratorUtil {
         generatorDataModel.setModuleName(moduleName);
         // 包名
         StringBuffer sb = new StringBuffer();
-        sb.append(NormalConstants.PROJECT_PRE).append(NormalConstants.POINT).append(moduleName)
-                .append(NormalConstants.POINT).append(typeEnum.getType()).append(NormalConstants.POINT)
-                .append(generatorDataModel.getClassName().toLowerCase());
+        sb.append(NormalConstants.PROJECT_PRE).append(NormalConstants.POINT).append(moduleName);
         generatorDataModel.setPackageName(sb.toString());
         // 表名
         generatorDataModel.setTableName(tableInfo.getTableName());
