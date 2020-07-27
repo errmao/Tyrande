@@ -16,6 +16,10 @@ public enum TemplateTypeEnum {
      */
     SERVICE("service", "Service.java.ftl"),
     /**
+     * DAO
+     */
+    DAO("dao", "Dao.java.ftl"),
+    /**
      * VO实体
      */
     VO("vo", "VO.java.ftl"),
