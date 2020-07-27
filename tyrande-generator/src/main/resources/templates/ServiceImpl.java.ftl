@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${packageName}.model.${classNameLower}.${className}Model;
-import ${packageName}.model.${classNameLower}.${className}Vo;
+import ${packageName}.vo.${classNameLower}.${className}Vo;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 
 /**

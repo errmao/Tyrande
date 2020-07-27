@@ -3,7 +3,7 @@ package ${packageName}.service.${classNameLower};
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import ${packageName}.model.${classNameLower}.${className}Model;
-import ${packageName}.model.${classNameLower}.${className}Vo;
+import ${packageName}.vo.${classNameLower}.${className}Vo;
 import java.util.List;
 
 /**

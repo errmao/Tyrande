@@ -47,4 +47,8 @@ public class NormalConstants {
      * 字符小写 z
      */
     public static final char Z_CHAR = 'z';
+    /**
+     * 文件类型
+     */
+    public static final String FTL = ".ftl";
 }

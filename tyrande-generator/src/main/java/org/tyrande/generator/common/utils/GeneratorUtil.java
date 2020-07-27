@@ -40,6 +40,8 @@ public class GeneratorUtil {
         GeneratorDataModel generatorDataModel = processDataModel(tableInfo, columns, moduleName);
         // 生成 model
         processCreateFile(generatorDataModel, TemplateTypeEnum.MODLE);
+        // 生成 vo
+        processCreateFile(generatorDataModel, TemplateTypeEnum.VO);
         // 生成 service
         processCreateFile(generatorDataModel, TemplateTypeEnum.SERVICE);
         // 生成 service 实现类
@@ -55,12 +57,20 @@ public class GeneratorUtil {
     private static void processCreateFile(GeneratorDataModel generatorDataModel,
                                           TemplateTypeEnum typeEnum) {
 
+        GeneratorConfigProperty generatorConfigProperty
+                = (GeneratorConfigProperty) SpringContextUtil.getBean("generatorConfigProperty");
+
         Template template = TemplateUtil.getTemplate(typeEnum.getFileName());
         String fileName = typeEnum.getFileName();
-        int index = fileName.indexOf(".ftl");
-        String path = new StringBuffer("D://data/").append(typeEnum.getType()).append(NormalConstants.SLASH)
-                .append(generatorDataModel.getClassNameLower()).append(NormalConstants.SLASH)
-                .append(generatorDataModel.getClassName()).append(typeEnum.getFileName(), 0, index).toString();
+        int index = fileName.indexOf(NormalConstants.FTL);
+        String path = new StringBuffer(generatorConfigProperty.getFilePath())
+                .append(generatorDataModel.getModuleName())
+                .append(NormalConstants.SLASH).append(typeEnum.getType())
+                .append(NormalConstants.SLASH)
+                .append(generatorDataModel.getClassNameLower())
+                .append(NormalConstants.SLASH)
+                .append(generatorDataModel.getClassName())
+                .append(typeEnum.getFileName(), 0, index).toString();
         File file = FileUtil.touch(path);
         // try with 关闭资源
         try (FileOutputStream fos = new FileOutputStream(file);

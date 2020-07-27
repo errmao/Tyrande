@@ -23,4 +23,9 @@ public class GeneratorConfigProperty {
      * 是否去除前缀
      */
     private Boolean excludePrefix;
+
+    /**
+     * 生成文件路径前缀
+     */
+    private String filePath;
 }

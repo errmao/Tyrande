@@ -16,6 +16,10 @@ public enum TemplateTypeEnum {
      */
     SERVICE("service", "Service.java.ftl"),
     /**
+     * VO实体
+     */
+    VO("vo", "VO.java.ftl"),
+    /**
      * 实体
      */
     MODLE("model", "Model.java.ftl");
