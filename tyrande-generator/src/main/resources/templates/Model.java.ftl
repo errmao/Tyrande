@@ -26,7 +26,7 @@ public class ${className}Model implements Serializable {
      * 主键
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Integer id;
+    private Long id;
 
 <#list columns as column>
     /**
