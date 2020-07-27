@@ -28,7 +28,7 @@ public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${clas
      */
     @Override
     public IPage<${className}Model> getPageList(${className}Vo ${classFirstNameLower}Vo) {
-        QueryWrapper<SysParamsModel> wrapper = new QueryWrapper();
+        QueryWrapper<${className}Model> wrapper = new QueryWrapper();
         IPage<${className}Model> page = ${classFirstNameLower}Dao.selectMapsPage(${classFirstNameLower}Vo, wrapper);
         return page;
     }
