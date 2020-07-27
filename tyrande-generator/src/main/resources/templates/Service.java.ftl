@@ -7,7 +7,7 @@ import ${packageName}.vo.${classNameLower}.${className}Vo;
 import java.util.List;
 
 /**
- * ${tableNameRemark} service层
+ * ${tableNameRemark} service 层
  *
  * @author ${author}
  * @date ${datetime}

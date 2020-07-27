@@ -6,7 +6,10 @@ package org.tyrande.generator.common.enums;
  * @author Tyrande
  */
 public enum TemplateTypeEnum {
-
+    /**
+     * Controller
+     */
+    CONTROLLER("controller", "Controller.java.ftl"),
     /**
      * 接口实现
      */

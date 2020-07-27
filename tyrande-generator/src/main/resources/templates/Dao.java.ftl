@@ -5,7 +5,7 @@ import ${packageName}.model.${classNameLower}.${className}Model;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * ${tableNameRemark} dao层
+ * ${tableNameRemark} dao 层
  *
  * @author ${author}
  * @date ${datetime}

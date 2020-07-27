@@ -50,6 +50,8 @@ public class GeneratorUtil {
         processCreateFile(generatorDataModel, TemplateTypeEnum.SERVICE);
         // 生成 service 实现类
         processCreateFile(generatorDataModel, TemplateTypeEnum.SERVICE_IMPL);
+        // 生成 controller
+        processCreateFile(generatorDataModel, TemplateTypeEnum.CONTROLLER);
     }
 
     /**

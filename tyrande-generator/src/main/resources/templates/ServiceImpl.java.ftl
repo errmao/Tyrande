@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * ${tableNameRemark} service层
+ * ${tableNameRemark} service 实现层
  *
  * @author ${author}
  * @date ${datetime}
