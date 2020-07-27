@@ -29,7 +29,7 @@ public enum TemplateTypeEnum {
     /**
      * VO实体
      */
-    VO("vo", "VO.java.ftl"),
+    VO("vo", "Vo.java.ftl"),
     /**
      * 实体
      */

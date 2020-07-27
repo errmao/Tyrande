@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @date ${datetime}
  */
 @Service("${classFirstNameLower}Service")
-public Class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${className}Model> implements ${className}Service{
+public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${className}Model> implements ${className}Service {
 
     @Resource
     private ${className}Dao ${classFirstNameLower}Dao;

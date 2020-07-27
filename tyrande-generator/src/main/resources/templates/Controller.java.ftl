@@ -1,8 +1,5 @@
 package ${packageName}.controller.${classNameLower};
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.api.R;
 import ${packageName}.model.${classNameLower}.${className}Model;
 import ${packageName}.vo.${classNameLower}.${className}Vo;
@@ -31,7 +28,7 @@ public class ${className}Controller {
      * 分页查询
      */
     @GetMapping("listPage")
-    public R<${className}Model> getPageList(${className}Vo ${classFirstNameLower}Vo) {
+    public R getPageList(${className}Vo ${classFirstNameLower}Vo) {
         return R.ok(${classFirstNameLower}Service.getPageList(${classFirstNameLower}Vo));
     }
 
@@ -39,7 +36,7 @@ public class ${className}Controller {
      * 根据ID查询
      */
     @GetMapping("getById")
-    public R<${className}Model> getById(@RequestParam @NotBlank(message = "主键ID不能为空") String id) {
+    public R getById(@RequestParam @NotBlank(message = "主键ID不能为空") String id) {
         return R.ok(${classFirstNameLower}Service.getById(id));
     }
 
@@ -53,9 +50,8 @@ public class ${className}Controller {
     }
 
     /**
-     * 修改参数
+     * 修改
      */
-    @ApiOperation("修改参数")
     @PutMapping("update")
     public R update(@Valid ${className}Model model) {
         ${classFirstNameLower}Service.updateById(model);
@@ -63,9 +59,8 @@ public class ${className}Controller {
     }
 
     /**
-     * 删除参数
+     * 删除
      */
-    @ApiOperation("删除参数")
     @DeleteMapping("delete")
     public R delete(@RequestParam @NotBlank(message = "主键ID不能为空") String id) {
         ${classFirstNameLower}Service.removeById(id);
