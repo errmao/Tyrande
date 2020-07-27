@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${packageName}.model.${classNameLower}.${className}Model;
 import ${packageName}.vo.${classNameLower}.${className}Vo;
-import java.util.List;
+import ${packageName}.dao.${classNameLower}.${className}Dao;
 
 import org.springframework.stereotype.Service;
 
