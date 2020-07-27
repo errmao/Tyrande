@@ -16,6 +16,10 @@ public enum TemplateTypeEnum {
      */
     SERVICE("service", "Service.java.ftl"),
     /**
+     * Mapper
+     */
+    MAPPER("mappers", "Mapping.xml.ftl"),
+    /**
      * DAO
      */
     DAO("dao", "Dao.java.ftl"),

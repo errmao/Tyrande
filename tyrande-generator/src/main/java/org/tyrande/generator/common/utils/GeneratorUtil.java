@@ -44,6 +44,8 @@ public class GeneratorUtil {
         processCreateFile(generatorDataModel, TemplateTypeEnum.VO);
         // 生成 dao
         processCreateFile(generatorDataModel, TemplateTypeEnum.DAO);
+        // 生成 mapper
+        processCreateFile(generatorDataModel, TemplateTypeEnum.MAPPER);
         // 生成 service
         processCreateFile(generatorDataModel, TemplateTypeEnum.SERVICE);
         // 生成 service 实现类
