@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.tyrande.security.dao.jwt.JwtUserDao;
-import org.tyrande.security.security.JwtUser;
+import org.tyrande.security.service.JwtUser;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -26,8 +26,8 @@ public class JwtUserServiceImpl implements JwtUserService {
      * 根据登录名加载用户信息
      */
     @Override
-    public JwtUser findByUsername(String username) {
-        log.info("用户接口查询 ： 根据用户名查询用户");
+    public JwtUser loadUserByUsername(String username) {
+        log.info("[根据登录名加载用户信息] ： 根据用户名查询用户 {}", username);
         JwtUser jwtUser = jwtUserDao.findByLoginCode(username);
         if (jwtUser == null) {
             throw new UsernameNotFoundException(String.format("没有用户： '%s'.", username));

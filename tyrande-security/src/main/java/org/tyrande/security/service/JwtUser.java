@@ -1,4 +1,4 @@
-package org.tyrande.security.security;
+package org.tyrande.security.service;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

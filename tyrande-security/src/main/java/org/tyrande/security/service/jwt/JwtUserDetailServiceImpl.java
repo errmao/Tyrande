@@ -4,7 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.tyrande.security.security.JwtUser;
+import org.tyrande.security.service.JwtUser;
 
 import javax.annotation.Resource;
 
@@ -28,7 +28,7 @@ public class JwtUserDetailServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        JwtUser jwtUser = jwtUserService.findByUsername(username);
+        JwtUser jwtUser = jwtUserService.loadUserByUsername(username);
         if (jwtUser == null) {
             throw new UsernameNotFoundException("该用户不存在！");
         }

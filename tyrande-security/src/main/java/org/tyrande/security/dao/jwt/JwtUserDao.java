@@ -2,7 +2,7 @@ package org.tyrande.security.dao.jwt;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.tyrande.security.security.JwtUser;
+import org.tyrande.security.service.JwtUser;
 
 import java.util.List;
 

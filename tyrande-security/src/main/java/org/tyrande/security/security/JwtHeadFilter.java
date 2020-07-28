@@ -9,6 +9,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.tyrande.common.constant.NormalConstants;
 import org.tyrande.common.utils.SpringContextUtil;
 import org.tyrande.security.common.JwtTokenUtil;
+import org.tyrande.security.service.JwtUser;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
