@@ -1,4 +1,4 @@
-package org.tyrande.starter.mybatis.config;
+package org.tyrande.common.confog;
 
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory;

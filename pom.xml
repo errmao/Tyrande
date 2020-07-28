@@ -15,6 +15,7 @@
         <module>tyrande-common</module>
         <module>tyrande-system</module>
         <module>tyrande-generator</module>
+        <module>tyrande-security</module>
     </modules>
 
     <!-- 依赖版本 -->
@@ -29,6 +30,9 @@
         <mybatisplus.version>3.3.2</mybatisplus.version>
         <hutool.version>5.3.9</hutool.version>
         <freemarker.version>2.3.1.RELEASE</freemarker.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <jedis.version>3.3.0</jedis.version>
+        <fastjson.version>1.2.73</fastjson.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -41,6 +45,27 @@
                 <version>${springboot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <!-- jwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
 
             <!-- Mybatis Plus -->

@@ -1,4 +1,4 @@
-package org.tyrande.starter.mybatis.handler;
+package org.tyrande.common.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

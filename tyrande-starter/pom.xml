@@ -32,6 +32,12 @@
             <artifactId>tyrande-generator</artifactId>
         </dependency>
 
+        <!-- 安全模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-security</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

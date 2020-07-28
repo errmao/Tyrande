@@ -7,16 +7,26 @@
         <groupId>org.tyrande</groupId>
         <version>1.0.0</version>
     </parent>
-    <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>tyrande-system</artifactId>
-    <description>系统管理</description>
+    <artifactId>tyrande-security</artifactId>
+    <description>安全模块</description>
 
     <dependencies>
-        <!-- 通用工具 -->
+        <!-- 通用模块 -->
         <dependency>
             <groupId>org.tyrande</groupId>
             <artifactId>tyrande-common</artifactId>
         </dependency>
+
+        <!-- spring security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
     </dependencies>
+
 </project>

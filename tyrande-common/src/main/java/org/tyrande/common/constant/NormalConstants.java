@@ -51,4 +51,14 @@ public class NormalConstants {
      * 文件类型
      */
     public static final String FTL = ".ftl";
+
+    /**
+     * Response 类型
+     */
+    public static final String JSON_UTF8 = "application/json;charset=UTF-8";
+
+    /**
+     * jwt 加密盐
+     */
+    public static final String JWT_SALT = "TYRANDE";
 }
