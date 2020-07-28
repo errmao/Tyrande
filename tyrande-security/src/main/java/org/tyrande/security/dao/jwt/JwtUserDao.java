@@ -28,5 +28,5 @@ public interface JwtUserDao {
      * @param userId 用户编号
      * @return
      */
-    List<String> getRoleList(@Param("userId") Integer userId);
+    List<String> getRoleList(@Param("userId") Long userId);
 }

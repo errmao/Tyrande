@@ -108,6 +108,12 @@
                 <version>${tyrande.version}</version>
             </dependency>
 
+            <!-- 安全模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-security</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

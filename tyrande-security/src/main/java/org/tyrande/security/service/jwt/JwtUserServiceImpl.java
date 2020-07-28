@@ -33,7 +33,7 @@ public class JwtUserServiceImpl implements JwtUserService {
             throw new UsernameNotFoundException(String.format("没有用户： '%s'.", username));
         }
         // 查询角色
-        List<String> roleIdList = jwtUserDao.getRoleList(jwtUser.getUserId());
+        List<String> roleIdList = jwtUserDao.getRoleList(jwtUser.getId());
 
         List<GrantedAuthority> list = new ArrayList<>();
         for (String roleId : roleIdList) {
