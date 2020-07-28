@@ -1,0 +1,5 @@
+# 安全模块参数
+tyrande:
+  security:
+    loginUrl: /tyrande/login
+    logoutUrl: /tyrande/logout
