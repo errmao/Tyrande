@@ -7,6 +7,7 @@ package org.tyrande.generator.common.enums;
  */
 public enum FieldTypeEnum {
 
+    BIGINT("bigint", "Long"),
     /**
      * 日期
      */
