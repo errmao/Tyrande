@@ -11,11 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.tyrande.common.constant.NormalConstants;
+import org.tyrande.security.model.TyrandeSecurityProperty;
 import org.tyrande.security.security.JwtAuthenticationProvider;
 import org.tyrande.security.security.JwtHeadFilter;
 import org.tyrande.security.security.JwtLoginFilter;
 import org.tyrande.security.security.handler.LoginFailureHandler;
 import org.tyrande.security.security.handler.LoginSuccessHandler;
+import org.tyrande.security.security.handler.TyrandeLogoutSuccessHandler;
 import org.tyrande.security.service.jwt.JwtUserDetailServiceImpl;
 
 import javax.annotation.Resource;
@@ -31,15 +33,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private JwtUserDetailServiceImpl jwtUserDetailService;
 
+    @Resource
+    private LoginSuccessHandler loginSuccessHandler;
+
+    @Resource
+    private LoginFailureHandler loginFailureHandler;
+
+    @Resource
+    private TyrandeLogoutSuccessHandler tyrandeLogoutSuccessHandler;
+
+    @Resource
+    private TyrandeSecurityProperty tyrandeSecurityProperty;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //登录过滤器
-        JwtLoginFilter jwtLoginFilter = new JwtLoginFilter();
+        JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(tyrandeSecurityProperty.getLoginUrl());
         jwtLoginFilter.setAuthenticationManager(this.authenticationManagerBean());
 
         //登录成功和失败的操作
-        jwtLoginFilter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
-        jwtLoginFilter.setAuthenticationFailureHandler(new LoginFailureHandler());
+        jwtLoginFilter.setAuthenticationSuccessHandler(loginSuccessHandler);
+        jwtLoginFilter.setAuthenticationFailureHandler(loginFailureHandler);
 
         //登录过滤器的授权提供者
         JwtAuthenticationProvider provider = new JwtAuthenticationProvider();
@@ -81,7 +95,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //禁用session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                .logout().logoutUrl(tyrandeSecurityProperty.getLogoutUrl()).logoutSuccessHandler(tyrandeLogoutSuccessHandler);
     }
 
     @Bean

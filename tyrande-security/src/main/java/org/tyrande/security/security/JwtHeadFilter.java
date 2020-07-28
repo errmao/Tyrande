@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.tyrande.common.constant.NormalConstants;
@@ -42,19 +41,19 @@ public class JwtHeadFilter extends OncePerRequestFilter {
             return;
         }
         RedisTemplate redisTemplate = (RedisTemplate) SpringContextUtil.getBean("redisTemplate");
+        String redisToken = redisTemplate.opsForValue().get(token).toString();
+
         // 过期
-        String realToken = redisTemplate.opsForValue().get(token).toString();
-        if (StringUtils.isEmpty(realToken)) {
+        if (StringUtils.isEmpty(redisToken)) {
             response.setContentType(NormalConstants.JSON_UTF8);
             response.getWriter().write("token 失效");
             return;
         }
-        String subject = JwtTokenUtil.getProperties(realToken);
-        JwtUser user = JSONObject.parseObject(subject, JwtUser.class);
-        // 调用方法，刷新token
-        String resultToken = DigestUtils.md5DigestAsHex((NormalConstants.JWT_SALT + user.getId()).getBytes());
-        redisTemplate.expire(resultToken, 1800L, TimeUnit.SECONDS);
 
+        String subject = JwtTokenUtil.getProperties(redisToken);
+        JwtUser user = JSONObject.parseObject(subject, JwtUser.class);
+
+        redisTemplate.expire(token, 1800L, TimeUnit.SECONDS);
         JwtLoginToken jwtLoginToken = new JwtLoginToken(user, "", user.getAuthorities());
         jwtLoginToken.setDetails(new WebAuthenticationDetails(request));
         SecurityContextHolder.getContext().setAuthentication(jwtLoginToken);

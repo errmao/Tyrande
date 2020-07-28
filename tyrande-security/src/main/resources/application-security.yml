@@ -1,0 +1,4 @@
+tyrande:
+  security:
+    loginUrl: /tyrande/login
+    logoutUrl: /tyrande/logout
