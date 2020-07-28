@@ -7,6 +7,7 @@
         select id, login_code, user_name, password, status
         from sys_user
         where login_code = #{username}
+          and `status` != 0
     </select>
 
     <select id="getRoleList" resultType="java.lang.String">
