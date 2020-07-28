@@ -20,7 +20,7 @@ public interface JwtUserDao {
      * @param username 登录账户
      * @return
      */
-    JwtUser findByUsername(@Param("username") String username);
+    JwtUser findByLoginCode(@Param("username") String username);
 
     /**
      * 根据用户编号查询用户拥有角色编号

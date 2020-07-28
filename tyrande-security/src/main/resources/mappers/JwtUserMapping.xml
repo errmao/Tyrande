@@ -3,14 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.tyrande.security.dao.jwt.JwtUserDao">
 
-    <select id="findByUsername" resultType="org.tyrande.security.security.JwtUser">
+    <select id="findByLoginCode" resultType="org.tyrande.security.security.JwtUser"
+            parameterType="string">
         select id, login_code, user_name, password, status
         from sys_user
         where login_code = #{username}
-          and `status` != 0
+          and status != 0
     </select>
 
-    <select id="getRoleList" resultType="java.lang.String">
+    <select id="getRoleList" resultType="java.lang.String" parameterType="long">
         select role_id
         from sys_user_role
         where user_id = #{userId}
