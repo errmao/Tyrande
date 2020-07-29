@@ -6,6 +6,7 @@ import org.tyrande.common.exception.customize.CustomException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
@@ -19,19 +20,20 @@ public class FrameworkUtil {
 
     /**
      * 返回jsonObj参数
+     *
      * @param request
      * @return
      */
     public static JSONObject getRequestParamsObj(HttpServletRequest request) {
         JSONObject paramsObj;
-        try {
-            BufferedReader streamReader = new BufferedReader( new InputStreamReader(request.getInputStream(), StandardCharsets.UTF_8));
+        try (InputStream inputStream = request.getInputStream();
+             BufferedReader streamReader = new BufferedReader(
+                     new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             StringBuilder responseStrBuilder = new StringBuilder();
             String inputStr;
             while ((inputStr = streamReader.readLine()) != null) {
                 responseStrBuilder.append(inputStr);
             }
-
             paramsObj = JSONObject.parseObject(responseStrBuilder.toString());
 
         } catch (Exception e) {
