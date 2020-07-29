@@ -70,7 +70,6 @@ const actions = {
 
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
-        console.log(avatar)
         if (avatar == null) {
           commit('SET_AVATAR', "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif")
         } else {
