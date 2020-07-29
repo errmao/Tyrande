@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.io.FileUtil;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 import org.tyrande.common.constant.NormalConstants;
 import org.tyrande.common.exception.customize.CustomException;
 import org.tyrande.common.utils.SpringContextUtil;
@@ -165,6 +166,9 @@ public class GeneratorUtil {
                 generatorFieldModel.setJavaType(FieldTypeEnum.getJavaType(jdbcType));
             } else {
                 generatorFieldModel.setJavaType(FieldTypeEnum.getJavaType(columnType));
+            }
+            if (StringUtils.isEmpty(generatorFieldModel.getJavaType())) {
+                generatorFieldModel.setJavaType("String");
             }
             generatorFieldModel.setColumnField(columnInfo.getColumnName());
             generatorFieldModel.setColumnComment(columnInfo.getColumnComment());

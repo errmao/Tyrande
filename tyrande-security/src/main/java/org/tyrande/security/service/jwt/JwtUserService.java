@@ -1,6 +1,6 @@
 package org.tyrande.security.service.jwt;
 
-import org.tyrande.security.service.JwtUser;
+import org.tyrande.common.model.JwtUser;
 
 /**
  * jwt 查询用户

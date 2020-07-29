@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.tyrande.security.dao.jwt.JwtUserDao;
-import org.tyrande.security.service.JwtUser;
+import org.tyrande.common.model.JwtUser;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
