@@ -5,7 +5,7 @@
 
     <select id="findByLoginCode" resultType="org.tyrande.security.service.JwtUser"
             parameterType="string">
-        select id, login_code, user_name, password, status
+        select id, login_code, user_name, password, status, avatar
         from sys_user
         where login_code = #{username}
           and status != 0

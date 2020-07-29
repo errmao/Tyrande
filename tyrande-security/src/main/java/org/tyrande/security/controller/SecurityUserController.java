@@ -36,7 +36,7 @@ public class SecurityUserController {
         JSONObject object = JSON.parseObject(userInfo);
         String name = object.getString("username");
         JSONArray roleArray = object.getJSONArray("authorities");
-        String avatar = object.getString("");
+        String avatar = object.getString("avatar");
         List<String> roles = new ArrayList<>();
         for (int i = 0; i < roleArray.size(); i++) {
             JSONObject jsonObject = roleArray.getJSONObject(i);

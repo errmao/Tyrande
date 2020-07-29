@@ -19,6 +19,7 @@ public class JwtUser implements UserDetails {
     private String userName;
     private String password;
     private Integer status;
+    private String avatar;
     private Collection<? extends GrantedAuthority> authorities;
 
     @Override
