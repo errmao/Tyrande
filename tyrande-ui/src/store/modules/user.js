@@ -1,5 +1,5 @@
-import {login, logout, getInfo} from '@/api/user'
-import {getToken, setToken, removeToken} from '@/utils/auth'
+import {getInfo, login, logout} from '@/api/user'
+import {getToken, removeToken, setToken} from '@/utils/auth'
 import {resetRouter} from '@/router'
 
 const getDefaultState = () => {
@@ -32,14 +32,17 @@ const mutations = {
 }
 
 const actions = {
-  // user login
+
+  /**
+   * 用户登录
+   */
   login({commit}, userInfo) {
     const {username, password} = userInfo
     return new Promise((resolve, reject) => {
       login({username: username.trim(), password: password}).then(response => {
         const {data} = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        commit('SET_TOKEN', data)
+        setToken(data)
         resolve()
       }).catch(error => {
         reject(error)
@@ -47,21 +50,22 @@ const actions = {
     })
   },
 
-  // get user info
+  /**
+   * 查询用户信息
+   */
   getInfo({commit, state}) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const {data} = response
 
         if (!data) {
-          reject('Verification failed, please Login again.')
+          reject('验证失败，请重新登录')
         }
 
         const {roles, name, avatar} = data
 
-        // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
-          reject('getInfo: roles must be a non-null array!')
+          reject('用户必须拥有角色!')
         }
 
         commit('SET_ROLES', roles)
@@ -74,11 +78,13 @@ const actions = {
     })
   },
 
-  // user logout
+  /**
+   * 用户登出
+   */
   logout({commit, state}) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
-        removeToken() // must remove  token  first
+        removeToken()
         resetRouter()
         commit('RESET_STATE')
         resolve()
@@ -88,10 +94,12 @@ const actions = {
     })
   },
 
-  // remove token
+  /**
+   * 移除 token
+   */
   resetToken({commit}) {
     return new Promise(resolve => {
-      removeToken() // must remove  token  first
+      removeToken()
       commit('RESET_STATE')
       resolve()
     })
