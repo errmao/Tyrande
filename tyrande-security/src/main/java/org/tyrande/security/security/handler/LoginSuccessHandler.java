@@ -30,7 +30,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setContentType(NormalConstants.JSON_UTF8);
         String userJsonStr = JSON.toJSONString(authentication.getPrincipal());
-        String token = JwtTokenUtil.createToken("", userJsonStr, 1800L);
+        String token = JwtTokenUtil.createToken("tyrande", userJsonStr);
 
         RedisTemplate redisTemplate = (RedisTemplate) SpringContextUtil.getBean("redisTemplate");
         redisTemplate.opsForValue().set(token, token, 1800L, TimeUnit.SECONDS);

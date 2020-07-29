@@ -17,11 +17,10 @@ export function login(data) {
  * @param token
  */
 export function getInfo(token) {
-  console.log(token)
   return request({
     url: '/info',
     method: 'get',
-    params: {token}
+    params: { token }
   })
 }
 

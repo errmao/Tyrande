@@ -17,23 +17,17 @@ public class JwtTokenUtil {
     /**
      * 密钥
      */
-    private static final String SECRET = "jwt_secret_tinycrow";
-    private static final String ISS = "tinycrow";
-
-    public static String createToken(String issuer, String subject, long expiration) {
-        return createToken(issuer, subject, expiration, null);
-    }
+    private static final String SECRET = "jwt_secret_tyrande";
+    private static final String ISS = "tyrande";
 
     /**
      * 创建 token
      *
-     * @param issuer     签发人
-     * @param subject    主体,即用户信息的JSON
-     * @param expiration 有效时间(秒)
-     * @param claims     自定义参数
+     * @param issuer  签发人
+     * @param subject 主体,即用户信息的JSON
      * @return
      */
-    public static String createToken(String issuer, String subject, long expiration, Claims claims) {
+    public static String createToken(String issuer, String subject) {
         return Jwts.builder()
                 // JWT_ID：是JWT的唯一标识，根据业务需要，这个可以设置为一个不重复的值，主要用来作为一次性token,从而回避重放攻击。
                 // 签名算法以及密匙
@@ -60,16 +54,6 @@ public class JwtTokenUtil {
      */
     public static String getProperties(String token) {
         return getTokenBody(token).getSubject();
-    }
-
-    /**
-     * 校验是否过期
-     *
-     * @param token
-     * @return
-     */
-    public static boolean isExpiration(String token) {
-        return getTokenBody(token).getExpiration().before(new Date());
     }
 
     /**
