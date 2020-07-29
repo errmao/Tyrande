@@ -163,6 +163,8 @@ public class GeneratorUtil {
             if (index != -1) {
                 String jdbcType = columnType.substring(0, index);
                 generatorFieldModel.setJavaType(FieldTypeEnum.getJavaType(jdbcType));
+            } else {
+                generatorFieldModel.setJavaType(FieldTypeEnum.getJavaType(columnType));
             }
             generatorFieldModel.setColumnField(columnInfo.getColumnName());
             generatorFieldModel.setColumnComment(columnInfo.getColumnComment());
