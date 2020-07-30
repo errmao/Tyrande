@@ -8,7 +8,6 @@
                menu_name,
                menu_level,
                pid,
-               menu_logo,
                menu_url,
                create_time,
                update_time
