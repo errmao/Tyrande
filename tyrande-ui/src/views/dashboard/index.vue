@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <el-image :src="src" lazy/>
+    <el-image v-for="url in urls" :key="url" :src="url" lazy></el-image>
   </div>
 </template>
 
@@ -9,7 +9,10 @@
     name: 'Dashboard',
     data() {
       return {
-        src: 'https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3'
+        urls: [
+          'https://121.196.58.164/files/tyrande//ty3.gif',
+          'https://121.196.58.164/files/tyrande//ty4.gif'
+        ]
       }
     }
   }
@@ -17,13 +20,8 @@
 
 <style lang="scss" scoped>
   .dashboard-container {
-    background-color: #E3E3E3;
-    // 居中
-    display: flex;
-    justify-content: center;
+    background-color: #e3e3e3;
+    min-height: 94.7vh;
   }
 
-  .app-main {
-    background-color: #E3E3E3;
-  }
 </style>
