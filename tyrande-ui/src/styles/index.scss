@@ -59,7 +59,14 @@ div:focus {
   }
 }
 
-// main-container global css
+// 主体区域内容样式
 .app-container {
-  padding: 20px;
+  padding: 10px;
+  font-size: 3px;
+
+  // 卡片间距
+  .el-card {
+    margin: 5px;
+  }
+
 }
