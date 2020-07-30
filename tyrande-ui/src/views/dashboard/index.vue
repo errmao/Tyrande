@@ -1,34 +1,29 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
-    <div class="dashboard-text">roles: <span v-for="role in roles" :key="role">{{ role }}</span>
-    </div>
+    <el-image :src="src" lazy/>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
-export default {
-  name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name',
-      'roles'
-    ])
+  export default {
+    name: 'Dashboard',
+    data() {
+      return {
+        src: 'https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3'
+      }
+    }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
+  .dashboard-container {
+    background-color: #E3E3E3;
+    // 居中
+    display: flex;
+    justify-content: center;
   }
 
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
+  .app-main {
+    background-color: #E3E3E3;
   }
-}
 </style>
