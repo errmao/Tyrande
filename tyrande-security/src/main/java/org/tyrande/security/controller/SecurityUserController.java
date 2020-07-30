@@ -10,7 +10,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.tyrande.security.common.JwtTokenUtil;
+import org.tyrande.security.service.menu.InitMenuService;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +31,8 @@ public class SecurityUserController {
     @Value("${tyrande.defaultAvatar}")
     private String defaultAvatar;
 
+    @Resource
+    private InitMenuService initMenuService;
     /**
      * 获取用户信息
      *
@@ -54,6 +58,7 @@ public class SecurityUserController {
         }
         map.put("avatar", avatar);
         map.put("roles", roles);
+        map.put("menus", initMenuService.getMenuTreeByUser());
         return R.ok(map);
     }
 }

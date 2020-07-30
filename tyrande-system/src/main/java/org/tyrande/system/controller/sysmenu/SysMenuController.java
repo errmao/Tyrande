@@ -68,11 +68,4 @@ public class SysMenuController {
         return R.ok(null);
     }
 
-    /**
-     * 根据用户权限获取菜单列表
-     */
-    @GetMapping("/getMenuByUser")
-    public R getMenuByUser() {
-        return R.ok(sysMenuService.getMenuTreeByUser());
-    }
 }

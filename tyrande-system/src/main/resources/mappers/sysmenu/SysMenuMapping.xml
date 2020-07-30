@@ -3,20 +3,4 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.tyrande.system.dao.sysmenu.SysMenuDao">
 
-    <select id="getMenuTreeByUser" resultType="org.tyrande.system.model.sysmenu.SysMenuTreeNode">
-        select id,
-               menu_name,
-               menu_level,
-               pid,
-               menu_logo,
-               menu_url,
-               create_time,
-               update_time
-        from sys_menu
-        where id in (select menu_id
-                     from sys_role_menu
-                     where role_id in (select role_id
-                                       from sys_user_role
-                                       where user_id = #{userId}))
-    </select>
 </mapper>

@@ -1,4 +1,4 @@
-package org.tyrande.system.model.sysmenu;
+package org.tyrande.security.model;
 
 import lombok.Data;
 import org.tyrande.common.model.TreeNode;
