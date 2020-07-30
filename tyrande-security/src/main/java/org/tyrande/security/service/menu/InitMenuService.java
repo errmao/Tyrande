@@ -1,6 +1,6 @@
 package org.tyrande.security.service.menu;
 
-import org.tyrande.security.model.SysMenuTreeNode;
+import org.tyrande.security.model.menu.InitMenu;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface InitMenuService {
     /**
      * 根据用户权限获取菜单
      */
-    List<SysMenuTreeNode> getMenuTreeByUser();
+    List<InitMenu> getMenuByUser();
 }

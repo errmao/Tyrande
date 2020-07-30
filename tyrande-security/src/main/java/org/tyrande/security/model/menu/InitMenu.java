@@ -1,7 +1,6 @@
-package org.tyrande.security.model;
+package org.tyrande.security.model.menu;
 
 import lombok.Data;
-import org.tyrande.common.model.TreeNode;
 
 import java.util.Date;
 
@@ -11,7 +10,7 @@ import java.util.Date;
  * @author Tyrande
  */
 @Data
-public class SysMenuTreeNode extends TreeNode {
+public class InitMenu {
 
     private Integer id;
 
@@ -20,8 +19,6 @@ public class SysMenuTreeNode extends TreeNode {
     private Integer menuLevel;
 
     private Integer pid;
-
-    private String menuLogo;
 
     private String menuUrl;
 

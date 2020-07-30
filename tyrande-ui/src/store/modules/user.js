@@ -28,6 +28,9 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_MENUS: (state, menus) => {
+    state.menus = menus
   }
 }
 
@@ -62,7 +65,7 @@ const actions = {
           reject('验证失败，请重新登录')
         }
 
-        const {roles, name, avatar} = data
+        const {roles, name, avatar, menus} = data
 
         if (!roles || roles.length <= 0) {
           reject('用户必须拥有角色!')
@@ -71,6 +74,7 @@ const actions = {
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
+        commit('SET_MENUS', menus)
         resolve(data)
       }).catch(error => {
         reject(error)

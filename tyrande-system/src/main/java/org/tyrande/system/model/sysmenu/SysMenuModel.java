@@ -41,14 +41,9 @@ public class SysMenuModel implements Serializable {
      */
     private Long pid;
     /**
-     * 图标名称
-     */
-    private String menuLogo;
-    /**
      * 请求路径
      */
     private String menuUrl;
-
     /**
      * 创建时间
      */

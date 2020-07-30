@@ -58,7 +58,7 @@ public class SecurityUserController {
         }
         map.put("avatar", avatar);
         map.put("roles", roles);
-        map.put("menus", initMenuService.getMenuTreeByUser());
+        map.put("menus", initMenuService.getMenuByUser());
         return R.ok(map);
     }
 }

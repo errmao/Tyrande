@@ -22,7 +22,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (hasToken) {
     if (to.path === '/login') {
-      // if is logged in, redirect to the home page
+      // 已经登录,重定向到首页
       next({path: '/'})
       NProgress.done()
     } else {
@@ -32,21 +32,20 @@ router.beforeEach(async (to, from, next) => {
         next()
       } else {
         try {
-          // get user info
-          // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-          const {roles} = await store.dispatch('user/getInfo')
+          // 获取权限内的菜单
+          const {menus} = await store.dispatch('user/getInfo')
 
-          // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          // 基于权限内的路由
+          const accessRoutes = await store.dispatch('permission/generateRoutes', menus)
 
-          // dynamically add accessible routes
+          // 动态加载权限内路由
           router.addRoutes(accessRoutes)
 
-          // hack method to ensure that addRoutes is complete
-          // set the replace: true, so the navigation will not leave a history record
+          // hack方法，以确保addRoutes是完整的
+          // 设置replace：true，因此导航将不会留下历史记录
           next({...to, replace: true})
         } catch (error) {
-          // remove token and go to login page to re-login
+          // 移除 token 跳转到登录页面重新登录
           await store.dispatch('user/resetToken')
           Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
@@ -55,7 +54,7 @@ router.beforeEach(async (to, from, next) => {
       }
     }
   } else {
-    /* has no token*/
+    /* 没有 token*/
 
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.tyrande.common.utils.SecurityUserInfoUtil;
 import org.tyrande.common.utils.TreeUtil;
 import org.tyrande.security.dao.menu.InitMenuDao;
-import org.tyrande.security.model.SysMenuTreeNode;
+import org.tyrande.security.model.menu.InitMenu;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,10 +24,9 @@ public class InitMenuServiceImpl implements InitMenuService{
      * 根据用户权限获取菜单
      */
     @Override
-    public List<SysMenuTreeNode> getMenuTreeByUser() {
+    public List<InitMenu> getMenuByUser() {
         Long userId = SecurityUserInfoUtil.getCurrentUser().getId();
-        List<SysMenuTreeNode> list = initMenuDao.getMenuTreeByUser(userId);
-        List<SysMenuTreeNode> tree = TreeUtil.buildTree(list);
-        return tree;
+        List<InitMenu> list = initMenuDao.getMenuByUser(userId);
+        return list;
     }
 }

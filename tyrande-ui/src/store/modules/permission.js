@@ -1,31 +1,33 @@
 import {asyncRoutes, constantRoutes} from '@/router'
 
 /**
- * Use meta.role to determine if the current user has permission
- * @param roles
- * @param route
+ * 判断是否拥有菜单权限
  */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    return true
+function hasPermission(menus, route) {
+  if (menus.length == 0) {
+    return true;
   }
+  let result = false;
+  menus.forEach(menu => {
+    if (menu.menuUrl == route.path) {
+      result = true;
+      return false;
+    }
+  })
+  return result;
 }
 
 /**
- * Filter asynchronous routing tables by recursion
- * @param routes asyncRoutes
- * @param roles
+ * 过滤没有权限的菜单
  */
-export function filterAsyncRoutes(routes, roles) {
+export function filterAsyncRoutes(routes, menus) {
   const res = []
 
   routes.forEach(route => {
     const tmp = {...route}
-    if (hasPermission(roles, tmp)) {
+    if (hasPermission(menus, tmp)) {
       if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
+        tmp.children = filterAsyncRoutes(tmp.children, menus)
       }
       res.push(tmp)
     }
@@ -46,15 +48,14 @@ const mutations = {
   }
 }
 
+/**
+ * 根据状态加载路由
+ */
 const actions = {
-  generateRoutes({commit}, roles) {
+  generateRoutes({commit}, menus) {
     return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
+      // 查询
+      let accessedRoutes = filterAsyncRoutes(asyncRoutes, menus)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

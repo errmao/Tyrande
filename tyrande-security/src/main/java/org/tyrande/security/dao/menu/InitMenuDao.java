@@ -2,7 +2,7 @@ package org.tyrande.security.dao.menu;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.tyrande.security.model.SysMenuTreeNode;
+import org.tyrande.security.model.menu.InitMenu;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface InitMenuDao {
     /**
      * 初始化菜单
      */
-    List<SysMenuTreeNode> getMenuTreeByUser(@Param("userId") Long userId);
+    List<InitMenu> getMenuByUser(@Param("userId") Long userId);
 }
