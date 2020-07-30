@@ -83,7 +83,7 @@ export const asyncRoutes = [
       },
       {
         path: 'sysmenu',
-        component: () => import('@/views/404'),
+        component: () => import('@/views/system/menu'),
         name: '菜单管理',
         meta: {title: '菜单管理'},
       },
