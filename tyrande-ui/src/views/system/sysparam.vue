@@ -13,7 +13,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" icon="el-icon-search" @click="doSearch">搜索</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="getPageList">搜索</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -21,10 +21,11 @@
     <!-- 数据列表 -->
     <el-card>
       <el-row class="app-container-toolbar">
-          <el-button type="primary" icon="el-icon-circle-plus-outline">添加</el-button>
+        <el-button type="primary" icon="el-icon-circle-plus-outline">添加</el-button>
       </el-row>
 
-      <el-table border :data="gridData">
+      <!-- 数据表格 -->
+      <el-table border :data="gridData.list">
         <el-table-column type="index" label="序号" width="50"/>
         <el-table-column prop="date" label="日期"/>
         <el-table-column prop="name" label="姓名"/>
@@ -37,6 +38,14 @@
           </template>
         </el-table-column>
       </el-table>
+
+      <!-- 分页区域 -->
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page="searchForm.current"
+        layout="prev, pager, next, jumper, ->, total"
+        :total="gridData.total">
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -44,36 +53,27 @@
 <script>
   export default {
     name: 'SysParam',
-
     data() {
       return {
         // 查询参数对象
         searchForm: {
+          current: 1,
           paramName: '',
           paramType: ''
         },
         // 列表数据
-        gridData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-02',
-          name: '王小虎2',
-          province: '上海2',
-          city: '普陀区2',
-          address: '上海市普陀区金沙江路 1518 弄2',
-          zip: 200333
-        }]
+        gridData: {
+          list: [],
+          total: 0
+        }
       }
     },
+    created() {
+      this.getPageList()
+    },
     methods: {
-      // 查询
-      doSearch: function () {
-
+      // 列表查询
+      getPageList() {
       }
     }
   }
