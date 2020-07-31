@@ -1,0 +1,86 @@
+// 主体区域内容样式
+.app-container {
+  padding: 10px;
+  font-size: 10px;
+
+  // 卡片间距
+  .el-card {
+    margin: 5px;
+
+    .el-card__body {
+      padding: 15px;
+    }
+  }
+
+  // 查询条件区域
+  .app-container-searchForm {
+    .el-form-item {
+      margin-bottom: 0px;
+
+      // 字体标签
+      .el-form-item__label {
+        font-size: 10px;
+      }
+
+      // 搜索按钮
+      .el-button--primary {
+        background-color: #2D5D88;
+        border-color: #2D5D88;
+      }
+
+      .el-button--primary:focus, .el-button--primary:hover {
+        background: #7093BE;
+        border-color: #7093BE;
+      }
+    }
+  }
+
+  // 工具栏区域
+  .app-container-toolbar {
+    margin-bottom: 15px;
+
+    // 工具栏按钮样式一
+    .tool-btn-one {
+      .el-button--primary {
+        background-color: #C4DC96;
+        border-color: #C4DC96;
+      }
+      .el-button--primary:focus, .el-button--primary:hover {
+        background: #D1E4AE;
+        border-color: #D1E4AE;
+      }
+    }
+
+    // 工具栏按钮样式二
+    .tool-btn-two {
+      .el-button--primary {
+        background-color: #40BFB2;
+        border-color: #40BFB2;
+      }
+      .el-button--primary:focus, .el-button--primary:hover {
+        background: #60CAC7;
+        border-color: #60CAC7;
+      }
+    }
+
+    // 工具栏按钮样式三
+    .tool-btn-three {
+      .el-button--primary {
+        background-color: #61B4CA;
+        border-color: #61B4CA;
+      }
+      .el-button--primary:focus, .el-button--primary:hover {
+        background: #75BED1;
+        border-color: #75BED1;
+      }
+    }
+  }
+
+  // 数据表格区域
+  .el-table {
+    // 表头字体颜色深黑色
+    .cell {
+      color: #606266
+    }
+  }
+}

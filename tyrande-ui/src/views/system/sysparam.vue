@@ -20,8 +20,8 @@
 
     <!-- 数据列表 -->
     <el-card>
-      <el-row>
-        <el-button type="primary" icon="el-icon-circle-plus-outline">添加</el-button>
+      <el-row class="app-container-toolbar">
+          <el-button type="primary" icon="el-icon-circle-plus-outline">添加</el-button>
       </el-row>
 
       <el-table border :data="gridData">

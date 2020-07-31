@@ -3,6 +3,7 @@
 @import './transition.scss';
 @import './element-ui.scss';
 @import './sidebar.scss';
+@import './main-view.scss';
 
 body {
   height: 100%;
@@ -59,48 +60,3 @@ div:focus {
   }
 }
 
-// 主体区域内容样式
-.app-container {
-  padding: 10px;
-  font-size: 10px;
-
-  // 卡片间距
-  .el-card {
-    margin: 5px;
-    .el-card__body {
-      padding: 15px;
-    }
-  }
-  .el-row {
-    margin-bottom: 15px;
-  }
-
-  // 查询条件域样式
-  .app-container-searchForm {
-    .el-form-item {
-      margin-bottom: 0px;
-
-      // 字体标签
-      .el-form-item__label {
-        font-size: 10px;
-      }
-
-      // 搜索按钮
-      .el-button--primary {
-        background-color: #2D5D88;
-        border-color:#2D5D88;
-      }
-      .el-button--primary:focus, .el-button--primary:hover {
-        background: #7093BE;
-        border-color: #7093BE;
-      }
-    }
-  }
-  // 数据表格区域样式
-  .el-table {
-    // 表格头样式
-    .cell {
-      color: #606266
-    }
-  }
-}
