@@ -10,8 +10,8 @@
     data() {
       return {
         urls: [
-          'https://121.196.58.164/files/tyrande//ty3.gif',
-          'https://121.196.58.164/files/tyrande//ty4.gif'
+          'http://errmao.gitee.io/errmao.gitee.io/_media/_img/ty3.gif',
+          'http://errmao.gitee.io/errmao.gitee.io/_media/_img/ty4.gif'
         ]
       }
     }
