@@ -10,8 +10,8 @@
     data() {
       return {
         urls: [
-          'http://errmao.gitee.io/errmao.gitee.io/_media/_img/ty3.gif',
-          'http://errmao.gitee.io/errmao.gitee.io/_media/_img/ty4.gif'
+          process.env.VUE_APP_IMG_URL + '/gif/ty3.gif',
+          process.env.VUE_APP_IMG_URL + '/gif/ty4.gif'
         ]
       }
     }
