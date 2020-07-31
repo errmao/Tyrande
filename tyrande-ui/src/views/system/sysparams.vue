@@ -75,9 +75,9 @@
       // 列表查询
       getPageList() {
         getPageList(this.searchForm).then((res) => {
-          const data = res.data;
-          this.gridData.list = data.records;
-          this.gridData.total = data.total;
+          const {records, total} = res.data;
+          this.gridData.list = records;
+          this.gridData.total = total;
         }).catch(() => {
           this.$message.error("请求失败");
         })
