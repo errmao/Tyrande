@@ -88,8 +88,8 @@ export const asyncRoutes = [
         meta: {title: '菜单管理'},
       },
       {
-        path: 'sysparam',
-        component: () => import('@/views/system/sysparam'),
+        path: 'sysparams',
+        component: () => import('@/views/system/sysparams'),
         name: '参数管理',
         meta: {title: '参数管理'},
       },
