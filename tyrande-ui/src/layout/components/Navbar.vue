@@ -40,7 +40,7 @@
     },
     data() {
       return {
-        imgUrl: process.env.VUE_APP_IMG_URL + '/gif/ty0.gif'
+        imgUrl: process.env.VUE_APP_IMG_URL + process.env.VUE_APP_GIF_DIR +'/ty0.gif'
       }
     },
     methods: {

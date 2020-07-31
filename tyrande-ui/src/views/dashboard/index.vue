@@ -10,8 +10,8 @@
     data() {
       return {
         urls: [
-          process.env.VUE_APP_IMG_URL + '/gif/ty3.gif',
-          process.env.VUE_APP_IMG_URL + '/gif/ty4.gif'
+          process.env.VUE_APP_IMG_URL + process.env.VUE_APP_GIF_DIR + '/ty3.gif',
+          process.env.VUE_APP_IMG_URL + process.env.VUE_APP_GIF_DIR + '/ty4.gif'
         ]
       }
     }
