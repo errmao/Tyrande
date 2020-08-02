@@ -77,7 +77,7 @@ INSERT INTO `sys_menu` VALUES (1, '系统管理', 1, 0, '/system', '2020-07-30 0
 INSERT INTO `sys_menu` VALUES (2, '用户管理', 2, 1, 'sysuser', '2020-07-30 09:40:55', '2020-07-30 09:40:59');
 INSERT INTO `sys_menu` VALUES (3, '角色管理', 2, 1, 'sysrole', '2020-07-30 09:41:22', '2020-07-30 09:41:25');
 INSERT INTO `sys_menu` VALUES (4, '菜单管理', 2, 1, 'sysmenu', '2020-07-30 09:41:47', '2020-07-30 09:41:49');
-
+INSERT INTO `sys_menu` VALUES (5, '参数管理', 2, 1, 'sysparams', '2020-07-30 09:41:47', '2020-07-30 09:41:49');
 -- ----------------------------
 -- Table structure for sys_params
 -- ----------------------------
@@ -132,6 +132,7 @@ INSERT INTO `sys_role_menu` VALUES (1, 1, 1);
 INSERT INTO `sys_role_menu` VALUES (2, 1, 2);
 INSERT INTO `sys_role_menu` VALUES (3, 1, 3);
 INSERT INTO `sys_role_menu` VALUES (4, 1, 4);
+INSERT INTO `sys_role_menu` VALUES (5, 1, 5);
 
 -- ----------------------------
 -- Table structure for sys_user
