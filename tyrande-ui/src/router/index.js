@@ -71,7 +71,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'sysuser',
-        component: () => import('@/views/404'),
+        component: () => import('@/views/system/sysuser/sysuser'),
         name: '用户管理',
         meta: {title: '用户管理'},
       },
@@ -83,13 +83,13 @@ export const asyncRoutes = [
       },
       {
         path: 'sysmenu',
-        component: () => import('@/views/system/menu/sysmenu'),
+        component: () => import('@/views/system/sysmenu/sysmenu'),
         name: '菜单管理',
         meta: {title: '菜单管理'},
       },
       {
         path: 'sysparams',
-        component: () => import('@/views/system/params/sysparams'),
+        component: () => import('@/views/system/sysparams/sysparams'),
         name: '参数管理',
         meta: {title: '参数管理'},
       },

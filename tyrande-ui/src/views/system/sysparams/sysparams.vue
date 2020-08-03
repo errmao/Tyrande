@@ -148,7 +148,7 @@
     doEditSave,
     doView,
     getPageList
-  } from "@/api/system/params/SysParams";
+  } from "@/api/system/sysparams/SysParams";
   import {isNumberAndSe} from "@/utils/validate";
 
   export default {
