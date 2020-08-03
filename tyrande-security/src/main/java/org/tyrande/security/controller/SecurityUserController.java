@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.api.R;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,9 @@ public class SecurityUserController {
 
     @Resource
     private InitMenuService initMenuService;
+
+    @Resource
+    private RedisTemplate redisTemplate;
     /**
      * 获取用户信息
      *
@@ -41,7 +45,8 @@ public class SecurityUserController {
      */
     @GetMapping("info")
     public R getUserInfo(@NotNull(message = "token 参数不能为空") String token) {
-        String userInfo = JwtTokenUtil.getProperties(token);
+        String jwtToken = redisTemplate.opsForValue().get(token).toString();
+        String userInfo = JwtTokenUtil.getProperties(jwtToken);
         JSONObject object = JSON.parseObject(userInfo);
         String name = object.getString("username");
         JSONArray roleArray = object.getJSONArray("authorities");

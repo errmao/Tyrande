@@ -40,7 +40,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         redisTemplate.opsForValue().set(resultToken, token, 1800L, TimeUnit.SECONDS);
         log.info("[用户登录成功]");
         //签发token
-        R r = R.ok(token);
+        R r = R.ok(resultToken);
         response.getWriter().write(JSONObject.toJSONString(r));
     }
 }
