@@ -74,13 +74,17 @@ public class GeneratorUtil {
         Template template = TemplateUtil.getTemplate(typeEnum.getFileName());
         String fileName = typeEnum.getFileName();
         int index = fileName.indexOf(NormalConstants.FTL);
+        String fileNamePre = generatorDataModel.getClassName();
+        if (".vue.ftl".equals(typeEnum.getFileName())) {
+            fileNamePre = generatorDataModel.getClassNameLower();
+        }
         String path = new StringBuffer(generatorConfigProperty.getFilePath())
                 .append(generatorDataModel.getModuleName())
                 .append(NormalConstants.SLASH).append(typeEnum.getType())
                 .append(NormalConstants.SLASH)
                 .append(generatorDataModel.getClassNameLower())
                 .append(NormalConstants.SLASH)
-                .append(generatorDataModel.getClassName())
+                .append(fileNamePre)
                 .append(typeEnum.getFileName(), 0, index).toString();
         File file = FileUtil.touch(path);
         // try with 关闭资源
