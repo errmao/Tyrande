@@ -17,6 +17,18 @@ const service = axios.create({
  */
 service.interceptors.request.use(
   config => {
+    // 修改操作需要去除掉两个时间参数
+    if (config.method == 'put') {
+      const data = config.data;
+      const arr = data.split('&');
+      const resultArr = [];
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].indexOf('updateTime') == -1 && arr[i].indexOf('createTime') == -1) {
+          resultArr.push(arr[i])
+        }
+      }
+      config.data = resultArr.join("&");
+    }
     // 所有请求都携带 token
     if (store.getters.token) {
       config.headers['Authorization'] = getToken()

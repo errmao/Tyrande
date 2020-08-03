@@ -36,10 +36,12 @@
         <el-table-column fixed="right" label="操作" width="180">
           <template slot-scope="scope">
             <el-button type="text" icon="el-icon-view" size="small"
-                       @click="doView(scope.row.id)">{{defaultSettings.btnView}}
+                       @click="visibleConfig.view =true, viewForm = scope.row">
+              {{defaultSettings.btnView}}
             </el-button>
             <el-button type="text" icon="el-icon-edit" size="small"
-                       @click="doEdit(scope.row)">{{defaultSettings.btnEdit}}
+                       @click="doEdit(scope.row.id)">
+              {{defaultSettings.btnEdit}}
             </el-button>
             <el-button type="text" icon="el-icon-delete" size="small"
                        @click="doDelete(scope.row.id)">{{defaultSettings.btnDelete}}
@@ -56,6 +58,30 @@
         :total="gridData.total">
       </el-pagination>
     </el-card>
+
+    <!-- 查看 -->
+    <el-dialog :title="defaultSettings.btnView" :visible.sync="visibleConfig.view" width="50%">
+       <span>
+         <el-form :model="viewForm" label-width="120px" disabled>
+          <el-form-item label="参数中文名" prop="paramName">
+            <el-input v-model="viewForm.paramName"/>
+          </el-form-item>
+          <el-form-item label="参数英文名" prop="paramEnName">
+            <el-input v-model="viewForm.paramEnName"/>
+          </el-form-item>
+          <el-form-item label="参数值" prop="paramValue">
+            <el-input v-model="viewForm.paramValue"/>
+          </el-form-item>
+          <el-form-item label="描述" prop="paramDesc">
+            <el-input v-model="viewForm.paramDesc"/>
+          </el-form-item>
+        </el-form>
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button
+          @click="visibleConfig.view = false">{{defaultSettings.closeButtonText}}</el-button>
+      </span>
+    </el-dialog>
 
     <!-- 添加 -->
     <el-dialog :title="defaultSettings.btnAdd" :visible.sync="visibleConfig.add" width="50%"
@@ -85,12 +111,44 @@
     </el-dialog>
 
     <!-- 编辑 -->
+    <el-dialog :title="defaultSettings.btnEdit" :visible.sync="visibleConfig.edit" width="50%"
+               @close="doEditClose">
+      <span>
+         <el-form :model="editForm" :rules="checkRules" ref="editFormRef" label-width="120px">
+          <el-form-item label="参数中文名" prop="paramName">
+            <el-input v-model="editForm.paramName"></el-input>
+          </el-form-item>
+          <el-form-item label="参数英文名" prop="paramEnName">
+            <el-input v-model="editForm.paramEnName"></el-input>
+          </el-form-item>
+          <el-form-item label="参数值" prop="paramValue">
+            <el-input v-model="editForm.paramValue"></el-input>
+          </el-form-item>
+          <el-form-item label="描述" prop="paramDesc">
+            <el-input v-model="editForm.paramDesc"></el-input>
+          </el-form-item>
+        </el-form>
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button
+          @click="visibleConfig.edit = false">{{defaultSettings.cancelButtonText}}</el-button>
+        <el-button type="primary"
+                   @click="doEditSave">{{defaultSettings.confirmButtonText}}</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
   import defaultSettings from '@/settings'
-  import {doAddSave, doDelete, getPageList} from "@/api/system/params/SysParams";
+  import {
+    doAddSave,
+    doDelete,
+    doEditSave,
+    doView,
+    getPageList
+  } from "@/api/system/params/SysParams";
   import {isNumberAndSe} from "@/utils/validate";
 
   export default {
@@ -114,7 +172,8 @@
         // 对话框是否展示配置
         visibleConfig: {
           add: false,
-          edit: false
+          edit: false,
+          view: false
         },
 
         // 添加或编辑对话框校验规则
@@ -130,22 +189,14 @@
           paramDesc: [{max: 200, message: "描述不能超过200个字符", trigger: 'blur'}]
         },
 
+        // 查看数据
+        viewForm: {},
+
         // 添加对话框数据
-        addForm: {
-          paramName: '',
-          paramEnName: '',
-          paramValue: '',
-          paramDesc: ''
-        },
+        addForm: {},
 
         // 编辑对话框数据
-        editForm: {
-          id: '',
-          paramName: '',
-          paramEnName: '',
-          paramValue: '',
-          paramDesc: ''
-        }
+        editForm: {}
       }
     },
     created() {
@@ -169,16 +220,6 @@
         this.getPageList()
       },
 
-      // 查看
-      doView(id) {
-        console.log('查看：', id);
-      },
-
-      // 编辑
-      doEdit(row) {
-        console.log('更新', row);
-      },
-
       // 删除
       doDelete(id) {
         const rowId = id;
@@ -190,8 +231,6 @@
           async () => {
             doDelete(rowId).then(() => {
               this.$message.success(defaultSettings.successDelete);
-            }).catch(() => {
-              this.$message.error(defaultSettings.failureDelete)
             })
             this.getPageList()
           });
@@ -203,9 +242,8 @@
           if (!valid) {
             return;
           }
-          await doAddSave(this.addForm).then(() => {
-            this.$message.success(defaultSettings.successAdd)
-          }).catch(() => this.$message.error(defaultSettings.failureAdd))
+          await doAddSave(this.addForm);
+          this.$message.success(defaultSettings.successAdd)
           this.visibleConfig.add = false;
           this.getPageList();
         })
@@ -213,6 +251,31 @@
       // 添加-关闭
       doAddClose() {
         this.$refs.addFormRef.resetFields()
+      },
+
+      // 编辑
+      async doEdit(id) {
+        const res = await doView(id);
+        this.editForm = res.data;
+        this.visibleConfig.edit = true;
+      },
+
+      // 编辑-保存
+      doEditSave() {
+        this.$refs.editFormRef.validate(async valid => {
+          if (!valid) {
+            return;
+          }
+          await doEditSave(this.editForm);
+          this.$message.success(defaultSettings.successEdit)
+          this.visibleConfig.edit = false;
+          this.getPageList();
+        })
+      },
+
+      // 编辑-关闭
+      doEditClose() {
+        this.$refs.editFormRef.resetFields()
       }
     }
   }
