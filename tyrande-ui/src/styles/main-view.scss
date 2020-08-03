@@ -45,6 +45,7 @@
         background-color: #C4DC96;
         border-color: #C4DC96;
       }
+
       .el-button--primary:focus, .el-button--primary:hover {
         background: #D1E4AE;
         border-color: #D1E4AE;
@@ -57,6 +58,7 @@
         background-color: #40BFB2;
         border-color: #40BFB2;
       }
+
       .el-button--primary:focus, .el-button--primary:hover {
         background: #60CAC7;
         border-color: #60CAC7;
@@ -69,6 +71,7 @@
         background-color: #61B4CA;
         border-color: #61B4CA;
       }
+
       .el-button--primary:focus, .el-button--primary:hover {
         background: #75BED1;
         border-color: #75BED1;
@@ -87,5 +90,10 @@
   // 分页区域
   .el-pagination {
     margin-top: 15px;
+  }
+
+  // 对话框
+  .el-dialog {
+    border-radius: 5px;
   }
 }

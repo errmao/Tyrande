@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-
+import qs from 'qs'
 /*************************************
  * 系统管理-参数管理
  *************************************/
@@ -11,4 +11,18 @@ export function getPageList(data) {
   return request.get('/sysparams/listPage', {
     params: data
   })
+}
+
+/**
+ * 删除
+ */
+export function doDelete(id) {
+  return request.delete('/sysparams/delete?id=' + id)
+}
+
+/**
+ * 添加保存
+ */
+export function doAddSave(data) {
+  return request.post('/sysparams/save', qs.stringify(data))
 }
