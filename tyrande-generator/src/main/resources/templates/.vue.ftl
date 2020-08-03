@@ -61,7 +61,7 @@
           <span>
             <el-form :model="viewForm" label-width="120px" disabled>
              <#list columns as column>
-                 <el-form-item label="${column.columnComment}" prop="${column.javaField}">
+              <el-form-item label="${column.columnComment}" prop="${column.javaField}">
                 <el-input v-model="viewForm.${column.javaField}"/>
               </el-form-item>
              </#list>
@@ -79,7 +79,7 @@
           <span>
             <el-form :model="addForm" :rules="checkRules" ref="addFormRef" label-width="120px">
              <#list columns as column>
-                 <el-form-item label="${column.columnComment}" prop="${column.javaField}">
+              <el-form-item label="${column.columnComment}" prop="${column.javaField}">
                 <el-input v-model="addForm.${column.javaField}"></el-input>
               </el-form-item>
              </#list>
@@ -99,7 +99,7 @@
           <span>
             <el-form :model="editForm" :rules="checkRules" ref="editFormRef" label-width="120px">
                <#list columns as column>
-                   <el-form-item label="${column.columnComment}" prop="${column.javaField}">
+               <el-form-item label="${column.columnComment}" prop="${column.javaField}">
                  <el-input v-model="editForm.${column.javaField}"></el-input>
                </el-form-item>
                </#list>
@@ -134,8 +134,7 @@
 
                 // 查询参数对象
                 searchForm: {
-                    current: 1,
-                    id: ''
+                    current: 1
                 },
                 // 列表数据
                 gridData: {

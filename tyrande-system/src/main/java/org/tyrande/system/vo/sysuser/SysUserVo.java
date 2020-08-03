@@ -12,4 +12,7 @@ import lombok.Data;
 @Data
 public class SysUserVo extends Page {
 
+    private String loginCode;
+    private String userName;
+
 }
