@@ -7,7 +7,7 @@ package org.tyrande.generator.common.enums;
  */
 public enum TemplateTypeEnum {
     /**
-     * Controller
+     * js
      */
     JS("js", ".js.ftl"),
     /**
