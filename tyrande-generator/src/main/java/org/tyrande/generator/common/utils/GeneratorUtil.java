@@ -53,6 +53,10 @@ public class GeneratorUtil {
         processCreateFile(generatorDataModel, TemplateTypeEnum.SERVICE_IMPL);
         // 生成 controller
         processCreateFile(generatorDataModel, TemplateTypeEnum.CONTROLLER);
+        // 生成 js
+        processCreateFile(generatorDataModel, TemplateTypeEnum.JS);
+        // 生成 vue
+        processCreateFile(generatorDataModel, TemplateTypeEnum.VUE);
     }
 
     /**

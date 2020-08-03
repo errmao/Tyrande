@@ -9,6 +9,14 @@ public enum TemplateTypeEnum {
     /**
      * Controller
      */
+    JS("js", ".js.ftl"),
+    /**
+     * vue
+     */
+    VUE("vue", ".vue.ftl"),
+    /**
+     * Controller
+     */
     CONTROLLER("controller", "Controller.java.ftl"),
     /**
      * 接口实现
