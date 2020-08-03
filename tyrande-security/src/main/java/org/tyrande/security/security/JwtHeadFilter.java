@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.tyrande.common.constant.NormalConstants;
@@ -53,8 +54,12 @@ public class JwtHeadFilter extends OncePerRequestFilter {
 
         String subject = JwtTokenUtil.getProperties(redisToken);
         JwtUser user = JSONObject.parseObject(subject, JwtUser.class);
+        // 调用方法，刷新token
+        String salt = "token";
+        String resultToken = DigestUtils.md5DigestAsHex((salt + user.getId()).getBytes());
+        redisTemplate.expire(resultToken, 1800L, TimeUnit.SECONDS);
 
-        redisTemplate.expire(token, 1800L, TimeUnit.SECONDS);
+
         JwtLoginToken jwtLoginToken = new JwtLoginToken(user, "", user.getAuthorities());
         jwtLoginToken.setDetails(new WebAuthenticationDetails(request));
         SecurityContextHolder.getContext().setAuthentication(jwtLoginToken);

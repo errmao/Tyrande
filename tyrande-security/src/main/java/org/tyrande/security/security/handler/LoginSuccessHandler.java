@@ -8,7 +8,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 import org.tyrande.common.constant.NormalConstants;
+import org.tyrande.common.model.JwtUser;
 import org.tyrande.common.utils.SpringContextUtil;
 import org.tyrande.security.common.JwtTokenUtil;
 
@@ -29,11 +31,13 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setContentType(NormalConstants.JSON_UTF8);
-        String userJsonStr = JSON.toJSONString(authentication.getPrincipal());
-        String token = JwtTokenUtil.createToken("tyrande", userJsonStr);
-
         RedisTemplate redisTemplate = (RedisTemplate) SpringContextUtil.getBean("redisTemplate");
-        redisTemplate.opsForValue().set(token, token, 1800L, TimeUnit.SECONDS);
+        String userJsonStr = JSON.toJSONString(authentication.getPrincipal());
+        String token = JwtTokenUtil.createToken("", userJsonStr);
+        JwtUser jwtUser = (JwtUser) authentication.getPrincipal();
+        String salt = "token";
+        String resultToken = DigestUtils.md5DigestAsHex((salt + jwtUser.getId()).getBytes());
+        redisTemplate.opsForValue().set(resultToken, token, 1800L, TimeUnit.SECONDS);
         log.info("[用户登录成功]");
         //签发token
         R r = R.ok(token);
