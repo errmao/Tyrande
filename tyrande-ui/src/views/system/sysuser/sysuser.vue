@@ -291,9 +291,7 @@ export default {
     }
   },
   async created() {
-    await this.$getDicts('sex').then(res => {
-      this.$dictMap['sex'] = res.data
-    })
+    await this.$getDict('sex')
     this.getPageList()
   },
   methods: {

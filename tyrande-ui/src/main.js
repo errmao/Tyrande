@@ -16,9 +16,8 @@ Vue.use(ElementUI, { size: 'small' })
 Vue.config.productionTip = false
 
 // 挂载全局方法
-import { getDicts } from '@/api/system/sysdictkey/SysDictKey'
-import { formatDict } from '@/utils/dict'
-Vue.prototype.$getDicts = getDicts
+import { formatDict, getDict } from '@/utils/dict'
+Vue.prototype.$getDict = getDict
 Vue.prototype.$formatDict = formatDict
 // 全局字典
 Vue.prototype.$dictMap = {}

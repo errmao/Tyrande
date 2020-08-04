@@ -110,7 +110,7 @@ export function doValueView(id) {
 /**
  * 根据字典项查询所有字典值
  */
-export function getDicts(dictKey) {
+export function getDictList(dictKey) {
   return request.get('/sysdictvalue/getByDictKey', {
     params: {
       dictKey: dictKey
