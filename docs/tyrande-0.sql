@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 03/08/2020 14:00:56
+ Date: 04/08/2020 17:31:19
 */
 
 SET NAMES utf8mb4;
@@ -26,15 +26,19 @@ CREATE TABLE `sys_dict_key`  (
   `dict_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '字典项',
   `dict_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '字典名',
   `dict_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '字典描述',
-  `dict_status` tinyint(0) NULL DEFAULT NULL COMMENT '字典状态（1-启用 2-停用）',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统字典项表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统字典项表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_key
 -- ----------------------------
+INSERT INTO `sys_dict_key` VALUES (1, 'sex', '性别', '1-男 2-女', '2020-08-04 10:12:09', '2020-08-04 10:12:09');
+INSERT INTO `sys_dict_key` VALUES (3, 'status_use_or_no', '启停状态', '1-启用 2-停用', '2020-08-04 13:34:47', '2020-08-04 13:34:47');
+INSERT INTO `sys_dict_key` VALUES (4, 'user_status', '用户状态', '0-未使用 1-正常 2-锁定 3-过期', '2020-08-04 13:35:44', '2020-08-04 13:35:44');
+INSERT INTO `sys_dict_key` VALUES (5, 'is_or_not', '是否状态', '0-否 1-是', '2020-08-04 13:36:22', '2020-08-04 13:36:22');
+INSERT INTO `sys_dict_key` VALUES (6, 'test', '测试', 'test', '2020-08-04 14:28:01', '2020-08-04 14:28:01');
 
 -- ----------------------------
 -- Table structure for sys_dict_value
@@ -49,11 +53,29 @@ CREATE TABLE `sys_dict_value`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统字典值表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统字典值表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_value
 -- ----------------------------
+INSERT INTO `sys_dict_value` VALUES (1, 1, '男', '1', 1, '2020-08-04 10:14:10', '2020-08-04 10:14:13');
+INSERT INTO `sys_dict_value` VALUES (2, 1, '女', '2', 2, '2020-08-04 10:14:24', '2020-08-04 10:14:26');
+INSERT INTO `sys_dict_value` VALUES (7, 5, '222', '222', 12, '2020-08-04 14:24:01', '2020-08-04 14:25:45');
+INSERT INTO `sys_dict_value` VALUES (8, 6, '1', '1', 1, '2020-08-04 14:28:06', '2020-08-04 14:28:06');
+INSERT INTO `sys_dict_value` VALUES (9, 6, '2', '2', 2, '2020-08-04 14:28:12', '2020-08-04 14:28:12');
+INSERT INTO `sys_dict_value` VALUES (10, 6, '3', '3', 100, '2020-08-04 14:28:18', '2020-08-04 14:28:18');
+INSERT INTO `sys_dict_value` VALUES (11, 6, '4', '4', 100, '2020-08-04 14:28:32', '2020-08-04 14:28:32');
+INSERT INTO `sys_dict_value` VALUES (12, 6, '5', '5', 5, '2020-08-04 14:28:36', '2020-08-04 14:28:36');
+INSERT INTO `sys_dict_value` VALUES (13, 6, '6', '6', 6, '2020-08-04 14:28:42', '2020-08-04 14:28:42');
+INSERT INTO `sys_dict_value` VALUES (14, 6, '7', '7', 7, '2020-08-04 14:28:45', '2020-08-04 14:28:45');
+INSERT INTO `sys_dict_value` VALUES (15, 6, '8', '8', 8, '2020-08-04 14:28:49', '2020-08-04 14:28:49');
+INSERT INTO `sys_dict_value` VALUES (16, 6, '9', '9', 9, '2020-08-04 14:28:52', '2020-08-04 14:28:52');
+INSERT INTO `sys_dict_value` VALUES (17, 6, '10', '10', 10, '2020-08-04 14:28:58', '2020-08-04 14:28:58');
+INSERT INTO `sys_dict_value` VALUES (18, 6, '11', '11', 11, '2020-08-04 14:29:02', '2020-08-04 14:29:02');
+INSERT INTO `sys_dict_value` VALUES (19, 6, '12', '12', 12, '2020-08-04 14:29:07', '2020-08-04 14:29:07');
+INSERT INTO `sys_dict_value` VALUES (20, 6, '13', '13', 13, '2020-08-04 14:29:11', '2020-08-04 14:29:11');
+INSERT INTO `sys_dict_value` VALUES (21, 6, '14', '14', 14, '2020-08-04 14:29:16', '2020-08-04 14:29:16');
+INSERT INTO `sys_dict_value` VALUES (22, 6, '15', '15', 15, '2020-08-04 14:29:22', '2020-08-04 14:29:22');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -68,7 +90,7 @@ CREATE TABLE `sys_menu`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -78,6 +100,7 @@ INSERT INTO `sys_menu` VALUES (2, '用户管理', 2, 1, 'sysuser', '2020-07-30 0
 INSERT INTO `sys_menu` VALUES (3, '角色管理', 2, 1, 'sysrole', '2020-07-30 09:41:22', '2020-07-30 09:41:25');
 INSERT INTO `sys_menu` VALUES (4, '菜单管理', 2, 1, 'sysmenu', '2020-07-30 09:41:47', '2020-07-30 09:41:49');
 INSERT INTO `sys_menu` VALUES (5, '参数管理', 2, 1, 'sysparams', '2020-07-31 10:09:52', '2020-07-31 10:09:55');
+INSERT INTO `sys_menu` VALUES (6, '字典管理', 2, 1, 'sysdictkey', '2020-08-04 08:52:26', '2020-08-04 08:52:29');
 
 -- ----------------------------
 -- Table structure for sys_params
@@ -92,7 +115,7 @@ CREATE TABLE `sys_params`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统参数表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 500003 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统参数表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_params
@@ -309,7 +332,7 @@ CREATE TABLE `sys_role`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -324,7 +347,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '角色编号',
   `menu_id` bigint(0) NULL DEFAULT NULL COMMENT '菜单编号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色菜单关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色菜单关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -334,6 +357,7 @@ INSERT INTO `sys_role_menu` VALUES (2, 1, 2);
 INSERT INTO `sys_role_menu` VALUES (3, 1, 3);
 INSERT INTO `sys_role_menu` VALUES (4, 1, 4);
 INSERT INTO `sys_role_menu` VALUES (5, 1, 5);
+INSERT INTO `sys_role_menu` VALUES (6, 1, 6);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -356,12 +380,12 @@ CREATE TABLE `sys_user`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'caomengde', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV/BS60lCvk.C5jhM5R9r06HqHBC', '曹孟德', 1, 25, NULL, '浙江省海宁市', 'errmao@aliyun.com', 0, '15990040088', 0, 1, '2020-05-01 00:00:00', '2020-05-01 00:00:00');
+INSERT INTO `sys_user` VALUES (1, 'caomengde', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV/BS60lCvk.C5jhM5R9r06HqHBC', '曹孟德', 1, 26, '22222', '浙江省海宁市', 'errmao@aliyun.com', 0, '15990040088', 0, 1, '2020-05-01 00:00:00', '2020-08-03 14:43:56');
 INSERT INTO `sys_user` VALUES (2, 'zhangyide', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV/BS60lCvk.C5jhM5R9r06HqHBC', '张翼德', 1, 22, NULL, '浙江省桐乡市', 'tiny@163.com', 0, '15990030081', 0, 1, '2020-05-01 00:00:00', '2020-05-01 00:00:00');
 INSERT INTO `sys_user` VALUES (3, 'admin', '$2a$10$rsaFbdiwf8igcVhUMpyp/eW5vj6Y2EZ3Q4X3kY56yXjbgxs09AwZS', 'admin', 2, 21, NULL, '浙江省嘉兴市', '222@163.com', 0, '1588552369', 0, 1, '2020-05-07 13:16:50', '2020-05-07 13:16:52');
 INSERT INTO `sys_user` VALUES (4, 'test1', '$2a$10$c4Pz/6WR1BmGedZk1WXtge33RONfTbUT9IsmfhEHwGzEilTJf6Ylu', '测试用户1', 2, 11, NULL, '浙江省嘉兴市', '11dds12@163.com', 1, '1588552369', 1, 2, '2020-05-07 13:27:21', '2020-05-07 13:27:23');
@@ -377,6 +401,7 @@ INSERT INTO `sys_user` VALUES (14, 'test10', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV
 INSERT INTO `sys_user` VALUES (19, 'hhhhhhhh', '$2a$10$PM3xTb8XcJsOJG/nmNnoI.MpdguhyNhUFkWeXnqSdkTSWPpDbrwDG', 'dddddd', 1, 1231, NULL, '123123', '', 0, '', 0, 1, '2020-05-14 11:23:35', '2020-05-14 11:23:35');
 INSERT INTO `sys_user` VALUES (20, 'gggggggg', '$2a$10$C2uEj30tvdcpegFVpCDSkOlJEvbjvohhps1TzBmB/bBniyQtqs6Ga', '12312', 1, 213, NULL, 'ddddd1111111', '', 0, '', 0, 1, '2020-05-14 12:07:43', '2020-05-14 12:07:50');
 INSERT INTO `sys_user` VALUES (21, 'fusheng', '$2a$10$KJbAWUjp36yqFtZA9RvoGuvQVnZ5WYh9qPOyZdx.a8uDXfZgFsAam', '浮生', 1, 18, NULL, '浙江杭州余杭区', '888@aliyun.com', 0, '19855699366', 0, 1, '2020-07-03 10:25:04', '2020-07-03 10:33:14');
+INSERT INTO `sys_user` VALUES (22, '1', '1', '1', 1, 1, '1', '1', '1', 1, '15990048640', 1, 1, '2020-08-03 14:46:05', '2020-08-03 14:46:05');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -387,7 +412,7 @@ CREATE TABLE `sys_user_role`  (
   `user_id` bigint(0) NULL DEFAULT NULL COMMENT '用户编号',
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '角色编号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户角色管理表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户角色管理表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_role
