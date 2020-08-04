@@ -115,14 +115,14 @@
 </template>
 
 <script>
-  import defaultSettings from '../tyrande-ui/src/settings'
+  import defaultSettings from '@/settings'
   import {
     doAddSave,
     doDelete,
     doEditSave,
     doView,
     getPageList
-  } from "templates/.vue${moduleName}/${classNameLower}/${className}";
+  } from "@/api/${moduleName}/${classNameLower}/${className}";
 
   export default {
     name: '${className}',
