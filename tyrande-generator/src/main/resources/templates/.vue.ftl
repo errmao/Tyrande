@@ -196,8 +196,8 @@
           async () => {
             doDelete(rowId).then(() => {
               this.$message.success(defaultSettings.successDelete);
+              this.getPageList()
             })
-            this.getPageList()
           });
       },
 
