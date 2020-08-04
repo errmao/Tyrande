@@ -18,4 +18,9 @@ public interface SysDictValueService extends IService<SysDictValueModel> {
      * 分页查询
      */
     IPage<SysDictValueModel> getPageList(SysDictValueVo sysDictValueVo);
+
+    /**
+     * 根据字典项查询字典值列表
+     */
+    List<SysDictValueModel> getByDictKey(String dictKey);
 }

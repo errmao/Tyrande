@@ -3,8 +3,11 @@
     <!-- 查询条件 -->
     <el-card>
       <el-form :inline="true" :model="searchForm" class="app-container-searchForm">
-        <el-form-item label="主键">
-          <el-input v-model="searchForm.id" placeholder="主键" />
+        <el-form-item label="字典名称">
+          <el-input v-model="searchForm.dictName" placeholder="字典名称" />
+        </el-form-item>
+        <el-form-item label="字典项">
+          <el-input v-model="searchForm.dictKey" placeholder="字典项" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="getPageList">
@@ -29,11 +32,9 @@
       <!-- 数据表格 -->
       <el-table border :data="gridData.list">
         <el-table-column type="index" label="序号" width="50" />
+        <el-table-column prop="dictName" label="字典名称" />
         <el-table-column prop="dictKey" label="字典项" />
-        <el-table-column prop="dictName" label="字典名" />
         <el-table-column prop="dictDesc" label="字典描述" />
-        <el-table-column prop="dictStatus" label="字典状态（1-启用 2-停用）" />
-        d
         <el-table-column fixed="right" label="操作" width="180">
           <template slot-scope="scope">
             <el-button
@@ -76,17 +77,14 @@
     <el-dialog :title="defaultSettings.btnView" :visible.sync="visibleConfig.view" width="50%">
       <span>
         <el-form :model="viewForm" label-width="120px" disabled>
+          <el-form-item label="字典名称" prop="dictName">
+            <el-input v-model="viewForm.dictName" />
+          </el-form-item>
           <el-form-item label="字典项" prop="dictKey">
             <el-input v-model="viewForm.dictKey" />
           </el-form-item>
-          <el-form-item label="字典名" prop="dictName">
-            <el-input v-model="viewForm.dictName" />
-          </el-form-item>
           <el-form-item label="字典描述" prop="dictDesc">
             <el-input v-model="viewForm.dictDesc" />
-          </el-form-item>
-          <el-form-item label="字典状态（1-启用 2-停用）" prop="dictStatus">
-            <el-input v-model="viewForm.dictStatus" />
           </el-form-item>
         </el-form>
       </span>
@@ -104,17 +102,14 @@
     >
       <span>
         <el-form ref="addFormRef" :model="addForm" :rules="checkRules" label-width="120px">
+          <el-form-item label="字典名称" prop="dictName">
+            <el-input v-model="addForm.dictName" />
+          </el-form-item>
           <el-form-item label="字典项" prop="dictKey">
             <el-input v-model="addForm.dictKey" />
           </el-form-item>
-          <el-form-item label="字典名" prop="dictName">
-            <el-input v-model="addForm.dictName" />
-          </el-form-item>
           <el-form-item label="字典描述" prop="dictDesc">
             <el-input v-model="addForm.dictDesc" />
-          </el-form-item>
-          <el-form-item label="字典状态（1-启用 2-停用）" prop="dictStatus">
-            <el-input v-model="addForm.dictStatus" />
           </el-form-item>
         </el-form>
       </span>
@@ -138,17 +133,14 @@
     >
       <span>
         <el-form ref="editFormRef" :model="editForm" :rules="checkRules" label-width="120px">
+          <el-form-item label="字典名称" prop="dictName">
+            <el-input v-model="editForm.dictName" />
+          </el-form-item>
           <el-form-item label="字典项" prop="dictKey">
             <el-input v-model="editForm.dictKey" />
           </el-form-item>
-          <el-form-item label="字典名" prop="dictName">
-            <el-input v-model="editForm.dictName" />
-          </el-form-item>
           <el-form-item label="字典描述" prop="dictDesc">
             <el-input v-model="editForm.dictDesc" />
-          </el-form-item>
-          <el-form-item label="字典状态（1-启用 2-停用）" prop="dictStatus">
-            <el-input v-model="editForm.dictStatus" />
           </el-form-item>
         </el-form>
       </span>
@@ -167,8 +159,8 @@
 </template>
 
 <script>
-import defaultSettings from '../tyrande-ui/src/settings'
-import { doAddSave, doDelete, doEditSave, doView, getPageList } from 'templates/.vuesystem/sysdictkey/SysDictKey'
+import defaultSettings from '@/settings'
+import { doAddSave, doDelete, doEditSave, doView, getPageList } from '@/api/system/sysdictkey/SysDictKey'
 
 export default {
   name: 'SysDictKey',
@@ -196,9 +188,8 @@ export default {
       // 添加或编辑对话框校验规则
       checkRules: {
         dictKey: [{ required: true, message: '请输入字典项', trigger: 'blur' }],
-        dictName: [{ required: true, message: '请输入字典名', trigger: 'blur' }],
-        dictDesc: [{ required: true, message: '请输入字典描述', trigger: 'blur' }],
-        dictStatus: [{ required: true, message: '请输入字典状态（1-启用 2-停用）', trigger: 'blur' }]
+        dictName: [{ required: true, message: '请输入字典名称', trigger: 'blur' }],
+        dictDesc: [{ required: true, message: '请输入字典描述', trigger: 'blur' }]
       },
 
       // 查看数据

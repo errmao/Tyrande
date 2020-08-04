@@ -40,10 +40,6 @@ public class SysDictKeyModel implements Serializable {
      * 字典描述
      */
     private String dictDesc;
-    /**
-     * 字典状态（1-启用 2-停用）
-     */
-    private Integer dictStatus;
 
     /**
      * 创建时间

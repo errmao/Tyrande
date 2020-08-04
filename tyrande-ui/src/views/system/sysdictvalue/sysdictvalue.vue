@@ -167,14 +167,8 @@
 </template>
 
 <script>
-import defaultSettings from '../tyrande-ui/src/settings'
-import {
-  doAddSave,
-  doDelete,
-  doEditSave,
-  doView,
-  getPageList
-} from 'templates/.vuesystem/sysdictvalue/SysDictValue'
+import defaultSettings from '@/settings'
+import { doAddSave, doDelete, doEditSave, doView, getPageList } from '@/api/system/sysdictvalue/SysDictValue'
 
 export default {
   name: 'SysDictValue',

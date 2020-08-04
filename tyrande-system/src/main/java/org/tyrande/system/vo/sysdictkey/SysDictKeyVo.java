@@ -12,4 +12,6 @@ import lombok.Data;
 @Data
 public class SysDictKeyVo extends Page {
 
+    private String dictName;
+    private String dictKey;
 }
