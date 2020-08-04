@@ -27,7 +27,7 @@
       <el-table border :data="gridData.list">
         <el-table-column type="index" label="序号" width="50"/>
         <#list columns as column>
-        <el-table-column prop="${column.javaField}" label="${column.columnComment}"/>
+      <el-table-column prop="${column.javaField}" label="${column.columnComment}"/>
         </#list>d
         <el-table-column fixed="right" label="操作" width="180">
           <template slot-scope="scope">
@@ -48,10 +48,10 @@
 
       <!-- 分页区域 -->
       <el-pagination
-        @current-change="handleCurrentChange"
-        :current-page="searchForm.current"
-        :layout="defaultSettings.page"
-        :total="gridData.total">
+              @current-change="handleCurrentChange"
+              :current-page="searchForm.current"
+              :layout="defaultSettings.page"
+              :total="gridData.total">
       </el-pagination>
     </el-card>
 
@@ -60,7 +60,7 @@
       <span>
         <el-form :model="viewForm" label-width="120px" disabled>
          <#list columns as column>
-          <el-form-item label="${column.columnComment}" prop="${column.javaField}">
+           <el-form-item label="${column.columnComment}" prop="${column.javaField}">
             <el-input v-model="viewForm.${column.javaField}"/>
           </el-form-item>
          </#list>
@@ -77,7 +77,7 @@
       <span>
         <el-form :model="addForm" :rules="checkRules" ref="addFormRef" label-width="120px">
           <#list columns as column>
-          <el-form-item label="${column.columnComment}" prop="${column.javaField}">
+            <el-form-item label="${column.columnComment}" prop="${column.javaField}">
             <el-input v-model="addForm.${column.javaField}"></el-input>
           </el-form-item>
           </#list>
@@ -85,7 +85,7 @@
       </span>
       <span slot="footer" class="dialog-footer">
         <el-button
-          @click="visibleConfig.add = false">{{defaultSettings.cancelButtonText}}</el-button>
+                @click="visibleConfig.add = false">{{defaultSettings.cancelButtonText}}</el-button>
         <el-button type="primary"
                    @click="doAddSave">{{defaultSettings.confirmButtonText}}</el-button>
       </span>
@@ -97,15 +97,15 @@
     <span>
       <el-form :model="editForm" :rules="checkRules" ref="editFormRef" label-width="120px">
         <#list columns as column>
-        <el-form-item label="${column.columnComment}" prop="${column.javaField}">
+          <el-form-item label="${column.columnComment}" prop="${column.javaField}">
          <el-input v-model="editForm.${column.javaField}"></el-input>
         </el-form-item>
         </#list>
       </el-form>
     </span>
-    <span slot="footer" class="dialog-footer">
+      <span slot="footer" class="dialog-footer">
       <el-button
-        @click="visibleConfig.edit = false">{{defaultSettings.cancelButtonText}}</el-button>
+              @click="visibleConfig.edit = false">{{defaultSettings.cancelButtonText}}</el-button>
       <el-button type="primary"
                  @click="doEditSave">{{defaultSettings.confirmButtonText}}</el-button>
     </span>
@@ -149,20 +149,20 @@
 
         // 添加或编辑对话框校验规则
         checkRules: {
-        <#list columns as column >
-          ${column.javaField}: [{required: true, message: '请输入${column.columnComment}', trigger: 'blur'}],
-        </#list>
-        },
+      <#list columns as column >
+      ${column.javaField}: [{required: true, message: '请输入${column.columnComment}', trigger: 'blur'}],
+      </#list>
+    },
 
-        // 查看数据
-        {},
+      // 查看数据
+      {},
 
-        // 添加对话框数据
-        {},
+      // 添加对话框数据
+      {},
 
-        // 编辑对话框数据
-        {}
-      }
+      // 编辑对话框数据
+      {}
+    }
     },
     created() {
       this.getPageList()
@@ -193,12 +193,12 @@
           cancelButtonText: defaultSettings.cancelButtonText,
           type: defaultSettings.typeWarning
         }).then(
-          async () => {
-            doDelete(rowId).then(() => {
-              this.$message.success(defaultSettings.successDelete);
-            })
-            this.getPageList()
-          });
+                async () => {
+                  doDelete(rowId).then(() => {
+                    this.$message.success(defaultSettings.successDelete);
+                  })
+                  this.getPageList()
+                });
       },
 
       // 添加-保存
