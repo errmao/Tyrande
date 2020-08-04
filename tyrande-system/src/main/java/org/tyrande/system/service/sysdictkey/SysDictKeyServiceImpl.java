@@ -38,4 +38,20 @@ public class SysDictKeyServiceImpl extends ServiceImpl<SysDictKeyDao, SysDictKey
         IPage<SysDictKeyModel> page = sysDictKeyDao.selectMapsPage(sysDictKeyVo, wrapper);
         return page;
     }
+
+    /**
+     * 根据字典项编号删除字典值
+     */
+    @Override
+    public void deleteDictValue(String id) {
+        sysDictKeyDao.deleteDictValue(id);
+    }
+
+    /**
+     * 根据字典项查询是否重复
+     */
+    @Override
+    public SysDictKeyModel checkDictKey(String dictKey) {
+        return sysDictKeyDao.checkDictKey(dictKey);
+    }
 }

@@ -65,6 +65,19 @@ public class SysDictKeyController {
     @DeleteMapping("delete")
     public R delete(@RequestParam @NotBlank(message = "主键ID不能为空") String id) {
         sysDictKeyService.removeById(id);
+        sysDictKeyService.deleteDictValue(id);
         return R.ok(null);
+    }
+
+    /**
+     * 根据字典项查询是否重复
+     */
+    @GetMapping("checkDictKey")
+    public R checkDictKey(@RequestParam @NotBlank(message = "字典项不能为空")String dictKey) {
+       SysDictKeyModel model = sysDictKeyService.checkDictKey(dictKey);
+       if (model != null) {
+           return R.ok(model);
+       }
+       return R.ok(model);
     }
 }

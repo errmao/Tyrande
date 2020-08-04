@@ -18,4 +18,14 @@ public interface SysDictKeyService extends IService<SysDictKeyModel> {
      * 分页查询
      */
     IPage<SysDictKeyModel> getPageList(SysDictKeyVo sysDictKeyVo);
+
+    /**
+     * 根据字典项编号删除字典值
+     */
+    void deleteDictValue(String id);
+
+    /**
+     * 根据字典项查询是否重复
+     */
+    SysDictKeyModel checkDictKey(String dictKey);
 }

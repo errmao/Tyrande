@@ -1,6 +1,7 @@
 /**
  * Created by PanJiaChen on 16/11/18.
  */
+import { checkDictKey } from '@/api/system/sysdictkey/SysDictKey'
 
 /**
  * @param {string} path
@@ -33,4 +34,20 @@ export function isNumberAndSe(rule, value, callback) {
       callback()
     }
   }
+}
+
+/**
+ * 字典项不能重复添加
+ * @param rule
+ * @param value
+ * @param callback
+ */
+export function dictKeyValidate(rule, value, callback) {
+  checkDictKey(value).then(res => {
+    if (res.data == null) {
+      callback()
+    } else {
+      callback(new Error('字典项已存在'))
+    }
+  })
 }
