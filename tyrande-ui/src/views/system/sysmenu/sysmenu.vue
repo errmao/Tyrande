@@ -10,9 +10,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'SysMenu'
-  }
+export default {
+  name: 'SysMenu'
+}
 </script>
 
 <style lang='scss' scoped>

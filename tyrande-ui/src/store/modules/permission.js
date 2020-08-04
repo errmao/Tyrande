@@ -1,20 +1,20 @@
-import {asyncRoutes, constantRoutes} from '@/router'
+import { asyncRoutes, constantRoutes } from '@/router'
 
 /**
  * 判断是否拥有菜单权限
  */
 function hasPermission(menus, route) {
   if (menus.length == 0) {
-    return true;
+    return true
   }
-  let result = false;
+  let result = false
   menus.forEach(menu => {
     if (menu.menuUrl == route.path) {
-      result = true;
-      return false;
+      result = true
+      return false
     }
   })
-  return result;
+  return result
 }
 
 /**
@@ -24,7 +24,7 @@ export function filterAsyncRoutes(routes, menus) {
   const res = []
 
   routes.forEach(route => {
-    const tmp = {...route}
+    const tmp = { ...route }
     if (hasPermission(menus, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, menus)
@@ -52,10 +52,10 @@ const mutations = {
  * 根据状态加载路由
  */
 const actions = {
-  generateRoutes({commit}, menus) {
+  generateRoutes({ commit }, menus) {
     return new Promise(resolve => {
       // 查询
-      let accessedRoutes = filterAsyncRoutes(asyncRoutes, menus)
+      const accessedRoutes = filterAsyncRoutes(asyncRoutes, menus)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

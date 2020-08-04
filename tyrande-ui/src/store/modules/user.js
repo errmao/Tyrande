@@ -1,6 +1,6 @@
-import {getInfo, login, logout} from '@/api/user'
-import {getToken, removeToken, setToken} from '@/utils/auth'
-import {resetRouter} from '@/router'
+import { getInfo, login, logout } from '@/api/user'
+import { getToken, removeToken, setToken } from '@/utils/auth'
+import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
@@ -39,11 +39,11 @@ const actions = {
   /**
    * 用户登录
    */
-  login({commit}, userInfo) {
-    const {username, password} = userInfo
+  login({ commit }, userInfo) {
+    const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({username: username.trim(), password: password}).then(response => {
-        const {data} = response
+      login({ username: username.trim(), password: password }).then(response => {
+        const { data } = response
         commit('SET_TOKEN', data)
         setToken(data)
         resolve()
@@ -56,16 +56,16 @@ const actions = {
   /**
    * 查询用户信息
    */
-  getInfo({commit, state}) {
+  getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
-        const {data} = response
+        const { data } = response
 
         if (!data) {
           reject('验证失败，请重新登录')
         }
 
-        const {roles, name, avatar, menus} = data
+        const { roles, name, avatar, menus } = data
 
         if (!roles || roles.length <= 0) {
           reject('用户必须拥有角色!')
@@ -85,7 +85,7 @@ const actions = {
   /**
    * 用户登出
    */
-  logout({commit, state}) {
+  logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         removeToken()
@@ -101,7 +101,7 @@ const actions = {
   /**
    * 移除 token
    */
-  resetToken({commit}) {
+  resetToken({ commit }) {
     return new Promise(resolve => {
       removeToken()
       commit('RESET_STATE')

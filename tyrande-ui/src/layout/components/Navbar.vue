@@ -1,13 +1,16 @@
 <template>
   <div class="navbar">
-    <hamburger :is-active="sidebar.opened" class="hamburger-container"
-               @toggleClick="toggleSideBar"/>
-    <breadcrumb class="breadcrumb-container"/>
+    <hamburger
+      :is-active="sidebar.opened"
+      class="hamburger-container"
+      @toggleClick="toggleSideBar"
+    />
+    <breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="imgUrl" class="user-avatar"/>
-          <i class="el-icon-caret-bottom"/>
+          <img :src="imgUrl" class="user-avatar">
+          <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
@@ -26,33 +29,33 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import Breadcrumb from '@/components/Breadcrumb'
-  import Hamburger from '@/components/Hamburger'
+import { mapGetters } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb'
+import Hamburger from '@/components/Hamburger'
 
-  export default {
-    components: {
-      Breadcrumb,
-      Hamburger,
+export default {
+  components: {
+    Breadcrumb,
+    Hamburger
+  },
+  computed: {
+    ...mapGetters(['sidebar'])
+  },
+  data() {
+    return {
+      imgUrl: process.env.VUE_APP_IMG_URL + process.env.VUE_APP_GIF_DIR + '/ty0.gif'
+    }
+  },
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar')
     },
-    computed: {
-      ...mapGetters(['sidebar']),
-    },
-    data() {
-      return {
-        imgUrl: process.env.VUE_APP_IMG_URL + process.env.VUE_APP_GIF_DIR +'/ty0.gif'
-      }
-    },
-    methods: {
-      toggleSideBar() {
-        this.$store.dispatch('app/toggleSideBar')
-      },
-      async logout() {
-        await this.$store.dispatch('user/logout')
-        this.$router.push(`/login?redirect=${this.$route.fullPath}`)
-      },
-    },
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>

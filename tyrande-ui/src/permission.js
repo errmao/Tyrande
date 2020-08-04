@@ -1,16 +1,16 @@
 import router from './router'
 import store from './store'
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import {getToken} from '@/utils/auth' // get token from cookie
+import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
-NProgress.configure({showSpinner: false}) // NProgress Configuration
+NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
 
@@ -23,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
   if (hasToken) {
     if (to.path === '/login') {
       // 已经登录,重定向到首页
-      next({path: '/'})
+      next({ path: '/' })
       NProgress.done()
     } else {
       // determine whether the user has obtained his permission roles through getInfo
@@ -33,7 +33,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           // 获取权限内的菜单
-          const {menus} = await store.dispatch('user/getInfo')
+          const { menus } = await store.dispatch('user/getInfo')
 
           // 基于权限内的路由
           const accessRoutes = await store.dispatch('permission/generateRoutes', menus)
@@ -43,7 +43,7 @@ router.beforeEach(async (to, from, next) => {
 
           // hack方法，以确保addRoutes是完整的
           // 设置replace：true，因此导航将不会留下历史记录
-          next({...to, replace: true})
+          next({ ...to, replace: true })
         } catch (error) {
           // 移除 token 跳转到登录页面重新登录
           await store.dispatch('user/resetToken')

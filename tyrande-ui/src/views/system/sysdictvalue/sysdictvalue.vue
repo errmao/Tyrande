@@ -3,11 +3,8 @@
     <!-- 查询条件 -->
     <el-card>
       <el-form :inline="true" :model="searchForm" class="app-container-searchForm">
-        <el-form-item label="参数中文名">
-          <el-input v-model="searchForm.paramName" placeholder="参数中文名" />
-        </el-form-item>
-        <el-form-item label="参数英文名">
-          <el-input v-model="searchForm.paramEnName" placeholder="参数英文名" />
+        <el-form-item label="主键">
+          <el-input v-model="searchForm.id" placeholder="主键" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="getPageList">
@@ -32,10 +29,11 @@
       <!-- 数据表格 -->
       <el-table border :data="gridData.list">
         <el-table-column type="index" label="序号" width="50" />
-        <el-table-column prop="paramName" label="参数中文名" />
-        <el-table-column prop="paramEnName" label="参数英文名" />
-        <el-table-column prop="paramValue" label="参数值" />
-        <el-table-column prop="paramDesc" label="描述" />
+        <el-table-column prop="dictKeyId" label="字典项编号" />
+        <el-table-column prop="dictValue" label="展示值" />
+        <el-table-column prop="dictRealValue" label="真实值" />
+        <el-table-column prop="dictOrder" label="字典顺序" />
+        d
         <el-table-column fixed="right" label="操作" width="180">
           <template slot-scope="scope">
             <el-button
@@ -78,24 +76,22 @@
     <el-dialog :title="defaultSettings.btnView" :visible.sync="visibleConfig.view" width="50%">
       <span>
         <el-form :model="viewForm" label-width="120px" disabled>
-          <el-form-item label="参数中文名" prop="paramName">
-            <el-input v-model="viewForm.paramName" />
+          <el-form-item label="字典项编号" prop="dictKeyId">
+            <el-input v-model="viewForm.dictKeyId" />
           </el-form-item>
-          <el-form-item label="参数英文名" prop="paramEnName">
-            <el-input v-model="viewForm.paramEnName" />
+          <el-form-item label="展示值" prop="dictValue">
+            <el-input v-model="viewForm.dictValue" />
           </el-form-item>
-          <el-form-item label="参数值" prop="paramValue">
-            <el-input v-model="viewForm.paramValue" />
+          <el-form-item label="真实值" prop="dictRealValue">
+            <el-input v-model="viewForm.dictRealValue" />
           </el-form-item>
-          <el-form-item label="描述" prop="paramDesc">
-            <el-input v-model="viewForm.paramDesc" />
+          <el-form-item label="字典顺序" prop="dictOrder">
+            <el-input v-model="viewForm.dictOrder" />
           </el-form-item>
         </el-form>
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button
-          @click="visibleConfig.view = false"
-        >{{ defaultSettings.closeButtonText }}</el-button>
+        <el-button @click="visibleConfig.view = false">{{ defaultSettings.closeButtonText }}</el-button>
       </span>
     </el-dialog>
 
@@ -108,17 +104,17 @@
     >
       <span>
         <el-form ref="addFormRef" :model="addForm" :rules="checkRules" label-width="120px">
-          <el-form-item label="参数中文名" prop="paramName">
-            <el-input v-model="addForm.paramName" />
+          <el-form-item label="字典项编号" prop="dictKeyId">
+            <el-input v-model="addForm.dictKeyId" />
           </el-form-item>
-          <el-form-item label="参数英文名" prop="paramEnName">
-            <el-input v-model="addForm.paramEnName" />
+          <el-form-item label="展示值" prop="dictValue">
+            <el-input v-model="addForm.dictValue" />
           </el-form-item>
-          <el-form-item label="参数值" prop="paramValue">
-            <el-input v-model="addForm.paramValue" />
+          <el-form-item label="真实值" prop="dictRealValue">
+            <el-input v-model="addForm.dictRealValue" />
           </el-form-item>
-          <el-form-item label="描述" prop="paramDesc">
-            <el-input v-model="addForm.paramDesc" />
+          <el-form-item label="字典顺序" prop="dictOrder">
+            <el-input v-model="addForm.dictOrder" />
           </el-form-item>
         </el-form>
       </span>
@@ -142,17 +138,17 @@
     >
       <span>
         <el-form ref="editFormRef" :model="editForm" :rules="checkRules" label-width="120px">
-          <el-form-item label="参数中文名" prop="paramName">
-            <el-input v-model="editForm.paramName" />
+          <el-form-item label="字典项编号" prop="dictKeyId">
+            <el-input v-model="editForm.dictKeyId" />
           </el-form-item>
-          <el-form-item label="参数英文名" prop="paramEnName">
-            <el-input v-model="editForm.paramEnName" />
+          <el-form-item label="展示值" prop="dictValue">
+            <el-input v-model="editForm.dictValue" />
           </el-form-item>
-          <el-form-item label="参数值" prop="paramValue">
-            <el-input v-model="editForm.paramValue" />
+          <el-form-item label="真实值" prop="dictRealValue">
+            <el-input v-model="editForm.dictRealValue" />
           </el-form-item>
-          <el-form-item label="描述" prop="paramDesc">
-            <el-input v-model="editForm.paramDesc" />
+          <el-form-item label="字典顺序" prop="dictOrder">
+            <el-input v-model="editForm.dictOrder" />
           </el-form-item>
         </el-form>
       </span>
@@ -171,27 +167,24 @@
 </template>
 
 <script>
-import defaultSettings from '@/settings'
+import defaultSettings from '../tyrande-ui/src/settings'
 import {
   doAddSave,
   doDelete,
   doEditSave,
   doView,
   getPageList
-} from '@/api/system/sysparams/SysParams'
-import { isNumberAndSe } from '@/utils/validate'
+} from 'templates/.vuesystem/sysdictvalue/SysDictValue'
 
 export default {
-  name: 'SysParam',
+  name: 'SysDictValue',
   data() {
     return {
       defaultSettings: defaultSettings,
 
       // 查询参数对象
       searchForm: {
-        current: 1,
-        paramName: '',
-        paramEnName: ''
+        current: 1
       },
       // 列表数据
       gridData: {
@@ -208,15 +201,10 @@ export default {
 
       // 添加或编辑对话框校验规则
       checkRules: {
-        paramName: [
-          { required: true, message: '请输入参数中文名', trigger: 'blur' },
-          { min: 1, max: 20, message: '请输入1-20个字符的参数中文名', trigger: 'blur' }],
-        paramEnName: [
-          { required: true, message: '请输入参数英文名', trigger: 'blur' },
-          { min: 1, max: 50, message: '请输入1-50个字符或数字', trigger: 'blur' },
-          { validator: isNumberAndSe, trigger: 'blur' }],
-        paramValue: [{ required: true, message: '请输入参数值', trigger: 'blur' }],
-        paramDesc: [{ max: 200, message: '描述不能超过200个字符', trigger: 'blur' }]
+        dictKeyId: [{ required: true, message: '请输入字典项编号', trigger: 'blur' }],
+        dictValue: [{ required: true, message: '请输入展示值', trigger: 'blur' }],
+        dictRealValue: [{ required: true, message: '请输入真实值', trigger: 'blur' }],
+        dictOrder: [{ required: true, message: '请输入字典顺序', trigger: 'blur' }]
       },
 
       // 查看数据
