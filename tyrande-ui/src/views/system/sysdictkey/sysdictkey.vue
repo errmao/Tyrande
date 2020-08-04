@@ -20,7 +20,6 @@
     <el-row :gutter="20">
       <!-- 字典项表格 -->
       <el-col :span="11">
-        <!-- 数据列表 -->
         <el-card class="dict_key-class">
           <el-row class="app-container-toolbar">
             <el-button
@@ -31,8 +30,6 @@
               {{ defaultSettings.btnAdd }}
             </el-button>
           </el-row>
-
-          <!-- 数据表格 -->
           <el-table
             ref="dictKeyTable"
             border
@@ -78,7 +75,6 @@
 
       <!-- 字典值表格 -->
       <el-col :span="13">
-        <!-- 数据列表 -->
         <el-card class="dict-value-class">
           <el-row class="app-container-toolbar">
             <el-button
@@ -89,9 +85,7 @@
               {{ defaultSettings.btnAdd }}
             </el-button>
           </el-row>
-
-          <!-- 数据表格 -->
-          <el-table border :data="gridData_value.list">
+          <el-table border :data="gridData_value.list" max-height="640">
             <el-table-column type="index" label="序号" width="50" />
             <el-table-column prop="dictRealValue" label="真实值" />
             <el-table-column prop="dictValue" label="展示值" />
@@ -214,7 +208,7 @@
       </span>
     </el-dialog>
 
-    <!-- 编辑 -->
+    <!-- 字典值编辑 -->
     <el-dialog
       :title="defaultSettings.btnEdit"
       :visible.sync="visibleConfig_value.edit"
