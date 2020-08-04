@@ -28,7 +28,7 @@
         <el-table-column type="index" label="序号" width="50"/>
         <#list columns as column>
         <el-table-column prop="${column.javaField}" label="${column.columnComment}"/>
-        </#list>d
+        </#list>
         <el-table-column fixed="right" label="操作" width="180">
           <template slot-scope="scope">
             <el-button type="text" icon="el-icon-view" size="small"
