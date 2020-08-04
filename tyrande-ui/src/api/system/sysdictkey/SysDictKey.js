@@ -102,3 +102,18 @@ export function doValueView(id) {
     }
   })
 }
+
+/** ***********************************
+ * 字典工具类
+ *************************************/
+
+/**
+ * 根据字典项查询所有字典值
+ */
+export function getDicts(dictKey) {
+  return request.get('/sysdictvalue/getByDictKey', {
+    params: {
+      dictKey: dictKey
+    }
+  })
+}

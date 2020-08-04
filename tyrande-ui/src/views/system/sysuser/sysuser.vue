@@ -33,7 +33,7 @@
         <el-table-column type="index" label="序号" width="50" />
         <el-table-column prop="loginCode" label="登陆账户" />
         <el-table-column prop="userName" label="用户名称" />
-        <el-table-column prop="sex" label="性别" />
+        <el-table-column prop="sex" label="性别" :formatter="formatSex" />
         <el-table-column prop="age" label="年龄" />
         <el-table-column prop="avatar" label="头像" />
         <el-table-column prop="address" label="地址" />
@@ -268,42 +268,16 @@ export default {
 
       // 添加或编辑对话框校验规则
       checkRules: {
-        loginCode: [
-          { required: true, message: '请输入登陆账户', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
-        ],
-        userName: [
-          { required: true, message: '请输入用户名称', trigger: 'blur' }
-        ],
-        sex: [
-          { required: true, message: '请输入性别 1-男 2-女', trigger: 'blur' }
-        ],
-        age: [
-          { required: true, message: '请输入年龄', trigger: 'blur' }
-        ],
-        avatar: [
-          { required: true, message: '请输入头像', trigger: 'blur' }
-        ],
-        address: [
-          { required: true, message: '请输入地址', trigger: 'blur' }
-        ],
-        email: [
-          { required: true, message: '请输入邮箱', trigger: 'blur' }
-        ],
-        validEmail: [
-          { required: true, message: '请输入邮箱是否验证 0-否 1-是', trigger: 'blur' }
-        ],
-        tel: [
-          { required: true, message: '请输入电话', trigger: 'blur' }
-        ],
-        validTel: [
-          { required: true, message: '请输入电话是否验证 0-否 1-是', trigger: 'blur' }
-        ],
-        status: [
-          { required: true, message: '请输入用户状态 0-未使用 1-正常 2-锁定 3-过期', trigger: 'blur' }
-        ]
+        loginCode: [{ required: true, message: '请输入登陆账户', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        userName: [{ required: true, message: '请输入用户名称', trigger: 'blur' }],
+        sex: [{ required: true, message: '请输入性别 1-男 2-女', trigger: 'blur' }],
+        age: [{ required: true, message: '请输入年龄', trigger: 'blur' }],
+        avatar: [{ required: true, message: '请输入头像', trigger: 'blur' }],
+        address: [{ required: true, message: '请输入地址', trigger: 'blur' }],
+        email: [{ required: true, message: '请输入邮箱', trigger: 'blur' }],
+        tel: [{ required: true, message: '请输入电话', trigger: 'blur' }],
+        status: [{ required: true, message: '请输入用户状态 0-未使用 1-正常 2-锁定 3-过期', trigger: 'blur' }]
       },
 
       // 查看数据
@@ -316,7 +290,10 @@ export default {
       editForm: {}
     }
   },
-  created() {
+  async created() {
+    await this.$getDicts('sex').then(res => {
+      this.$dictMap['sex'] = res.data
+    })
     this.getPageList()
   },
   methods: {
@@ -393,6 +370,11 @@ export default {
     // 编辑-关闭
     doEditClose() {
       this.$refs.editFormRef.resetFields()
+    },
+
+    // 格式化_性别
+    formatSex(row, column, cellValue) {
+      return this.$formatDict(cellValue, 'sex')
     }
   }
 }
