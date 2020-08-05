@@ -1,5 +1,5 @@
 import Vue from 'vue'
-
+import '@/extra'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -14,15 +14,6 @@ import '@/permission' // permission control
 Vue.use(ElementUI, { size: 'small' })
 
 Vue.config.productionTip = false
-
-// 挂载全局方法
-import { formatDict, getDict } from '@/utils/dict'
-Vue.prototype.$getDict = getDict
-Vue.prototype.$formatDict = formatDict
-// 全局字典
-Vue.prototype.$dictMap = {}
-import DictOption from '@/components/Dict/DictOption'
-Vue.component('option-dict', DictOption)
 
 new Vue({
   el: '#app',

@@ -77,7 +77,7 @@ export const asyncRoutes = [
       },
       {
         path: 'sysrole',
-        component: () => import('@/views/404'),
+        component: () => import('@/views/system/sysrole/sysrole'),
         name: '角色管理',
         meta: { title: '角色管理' }
       },
