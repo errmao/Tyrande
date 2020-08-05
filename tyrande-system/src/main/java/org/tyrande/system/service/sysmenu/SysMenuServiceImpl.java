@@ -39,7 +39,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuModel> im
     @Override
     public List<SysMenuTreeModel> getMenuByLevel(String level) {
         List<SysMenuTreeModel> list = new ArrayList<>();
-        SysMenuTreeModel model= new SysMenuTreeModel();
+        SysMenuTreeModel model = new SysMenuTreeModel();
         model.setId(-1L);
         model.setPid(-2L);
         model.setMenuLevel(0);
@@ -51,13 +51,5 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuModel> im
             return tree;
         }
         return list;
-    }
-
-    /**
-     * 根据ID查询
-     */
-    @Override
-    public SysMenuTreeModel getModelById(String id) {
-        return sysMenuDao.getModelById(id);
     }
 }

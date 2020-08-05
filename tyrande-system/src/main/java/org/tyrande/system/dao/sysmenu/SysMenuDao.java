@@ -20,6 +20,4 @@ public interface SysMenuDao extends BaseMapper<SysMenuModel> {
     List<SysMenuTreeModel> getPageList();
 
     List<SysMenuTreeModel> getMenuByLevel(@Param("level") int level);
-
-    SysMenuTreeModel getModelById(@Param("id")String id);
 }

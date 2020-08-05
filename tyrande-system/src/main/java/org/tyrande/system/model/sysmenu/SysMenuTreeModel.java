@@ -20,6 +20,5 @@ public class SysMenuTreeModel extends TreeNode {
     private String menuUrl;
     private Date createTime;
     private Date updateTime;
-    private String menuNameParent;
 
 }
