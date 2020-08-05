@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 04/08/2020 17:31:19
+ Date: 05/08/2020 17:08:03
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `sys_dict_key`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统字典项表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统字典项表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_key
@@ -38,7 +38,7 @@ INSERT INTO `sys_dict_key` VALUES (1, 'sex', '性别', '1-男 2-女', '2020-08-0
 INSERT INTO `sys_dict_key` VALUES (3, 'status_use_or_no', '启停状态', '1-启用 2-停用', '2020-08-04 13:34:47', '2020-08-04 13:34:47');
 INSERT INTO `sys_dict_key` VALUES (4, 'user_status', '用户状态', '0-未使用 1-正常 2-锁定 3-过期', '2020-08-04 13:35:44', '2020-08-04 13:35:44');
 INSERT INTO `sys_dict_key` VALUES (5, 'is_or_not', '是否状态', '0-否 1-是', '2020-08-04 13:36:22', '2020-08-04 13:36:22');
-INSERT INTO `sys_dict_key` VALUES (6, 'test', '测试', 'test', '2020-08-04 14:28:01', '2020-08-04 14:28:01');
+INSERT INTO `sys_dict_key` VALUES (7, 'menu_level', '菜单层级', '1-一级菜单 2-二级菜单 3-按钮', '2020-08-05 09:19:09', '2020-08-05 09:19:09');
 
 -- ----------------------------
 -- Table structure for sys_dict_value
@@ -53,29 +53,24 @@ CREATE TABLE `sys_dict_value`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统字典值表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统字典值表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_value
 -- ----------------------------
 INSERT INTO `sys_dict_value` VALUES (1, 1, '男', '1', 1, '2020-08-04 10:14:10', '2020-08-04 10:14:13');
 INSERT INTO `sys_dict_value` VALUES (2, 1, '女', '2', 2, '2020-08-04 10:14:24', '2020-08-04 10:14:26');
-INSERT INTO `sys_dict_value` VALUES (7, 5, '222', '222', 12, '2020-08-04 14:24:01', '2020-08-04 14:25:45');
-INSERT INTO `sys_dict_value` VALUES (8, 6, '1', '1', 1, '2020-08-04 14:28:06', '2020-08-04 14:28:06');
-INSERT INTO `sys_dict_value` VALUES (9, 6, '2', '2', 2, '2020-08-04 14:28:12', '2020-08-04 14:28:12');
-INSERT INTO `sys_dict_value` VALUES (10, 6, '3', '3', 100, '2020-08-04 14:28:18', '2020-08-04 14:28:18');
-INSERT INTO `sys_dict_value` VALUES (11, 6, '4', '4', 100, '2020-08-04 14:28:32', '2020-08-04 14:28:32');
-INSERT INTO `sys_dict_value` VALUES (12, 6, '5', '5', 5, '2020-08-04 14:28:36', '2020-08-04 14:28:36');
-INSERT INTO `sys_dict_value` VALUES (13, 6, '6', '6', 6, '2020-08-04 14:28:42', '2020-08-04 14:28:42');
-INSERT INTO `sys_dict_value` VALUES (14, 6, '7', '7', 7, '2020-08-04 14:28:45', '2020-08-04 14:28:45');
-INSERT INTO `sys_dict_value` VALUES (15, 6, '8', '8', 8, '2020-08-04 14:28:49', '2020-08-04 14:28:49');
-INSERT INTO `sys_dict_value` VALUES (16, 6, '9', '9', 9, '2020-08-04 14:28:52', '2020-08-04 14:28:52');
-INSERT INTO `sys_dict_value` VALUES (17, 6, '10', '10', 10, '2020-08-04 14:28:58', '2020-08-04 14:28:58');
-INSERT INTO `sys_dict_value` VALUES (18, 6, '11', '11', 11, '2020-08-04 14:29:02', '2020-08-04 14:29:02');
-INSERT INTO `sys_dict_value` VALUES (19, 6, '12', '12', 12, '2020-08-04 14:29:07', '2020-08-04 14:29:07');
-INSERT INTO `sys_dict_value` VALUES (20, 6, '13', '13', 13, '2020-08-04 14:29:11', '2020-08-04 14:29:11');
-INSERT INTO `sys_dict_value` VALUES (21, 6, '14', '14', 14, '2020-08-04 14:29:16', '2020-08-04 14:29:16');
-INSERT INTO `sys_dict_value` VALUES (22, 6, '15', '15', 15, '2020-08-04 14:29:22', '2020-08-04 14:29:22');
+INSERT INTO `sys_dict_value` VALUES (7, 5, '是', '1', 1, '2020-08-04 14:24:01', '2020-08-05 09:17:53');
+INSERT INTO `sys_dict_value` VALUES (23, 3, '启用', '1', 1, '2020-08-05 09:16:23', '2020-08-05 09:16:23');
+INSERT INTO `sys_dict_value` VALUES (24, 3, '停用', '2', 2, '2020-08-05 09:16:29', '2020-08-05 09:16:29');
+INSERT INTO `sys_dict_value` VALUES (25, 4, '未使用', '0', 1, '2020-08-05 09:17:03', '2020-08-05 09:17:03');
+INSERT INTO `sys_dict_value` VALUES (26, 4, '正常', '1', 2, '2020-08-05 09:17:15', '2020-08-05 09:17:15');
+INSERT INTO `sys_dict_value` VALUES (27, 4, '锁定', '2', 3, '2020-08-05 09:17:26', '2020-08-05 09:17:26');
+INSERT INTO `sys_dict_value` VALUES (28, 4, '过期', '3', 4, '2020-08-05 09:17:34', '2020-08-05 09:17:34');
+INSERT INTO `sys_dict_value` VALUES (29, 5, '否', '0', 2, '2020-08-05 09:18:01', '2020-08-05 09:18:01');
+INSERT INTO `sys_dict_value` VALUES (30, 7, '一级菜单', '1', 1, '2020-08-05 09:19:17', '2020-08-05 09:19:17');
+INSERT INTO `sys_dict_value` VALUES (31, 7, '二级菜单', '2', 2, '2020-08-05 09:19:26', '2020-08-05 09:19:26');
+INSERT INTO `sys_dict_value` VALUES (32, 7, '按钮权限', '3', 3, '2020-08-05 09:19:32', '2020-08-05 09:19:41');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -90,17 +85,21 @@ CREATE TABLE `sys_menu`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES (1, '系统管理', 1, 0, '/system', '2020-07-30 09:40:22', '2020-07-30 09:40:25');
+INSERT INTO `sys_menu` VALUES (1, '系统管理', 1, -1, '/system', '2020-07-30 09:40:22', '2020-07-30 09:40:25');
 INSERT INTO `sys_menu` VALUES (2, '用户管理', 2, 1, 'sysuser', '2020-07-30 09:40:55', '2020-07-30 09:40:59');
 INSERT INTO `sys_menu` VALUES (3, '角色管理', 2, 1, 'sysrole', '2020-07-30 09:41:22', '2020-07-30 09:41:25');
 INSERT INTO `sys_menu` VALUES (4, '菜单管理', 2, 1, 'sysmenu', '2020-07-30 09:41:47', '2020-07-30 09:41:49');
 INSERT INTO `sys_menu` VALUES (5, '参数管理', 2, 1, 'sysparams', '2020-07-31 10:09:52', '2020-07-31 10:09:55');
 INSERT INTO `sys_menu` VALUES (6, '字典管理', 2, 1, 'sysdictkey', '2020-08-04 08:52:26', '2020-08-04 08:52:29');
+INSERT INTO `sys_menu` VALUES (7, '日志管理', 1, -1, '/logger', '2020-08-05 11:09:53', '2020-08-05 11:09:56');
+INSERT INTO `sys_menu` VALUES (8, '登录日志', 2, 7, 'loglogin', '2020-08-05 11:16:42', '2020-08-05 11:16:44');
+INSERT INTO `sys_menu` VALUES (9, '操作日志', 2, 7, 'logoperator', '2020-08-05 11:17:06', '2020-08-05 11:17:08');
+INSERT INTO `sys_menu` VALUES (16, '添加按钮', 3, 9, 'addBtn', '2020-08-05 16:53:56', '2020-08-05 16:53:56');
 
 -- ----------------------------
 -- Table structure for sys_params
@@ -326,17 +325,19 @@ INSERT INTO `sys_params` VALUES (200, '参数200', 'value600', '800000', '参数
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-  `role_id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '角色编号',
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '角色编号',
   `role_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '角色名称',
   `role_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '角色描述',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
+INSERT INTO `sys_role` VALUES (1, '系统管理员', '系统管理员', '2020-08-05 09:53:28', '2020-08-05 09:53:32');
+INSERT INTO `sys_role` VALUES (2, '超级管理员', '超级管理员', '2020-08-05 09:56:46', '2020-08-05 09:56:46');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
