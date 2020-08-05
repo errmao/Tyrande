@@ -22,7 +22,7 @@ public class TreeUtil {
      * @return
      */
     public static <T extends TreeNode> List<T> buildTree(List<T> nodes) {
-        Map<Integer, List<TreeNode>> sub = nodes.stream()
+        Map<Long, List<TreeNode>> sub = nodes.stream()
                 .filter(node -> node.getPid() != 0).collect(Collectors.groupingBy(node -> node.getPid()));
         nodes.forEach(node -> node.setSub(sub.get(node.getId())));
         return nodes.stream().filter(node -> node.getPid() == 0).collect(Collectors.toList());

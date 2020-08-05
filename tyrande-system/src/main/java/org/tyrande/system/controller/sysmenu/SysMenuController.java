@@ -2,10 +2,9 @@ package org.tyrande.system.controller.sysmenu;
 
 import com.baomidou.mybatisplus.extension.api.R;
 import org.springframework.validation.annotation.Validated;
-import org.tyrande.system.model.sysmenu.SysMenuModel;
-import org.tyrande.system.vo.sysmenu.SysMenuVo;
-import org.tyrande.system.service.sysmenu.SysMenuService;
 import org.springframework.web.bind.annotation.*;
+import org.tyrande.system.model.sysmenu.SysMenuModel;
+import org.tyrande.system.service.sysmenu.SysMenuService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -29,8 +28,8 @@ public class SysMenuController {
      * 分页查询
      */
     @GetMapping("listPage")
-    public R getPageList(SysMenuVo sysMenuVo) {
-        return R.ok(sysMenuService.getPageList(sysMenuVo));
+    public R getPageList() {
+        return R.ok(sysMenuService.getPageList());
     }
 
     /**

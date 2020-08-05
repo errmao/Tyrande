@@ -3,6 +3,9 @@ package org.tyrande.system.dao.sysmenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.tyrande.system.model.sysmenu.SysMenuModel;
+import org.tyrande.system.model.sysmenu.SysMenuTreeModel;
+
+import java.util.List;
 
 /**
  * 系统菜单表 dao 层
@@ -13,4 +16,5 @@ import org.tyrande.system.model.sysmenu.SysMenuModel;
 @Mapper
 public interface SysMenuDao extends BaseMapper<SysMenuModel> {
 
+    List<SysMenuTreeModel> getPageList();
 }

@@ -1,14 +1,14 @@
 package org.tyrande.system.service.sysmenu;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.tyrande.common.utils.TreeUtil;
 import org.tyrande.system.dao.sysmenu.SysMenuDao;
 import org.tyrande.system.model.sysmenu.SysMenuModel;
-import org.tyrande.system.vo.sysmenu.SysMenuVo;
+import org.tyrande.system.model.sysmenu.SysMenuTreeModel;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 系统菜单表 service 实现层
@@ -26,9 +26,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuModel> im
      * 分页查询
      */
     @Override
-    public IPage<SysMenuModel> getPageList(SysMenuVo sysMenuVo) {
-        QueryWrapper<SysMenuModel> wrapper = new QueryWrapper();
-        IPage<SysMenuModel> page = sysMenuDao.selectMapsPage(sysMenuVo, wrapper);
-        return page;
+    public List<SysMenuTreeModel> getPageList() {
+        List<SysMenuTreeModel> list = sysMenuDao.getPageList();
+        List<SysMenuTreeModel> tree = TreeUtil.buildTree(list);
+        return tree;
     }
 }

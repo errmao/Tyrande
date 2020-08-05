@@ -13,20 +13,20 @@ import java.util.List;
 @Data
 public class TreeNode {
 
-    private Integer id;
-    private Integer pid;
+    private Long id;
+    private Long pid;
     private String name;
     private List<TreeNode> sub = new ArrayList<>();
 
     public TreeNode() {
     }
 
-    public TreeNode(int id, int pid) {
+    public TreeNode(Long id, Long pid) {
         this.id = id;
         this.pid = pid;
     }
 
-    public TreeNode(int id, int pid, String name) {
+    public TreeNode(Long id, Long pid, String name) {
         this.id = id;
         this.pid = pid;
         this.name = name;

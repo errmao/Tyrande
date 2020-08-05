@@ -1,19 +1,5 @@
 <template>
   <div class="app-container">
-    <!-- 查询条件 -->
-    <el-card>
-      <el-form :inline="true" :model="searchForm" class="app-container-searchForm">
-        <el-form-item label="主键">
-          <el-input v-model="searchForm.id" placeholder="主键" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="el-icon-search" @click="getPageList">
-            {{ defaultSettings.btnSearch }}
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-
     <!-- 数据列表 -->
     <el-card>
       <el-row class="app-container-toolbar">
@@ -27,11 +13,25 @@
       </el-row>
 
       <!-- 数据表格 -->
-      <el-table border :data="gridData.list">
-        <el-table-column type="index" label="序号" width="50" />
+      <el-table
+        border
+        :data="gridData.list"
+        row-key="id"
+        :tree-props="{children: 'sub'}"
+      >
+        <el-table-column prop="id" label="菜单编号" />
         <el-table-column prop="menuName" label="菜单名称" />
-        <el-table-column prop="menuLevel" label="菜单层级" />
-        <el-table-column prop="pid" label="上级" />
+        <el-table-column prop="menuLevel" label="菜单层级">
+          <template slot-scope="scope">
+            <el-tag
+              plain
+              size="mini"
+              :type="(scope.row.menuLevel=='1' ? 'success' : (scope.row.menuLevel=='2'? 'warning': scope.row.menuLevel=='3'?'danger':'info'))"
+            >
+              {{ formatMenuLevel(scope.row.menuLevel) }}
+            </el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="menuUrl" label="请求路径" />
         <el-table-column fixed="right" label="操作" width="180">
           <template slot-scope="scope">
@@ -61,14 +61,6 @@
           </template>
         </el-table-column>
       </el-table>
-
-      <!-- 分页区域 -->
-      <el-pagination
-        :current-page="searchForm.current"
-        :layout="defaultSettings.page"
-        :total="gridData.total"
-        @current-change="handleCurrentChange"
-      />
     </el-card>
 
     <!-- 查看 -->
@@ -181,14 +173,9 @@ export default {
     return {
       defaultSettings: defaultSettings,
 
-      // 查询参数对象
-      searchForm: {
-        current: 1
-      },
       // 列表数据
       gridData: {
-        list: [],
-        total: 0
+        list: []
       },
 
       // 对话框是否展示配置
@@ -217,24 +204,17 @@ export default {
     }
   },
   created() {
+    this.$getDict(defaultSettings.dict.menuLevel)
     this.getPageList()
   },
   methods: {
     // 列表查询
     getPageList() {
-      getPageList(this.searchForm).then((res) => {
-        const { records, total } = res.data
-        this.gridData.list = records
-        this.gridData.total = total
+      getPageList().then((res) => {
+        this.gridData.list = res.data
       }).catch(() => {
         this.$message.error(defaultSettings.failureSearch)
       })
-    },
-
-    // 分页栏页数改变监听
-    handleCurrentChange(newCurrent) {
-      this.searchForm.current = newCurrent
-      this.getPageList()
     },
 
     // 删除
@@ -293,6 +273,9 @@ export default {
     // 编辑-关闭
     doEditClose() {
       this.$refs.editFormRef.resetFields()
+    },
+    formatMenuLevel(cellValue) {
+      return this.$formatDict(cellValue, defaultSettings.dict.menuLevel)
     }
   }
 }
