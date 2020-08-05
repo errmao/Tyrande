@@ -38,5 +38,10 @@ module.exports = {
   failureEdit: '编辑失败',
   failureSystem: '系统异常',
   // 分页布局
-  page: 'prev, pager, next, jumper, ->, total'
+  page: 'prev, pager, next, jumper, ->, total',
+  // 字典统一字典项
+  dict: {
+    sex: 'sex'
+  }
+
 }

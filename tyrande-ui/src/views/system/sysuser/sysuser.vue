@@ -291,7 +291,7 @@ export default {
     }
   },
   async created() {
-    await this.$getDict('sex')
+    await this.$getDict(defaultSettings.dict.sex)
     this.getPageList()
   },
   methods: {
@@ -372,7 +372,7 @@ export default {
 
     // 格式化_性别
     formatSex(row, column, cellValue) {
-      return this.$formatDict(cellValue, 'sex')
+      return this.$formatDict(cellValue, defaultSettings.dict.sex)
     }
   }
 }
