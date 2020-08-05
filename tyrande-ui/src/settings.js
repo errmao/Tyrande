@@ -46,7 +46,9 @@ module.exports = {
     // 用户状态 0-未使用 1-正常 2-锁定 3-过期
     userStatus: 'user_status',
     // 是否 0-否 1-是
-    isOrNot: 'is_or_not'
+    isOrNot: 'is_or_not',
+    // 菜单层级
+    menuLevel: 'menu_level'
   }
 
 }

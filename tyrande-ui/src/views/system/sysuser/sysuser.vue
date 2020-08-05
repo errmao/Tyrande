@@ -285,10 +285,10 @@ export default {
       editForm: {}
     }
   },
-  async created() {
-    await this.$getDict(defaultSettings.dict.sex)
-    await this.$getDict(defaultSettings.dict.userStatus)
-    await this.$getDict(defaultSettings.dict.isOrNot)
+  created() {
+    this.$getDict(defaultSettings.dict.sex)
+    this.$getDict(defaultSettings.dict.userStatus)
+    this.$getDict(defaultSettings.dict.isOrNot)
     this.getPageList()
   },
   methods: {
