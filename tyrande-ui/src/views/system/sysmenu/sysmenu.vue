@@ -70,7 +70,7 @@
           <el-form-item label="菜单名称">
             <el-input v-model="viewForm.menuName" />
           </el-form-item>
-         <el-form-item label="菜单层级" prop="menuLevel">
+          <el-form-item label="菜单层级" prop="menuLevel">
             <el-select v-model="viewForm.menuLevel">
               <option-dict :dict="defaultSettings.dict.menuLevel" />
             </el-select>

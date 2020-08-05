@@ -95,5 +95,13 @@
   // 对话框
   .el-dialog {
     border-radius: 5px;
+
+    .el-select {
+      width: 100%;
+    }
+
+    .el-cascader {
+      width: 100%;
+    }
   }
 }
