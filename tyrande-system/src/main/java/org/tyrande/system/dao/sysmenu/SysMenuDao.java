@@ -2,6 +2,7 @@ package org.tyrande.system.dao.sysmenu;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.tyrande.system.model.sysmenu.SysMenuModel;
 import org.tyrande.system.model.sysmenu.SysMenuTreeModel;
 
@@ -17,4 +18,8 @@ import java.util.List;
 public interface SysMenuDao extends BaseMapper<SysMenuModel> {
 
     List<SysMenuTreeModel> getPageList();
+
+    List<SysMenuTreeModel> getMenuByLevel(@Param("level") int level);
+
+    SysMenuTreeModel getModelById(@Param("id")String id);
 }

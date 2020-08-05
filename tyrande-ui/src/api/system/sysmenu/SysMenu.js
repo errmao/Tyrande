@@ -2,8 +2,8 @@ import request from '@/utils/request'
 import qs from 'qs'
 
 /** ***********************************
-* 系统菜单表
-*************************************/
+ * 系统菜单表
+ *************************************/
 
 /**
  * 查询-数据列表
@@ -42,6 +42,17 @@ export function doView(id) {
   return request.get('/sysmenu/getById', {
     params: {
       id: id
+    }
+  })
+}
+
+/**
+ * 根据菜单层级查询菜单
+ */
+export function getMenuByLevel(level) {
+  return request.get('/sysmenu/getMenuByLevel', {
+    params: {
+      level: level
     }
   })
 }

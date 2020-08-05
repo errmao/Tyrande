@@ -39,7 +39,7 @@
               type="text"
               icon="el-icon-view"
               size="small"
-              @click="visibleConfig.view =true, viewForm = scope.row"
+              @click="doView(scope.row.id)"
             >
               {{ defaultSettings.btnView }}
             </el-button>
@@ -67,16 +67,16 @@
     <el-dialog :title="defaultSettings.btnView" :visible.sync="visibleConfig.view" width="50%">
       <span>
         <el-form :model="viewForm" label-width="120px" disabled>
-          <el-form-item label="菜单名称" prop="menuName">
+          <el-form-item label="菜单名称">
             <el-input v-model="viewForm.menuName" />
           </el-form-item>
-          <el-form-item label="菜单层级" prop="menuLevel">
+          <el-form-item label="菜单层级">
             <el-input v-model="viewForm.menuLevel" />
           </el-form-item>
-          <el-form-item label="上级" prop="pid">
-            <el-input v-model="viewForm.pid" />
+          <el-form-item label="上级菜单">
+            <el-input v-model="viewForm.menuNameParent" />
           </el-form-item>
-          <el-form-item label="请求路径" prop="menuUrl">
+          <el-form-item label="请求路径">
             <el-input v-model="viewForm.menuUrl" />
           </el-form-item>
         </el-form>
@@ -99,10 +99,22 @@
             <el-input v-model="addForm.menuName" />
           </el-form-item>
           <el-form-item label="菜单层级" prop="menuLevel">
-            <el-input v-model="addForm.menuLevel" />
+            <el-select v-model="addForm.menuLevel" @change="menuLevelChangeForAdd">
+              <option-dict :dict="defaultSettings.dict.menuLevel" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="上级" prop="pid">
-            <el-input v-model="addForm.pid" />
+          <el-form-item label="上级菜单" prop="pid">
+            <el-cascader
+              :key="addForm.pid"
+              v-model="addForm.pid"
+              :options="addPidData"
+              :props="{
+                emitPath:false,
+                expandTrigger: 'hover',
+                children:'sub',
+                label:'menuName',
+                value:'id'}"
+            />
           </el-form-item>
           <el-form-item label="请求路径" prop="menuUrl">
             <el-input v-model="addForm.menuUrl" />
@@ -135,7 +147,7 @@
           <el-form-item label="菜单层级" prop="menuLevel">
             <el-input v-model="editForm.menuLevel" />
           </el-form-item>
-          <el-form-item label="上级" prop="pid">
+          <el-form-item label="上级菜单" prop="pid">
             <el-input v-model="editForm.pid" />
           </el-form-item>
           <el-form-item label="请求路径" prop="menuUrl">
@@ -159,13 +171,8 @@
 
 <script>
 import defaultSettings from '@/settings'
-import {
-  doAddSave,
-  doDelete,
-  doEditSave,
-  doView,
-  getPageList
-} from '@/api/system/sysmenu/SysMenu'
+import { doAddSave, doDelete, doEditSave, doView, getMenuByLevel, getPageList } from '@/api/system/sysmenu/SysMenu'
+import { formatDict } from '@/utils/dict'
 
 export default {
   name: 'SysMenu',
@@ -187,10 +194,10 @@ export default {
 
       // 添加或编辑对话框校验规则
       checkRules: {
-        menuName: [{ required: true, message: '请输入菜单名称', trigger: 'blur' }],
-        menuLevel: [{ required: true, message: '请输入菜单层级', trigger: 'blur' }],
-        pid: [{ required: true, message: '请输入上级', trigger: 'blur' }],
-        menuUrl: [{ required: true, message: '请输入请求路径', trigger: 'blur' }]
+        menuName: [{ required: true, message: '菜单名称不能为空', trigger: 'blur' }],
+        menuLevel: [{ required: true, message: '菜单层级不能为空', trigger: 'blur' }],
+        pid: [{ required: true, message: '上级菜单不能为空', trigger: 'blur' }],
+        menuUrl: [{ required: true, message: '菜单路径不能为空', trigger: 'blur' }]
       },
 
       // 查看数据
@@ -198,13 +205,16 @@ export default {
 
       // 添加对话框数据
       addForm: {},
+      addPidData: [],
 
       // 编辑对话框数据
-      editForm: {}
+      editForm: {},
+      editPidData: []
     }
   },
   created() {
     this.$getDict(defaultSettings.dict.menuLevel)
+    this.menuLevelChangeForAdd(1)
     this.getPageList()
   },
   methods: {
@@ -231,6 +241,16 @@ export default {
             this.getPageList()
           })
         })
+    },
+
+    async doView(id) {
+      const res = await doView(id)
+      this.viewForm = res.data
+      if (this.viewForm.pid === -1) {
+        this.viewForm.menuNameParent = '根菜单'
+      }
+      this.viewForm.menuLevel = this.$formatDict(this.viewForm.menuLevel, defaultSettings.dict.menuLevel)
+      this.visibleConfig.view = true
     },
 
     // 添加-保存
@@ -276,6 +296,13 @@ export default {
     },
     formatMenuLevel(cellValue) {
       return this.$formatDict(cellValue, defaultSettings.dict.menuLevel)
+    },
+
+    // 新增对话框菜单层级事件
+    async menuLevelChangeForAdd(newValue) {
+      const { data } = await getMenuByLevel(newValue)
+      this.addPidData = data
+      this.addForm.pid = 0
     }
   }
 }

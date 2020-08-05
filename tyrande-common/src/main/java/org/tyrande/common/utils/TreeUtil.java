@@ -23,8 +23,18 @@ public class TreeUtil {
      */
     public static <T extends TreeNode> List<T> buildTree(List<T> nodes) {
         Map<Long, List<TreeNode>> sub = nodes.stream()
-                .filter(node -> node.getPid() != 0).collect(Collectors.groupingBy(node -> node.getPid()));
+                .filter(node -> node.getPid() != -1).collect(Collectors.groupingBy(node -> node.getPid()));
         nodes.forEach(node -> node.setSub(sub.get(node.getId())));
-        return nodes.stream().filter(node -> node.getPid() == 0).collect(Collectors.toList());
+        return nodes.stream().filter(node -> node.getPid() == -1).collect(Collectors.toList());
+    }
+
+    /**
+     * 构建树（根节点是root）
+     */
+    public static <T extends TreeNode> List<T> buildTreeRoot(List<T> nodes) {
+        Map<Long, List<TreeNode>> sub = nodes.stream()
+                .filter(node -> node.getPid() != -2L).collect(Collectors.groupingBy(node -> node.getPid()));
+        nodes.forEach(node -> node.setSub(sub.get(node.getId())));
+        return nodes.stream().filter(node -> node.getPid() == -2L).collect(Collectors.toList());
     }
 }

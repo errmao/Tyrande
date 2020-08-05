@@ -19,4 +19,13 @@ public interface SysMenuService extends IService<SysMenuModel> {
      */
     List<SysMenuTreeModel> getPageList();
 
+    /**
+     * 根据菜单层级查询菜单
+     */
+    List<SysMenuTreeModel> getMenuByLevel(String level);
+
+    /**
+     * 根据ID查询
+     */
+    SysMenuTreeModel getModelById(String id);
 }

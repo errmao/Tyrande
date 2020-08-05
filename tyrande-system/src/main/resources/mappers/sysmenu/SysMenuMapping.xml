@@ -9,4 +9,24 @@
         from sys_menu
         order by menu_level asc
     </select>
+    <select id="getMenuByLevel" resultType="org.tyrande.system.model.sysmenu.SysMenuTreeModel">
+        select id, menu_name, menu_level, pid, menu_url, create_time, update_time
+        from sys_menu
+        where menu_level &lt;= #{level}
+        order by id asc
+    </select>
+    <select id="getModelById"
+            resultType="org.tyrande.system.model.sysmenu.SysMenuTreeModel">
+        select t.id,
+               t.menu_name,
+               t.menu_level,
+               t.pid,
+               t.menu_url,
+               t.create_time,
+               t.update_time,
+               t1.menu_name as menu_name_parent
+        from sys_menu t
+                 left join sys_menu t1 on t.pid = t1.id
+        where t.id = #{id}
+    </select>
 </mapper>
