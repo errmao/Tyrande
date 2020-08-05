@@ -60,7 +60,7 @@
       <span>
         <el-form :model="viewForm" label-width="120px" disabled>
          <#list columns as column>
-          <el-form-item label="${column.columnComment}" prop="${column.javaField}">
+          <el-form-item label="${column.columnComment}">
             <el-input v-model="viewForm.${column.javaField}"/>
           </el-form-item>
          </#list>

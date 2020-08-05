@@ -145,10 +145,22 @@
             <el-input v-model="editForm.menuName" />
           </el-form-item>
           <el-form-item label="菜单层级" prop="menuLevel">
-            <el-input v-model="editForm.menuLevel" />
+            <el-select v-model="editForm.menuLevel" @change="menuLevelChangeForEdit">
+              <option-dict :dict="defaultSettings.dict.menuLevel" />
+            </el-select>
           </el-form-item>
           <el-form-item label="上级菜单" prop="pid">
-            <el-input v-model="editForm.pid" />
+            <el-cascader
+              :key="editForm.id"
+              v-model="editForm.pid"
+              :options="editPidData"
+              :props="{
+                emitPath:false,
+                expandTrigger: 'hover',
+                children:'sub',
+                label:'menuName',
+                value:'id'}"
+            />
           </el-form-item>
           <el-form-item label="请求路径" prop="menuUrl">
             <el-input v-model="editForm.menuUrl" />
@@ -172,7 +184,6 @@
 <script>
 import defaultSettings from '@/settings'
 import { doAddSave, doDelete, doEditSave, doView, getMenuByLevel, getPageList } from '@/api/system/sysmenu/SysMenu'
-import { formatDict } from '@/utils/dict'
 
 export default {
   name: 'SysMenu',
@@ -273,7 +284,9 @@ export default {
     // 编辑
     async doEdit(id) {
       const res = await doView(id)
+      await this.menuLevelChangeForEdit(res.data.menuLevel)
       this.editForm = res.data
+      this.editForm.menuLevel = this.editForm.menuLevel + ''
       this.visibleConfig.edit = true
     },
 
@@ -302,7 +315,13 @@ export default {
     async menuLevelChangeForAdd(newValue) {
       const { data } = await getMenuByLevel(newValue)
       this.addPidData = data
-      this.addForm.pid = 0
+      this.addForm.pid = null
+    },
+
+    async menuLevelChangeForEdit(newValue) {
+      const { data } = await getMenuByLevel(newValue)
+      this.editPidData = data
+      this.editForm.pid = null
     }
   }
 }
