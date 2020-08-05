@@ -70,11 +70,23 @@
           <el-form-item label="菜单名称">
             <el-input v-model="viewForm.menuName" />
           </el-form-item>
-          <el-form-item label="菜单层级">
-            <el-input v-model="viewForm.menuLevel" />
+         <el-form-item label="菜单层级" prop="menuLevel">
+            <el-select v-model="viewForm.menuLevel">
+              <option-dict :dict="defaultSettings.dict.menuLevel" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="上级菜单">
-            <el-input v-model="viewForm.menuNameParent" />
+          <el-form-item label="上级菜单" prop="pid">
+            <el-cascader
+              :key="viewForm.id"
+              v-model="viewForm.pid"
+              :options="viewPidData"
+              :props="{
+                emitPath:false,
+                expandTrigger: 'hover',
+                children:'sub',
+                label:'menuName',
+                value:'id'}"
+            />
           </el-form-item>
           <el-form-item label="请求路径">
             <el-input v-model="viewForm.menuUrl" />
@@ -220,7 +232,9 @@ export default {
 
       // 编辑对话框数据
       editForm: {},
-      editPidData: []
+      editPidData: [],
+
+      viewPidData: []
     }
   },
   created() {
@@ -256,11 +270,9 @@ export default {
 
     async doView(id) {
       const res = await doView(id)
+      await this.menuLevelChangeForView(res.data.menuLevel)
       this.viewForm = res.data
-      if (this.viewForm.pid === -1) {
-        this.viewForm.menuNameParent = '根菜单'
-      }
-      this.viewForm.menuLevel = this.$formatDict(this.viewForm.menuLevel, defaultSettings.dict.menuLevel)
+      this.viewForm.menuLevel = this.viewForm.menuLevel + ''
       this.visibleConfig.view = true
     },
 
@@ -322,7 +334,12 @@ export default {
       const { data } = await getMenuByLevel(newValue)
       this.editPidData = data
       this.editForm.pid = null
+    },
+    async menuLevelChangeForView(newValue) {
+      const { data } = await getMenuByLevel(newValue)
+      this.viewPidData = data
     }
+
   }
 }
 </script>
