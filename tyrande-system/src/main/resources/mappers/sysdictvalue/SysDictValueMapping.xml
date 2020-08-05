@@ -8,5 +8,6 @@
         select id, dict_key_id, dict_value, dict_real_value, dict_order
         from sys_dict_value
         where dict_key_id = (select id from sys_dict_key where dict_key = #{dictKey})
+        order by dict_order asc
     </select>
 </mapper>

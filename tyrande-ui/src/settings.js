@@ -41,7 +41,12 @@ module.exports = {
   page: 'prev, pager, next, jumper, ->, total',
   // 字典统一字典项
   dict: {
-    sex: 'sex'
+    // 性别 1-男 2-女
+    sex: 'sex',
+    // 用户状态 0-未使用 1-正常 2-锁定 3-过期
+    userStatus: 'user_status',
+    // 是否 0-否 1-是
+    isOrNot: 'is_or_not'
   }
 
 }

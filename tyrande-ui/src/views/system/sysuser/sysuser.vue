@@ -38,10 +38,10 @@
         <el-table-column prop="avatar" label="头像" />
         <el-table-column prop="address" label="地址" />
         <el-table-column prop="email" label="邮箱" width="160" />
-        <el-table-column prop="validEmail" label="邮箱验证" />
+        <el-table-column prop="validEmail" label="邮箱验证" :formatter="formatIsOrNot" />
         <el-table-column prop="tel" label="电话" />
-        <el-table-column prop="validTel" label="电话验证" />
-        <el-table-column prop="status" label="用户状态" />
+        <el-table-column prop="validTel" label="电话验证" :formatter="formatIsOrNot" />
+        <el-table-column prop="status" label="用户状态" :formatter="formatUserStatus" />
         <el-table-column fixed="right" label="操作" width="180">
           <template slot-scope="scope">
             <el-button
@@ -138,14 +138,13 @@
           <el-form-item label="登陆账户" prop="loginCode">
             <el-input v-model="addForm.loginCode" />
           </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-input v-model="addForm.password" />
-          </el-form-item>
           <el-form-item label="用户名称" prop="userName">
             <el-input v-model="addForm.userName" />
           </el-form-item>
           <el-form-item label="性别" prop="sex">
-            <el-input v-model="addForm.sex" />
+            <el-select v-model="addForm.sex" placeholder="请选择">
+              <option-dict :dict="defaultSettings.dict.sex" />
+            </el-select>
           </el-form-item>
           <el-form-item label="年龄" prop="age">
             <el-input v-model="addForm.age" />
@@ -159,17 +158,13 @@
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="addForm.email" />
           </el-form-item>
-          <el-form-item label="邮箱是否验证 0-否 1-是" prop="validEmail">
-            <el-input v-model="addForm.validEmail" />
-          </el-form-item>
           <el-form-item label="电话" prop="tel">
             <el-input v-model="addForm.tel" />
           </el-form-item>
-          <el-form-item label="电话是否验证 0-否 1-是" prop="validTel">
-            <el-input v-model="addForm.validTel" />
-          </el-form-item>
-          <el-form-item label="用户状态 0-未使用 1-正常 2-锁定 3-过期" prop="status">
-            <el-input v-model="addForm.status" />
+          <el-form-item label="用户状态" prop="status">
+            <el-select v-model="addForm.status" placeholder="请选择">
+              <option-dict :dict="defaultSettings.dict.userStatus" />
+            </el-select>
           </el-form-item>
         </el-form>
       </span>
@@ -292,6 +287,8 @@ export default {
   },
   async created() {
     await this.$getDict(defaultSettings.dict.sex)
+    await this.$getDict(defaultSettings.dict.userStatus)
+    await this.$getDict(defaultSettings.dict.isOrNot)
     this.getPageList()
   },
   methods: {
@@ -370,9 +367,15 @@ export default {
       this.$refs.editFormRef.resetFields()
     },
 
-    // 格式化_性别
+    // 格式化
     formatSex(row, column, cellValue) {
       return this.$formatDict(cellValue, defaultSettings.dict.sex)
+    },
+    formatIsOrNot(row, column, cellValue) {
+      return this.$formatDict(cellValue, defaultSettings.dict.isOrNot)
+    },
+    formatUserStatus(row, column, cellValue) {
+      return this.$formatDict(cellValue, defaultSettings.dict.userStatus)
     }
   }
 }

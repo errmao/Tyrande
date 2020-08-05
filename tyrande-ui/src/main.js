@@ -21,6 +21,8 @@ Vue.prototype.$getDict = getDict
 Vue.prototype.$formatDict = formatDict
 // 全局字典
 Vue.prototype.$dictMap = {}
+import DictOption from '@/components/Dict/DictOption'
+Vue.component('option-dict', DictOption)
 
 new Vue({
   el: '#app',
