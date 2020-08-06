@@ -25,7 +25,7 @@ public class SysMenuController {
     private SysMenuService sysMenuService;
 
     /**
-     * 分页查询
+     * 菜单树列表
      */
     @GetMapping("listPage")
     public R getPageList() {

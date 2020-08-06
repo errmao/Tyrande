@@ -24,7 +24,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuModel> im
     private SysMenuDao sysMenuDao;
 
     /**
-     * 分页查询
+     * 菜单树列表
      */
     @Override
     public List<SysMenuTreeModel> getPageList() {
@@ -52,4 +52,5 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuModel> im
         }
         return list;
     }
+
 }

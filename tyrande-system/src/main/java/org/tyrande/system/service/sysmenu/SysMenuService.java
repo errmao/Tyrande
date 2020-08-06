@@ -15,7 +15,7 @@ import java.util.List;
 public interface SysMenuService extends IService<SysMenuModel> {
 
     /**
-     * 查询菜单列表
+     * 查询菜单树列表
      */
     List<SysMenuTreeModel> getPageList();
 
@@ -23,4 +23,5 @@ public interface SysMenuService extends IService<SysMenuModel> {
      * 根据菜单层级查询菜单
      */
     List<SysMenuTreeModel> getMenuByLevel(String level);
+
 }
