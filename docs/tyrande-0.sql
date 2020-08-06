@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 06/08/2020 13:52:59
+ Date: 06/08/2020 14:55:35
 */
 
 SET NAMES utf8mb4;
@@ -85,7 +85,7 @@ CREATE TABLE `sys_menu`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -390,8 +390,8 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'caomengde', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV/BS60lCvk.C5jhM5R9r06HqHBC', '曹孟德', 1, 26, '22222', '浙江省海宁市', 'errmao@aliyun.com', 0, '15990040088', 0, 1, '2020-05-01 00:00:00', '2020-08-03 14:43:56');
-INSERT INTO `sys_user` VALUES (2, 'zhangyide', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV/BS60lCvk.C5jhM5R9r06HqHBC', '张翼德', 1, 22, NULL, '浙江省桐乡市', 'tiny@163.com', 0, '15990030081', 0, 1, '2020-05-01 00:00:00', '2020-05-01 00:00:00');
+INSERT INTO `sys_user` VALUES (1, 'caomengde', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV/BS60lCvk.C5jhM5R9r06HqHBC', '曹孟德', 1, 26, 'http://errmao.gitee.io/tyrande-images/compression_gif/ty0.gif', '浙江省海宁市', 'errmao@aliyun.com', 0, '15990040088', 0, 1, '2020-05-01 00:00:00', '2020-08-03 14:43:56');
+INSERT INTO `sys_user` VALUES (2, 'zhangyide', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV/BS60lCvk.C5jhM5R9r06HqHBC', '张翼德', 1, 22, 'http://errmao.gitee.io/tyrande-images/compression_gif/ty0.gif', '浙江省桐乡市', 'tiny@163.com', 0, '15990030081', 0, 1, '2020-05-01 00:00:00', '2020-05-01 00:00:00');
 INSERT INTO `sys_user` VALUES (3, 'admin', '$2a$10$rsaFbdiwf8igcVhUMpyp/eW5vj6Y2EZ3Q4X3kY56yXjbgxs09AwZS', 'admin', 2, 21, NULL, '浙江省嘉兴市', '222@163.com', 0, '1588552369', 0, 1, '2020-05-07 13:16:50', '2020-05-07 13:16:52');
 INSERT INTO `sys_user` VALUES (4, 'test1', '$2a$10$c4Pz/6WR1BmGedZk1WXtge33RONfTbUT9IsmfhEHwGzEilTJf6Ylu', '测试用户1', 2, 11, NULL, '浙江省嘉兴市', '11dds12@163.com', 1, '1588552369', 1, 2, '2020-05-07 13:27:21', '2020-05-07 13:27:23');
 INSERT INTO `sys_user` VALUES (5, 'test2', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV/BS60lCvk.C5jhM5R9r06HqHBC', '测试用户2', 1, 13, NULL, '浙江省嘉兴市', '21321@163.com', 0, '1588552369', 0, 1, '2020-05-13 16:08:13', '2020-05-13 16:08:11');
@@ -424,6 +424,8 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1, 1);
 INSERT INTO `sys_user_role` VALUES (2, 1, 2);
+INSERT INTO `sys_user_role` VALUES (205, 2, 2);
+INSERT INTO `sys_user_role` VALUES (206, 2, 1);
 
 -- ----------------------------
 -- Procedure structure for proc_initData
