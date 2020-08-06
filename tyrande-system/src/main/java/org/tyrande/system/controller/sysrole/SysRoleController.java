@@ -2,12 +2,14 @@ package org.tyrande.system.controller.sysrole;
 
 import com.baomidou.mybatisplus.extension.api.R;
 import org.springframework.validation.annotation.Validated;
+import org.tyrande.system.model.sysrole.RoleMenuVo;
 import org.tyrande.system.model.sysrole.SysRoleModel;
 import org.tyrande.system.vo.sysrole.SysRoleVo;
 import org.tyrande.system.service.sysrole.SysRoleService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.crypto.interfaces.PBEKey;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
@@ -65,6 +67,23 @@ public class SysRoleController {
     @DeleteMapping("delete")
     public R delete(@RequestParam @NotBlank(message = "主键ID不能为空") String id) {
         sysRoleService.removeById(id);
+        return R.ok(null);
+    }
+
+    /**
+     * 查询角色拥有的菜单权限
+     */
+    @GetMapping("getRoleMenu")
+    public R getRoleMenu(@RequestParam @NotBlank(message = "主键ID不能为空") String id) {
+        return R.ok(sysRoleService.getRoleMenu(id));
+    }
+
+    /**
+     * 保存角色菜单关联
+     */
+    @PostMapping("saveRoleMenu")
+    public R saveRoleMenu(@Valid @RequestBody RoleMenuVo roleMenuVo) {
+        sysRoleService.saveRoleMenu(roleMenuVo);
         return R.ok(null);
     }
 }

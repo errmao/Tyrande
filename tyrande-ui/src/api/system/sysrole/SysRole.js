@@ -45,3 +45,21 @@ export function doView(id) {
     }
   })
 }
+
+/**
+ * 根据角色编号查询拥有的菜单
+ */
+export function getRoleMenu(id) {
+  return request.get('/sysrole/getRoleMenu', {
+    params: {
+      id: id
+    }
+  })
+}
+
+/**
+ * 保存菜单角色
+ */
+export function saveRoleMenu(data) {
+  return request.post('/sysrole/saveRoleMenu', data)
+}

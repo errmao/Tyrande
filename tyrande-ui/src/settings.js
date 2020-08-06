@@ -25,6 +25,7 @@ module.exports = {
   returnButtonText: '返回',
   btnEdit: '编辑',
   btnAdd: '添加',
+  btnSave: '保存',
   btnDelete: '删除',
   btnView: '查看',
   btnSearch: '搜索',
@@ -32,11 +33,13 @@ module.exports = {
   successDelete: '删除成功',
   successAdd: '新增成功',
   successEdit: '编辑成功',
+  successSave: '保存成功',
   failureSearch: '查询失败',
   failureDelete: '删除失败',
   failureAdd: '新增失败',
   failureEdit: '编辑失败',
   failureSystem: '系统异常',
+  failureSave: '保存失败',
   // 分页布局
   page: 'prev, pager, next, jumper, ->, total',
   // 字典统一字典项

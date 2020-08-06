@@ -14,60 +14,94 @@
       </el-form>
     </el-card>
 
-    <!-- 数据列表 -->
-    <el-card>
-      <el-row class="app-container-toolbar">
-        <el-button
-          type="primary"
-          icon="el-icon-circle-plus-outline"
-          @click="visibleConfig.add = true"
-        >
-          {{ defaultSettings.btnAdd }}
-        </el-button>
-      </el-row>
-
-      <!-- 数据表格 -->
-      <el-table border :data="gridData.list">
-        <el-table-column type="index" label="序号" width="50" />
-        <el-table-column prop="roleName" label="角色名称" />
-        <el-table-column prop="roleDesc" label="角色描述" />
-        <el-table-column fixed="right" label="操作" width="180">
-          <template slot-scope="scope">
+    <el-row :gutter="20">
+      <!-- 字典项表格 -->
+      <el-col :span="11">
+        <!-- 数据列表 -->
+        <el-card class="role_menu_role_class">
+          <el-row class="app-container-toolbar">
             <el-button
-              type="text"
-              icon="el-icon-view"
-              size="small"
-              @click="visibleConfig.view =true, viewForm = scope.row"
+              type="primary"
+              icon="el-icon-circle-plus-outline"
+              @click="visibleConfig.add = true"
             >
-              {{ defaultSettings.btnView }}
+              {{ defaultSettings.btnAdd }}
             </el-button>
-            <el-button
-              type="text"
-              icon="el-icon-edit"
-              size="small"
-              @click="doEdit(scope.row.id)"
-            >
-              {{ defaultSettings.btnEdit }}
-            </el-button>
-            <el-button
-              type="text"
-              icon="el-icon-delete"
-              size="small"
-              @click="doDelete(scope.row.id)"
-            >{{ defaultSettings.btnDelete }}
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+          </el-row>
 
-      <!-- 分页区域 -->
-      <el-pagination
-        :current-page="searchForm.current"
-        :layout="defaultSettings.page"
-        :total="gridData.total"
-        @current-change="handleCurrentChange"
-      />
-    </el-card>
+          <!-- 数据表格 -->
+          <el-table border :data="gridData.list" highlight-current-row @current-change="roleRowChangeClick">
+            <el-table-column type="index" label="序号" width="50" />
+            <el-table-column prop="roleName" label="角色名称" />
+            <el-table-column prop="roleDesc" label="角色描述" />
+            <el-table-column fixed="right" label="操作" width="180">
+              <template slot-scope="scope">
+                <el-button
+                  type="text"
+                  icon="el-icon-view"
+                  size="small"
+                  @click="visibleConfig.view =true, viewForm = scope.row"
+                >
+                  {{ defaultSettings.btnView }}
+                </el-button>
+                <el-button
+                  type="text"
+                  icon="el-icon-edit"
+                  size="small"
+                  @click="doEdit(scope.row.id)"
+                >
+                  {{ defaultSettings.btnEdit }}
+                </el-button>
+                <el-button
+                  type="text"
+                  icon="el-icon-delete"
+                  size="small"
+                  @click="doDelete(scope.row.id)"
+                >{{ defaultSettings.btnDelete }}
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+
+          <!-- 分页区域 -->
+          <el-pagination
+            :current-page="searchForm.current"
+            :layout="defaultSettings.page"
+            :total="gridData.total"
+            @current-change="handleCurrentChange"
+          />
+        </el-card>
+      </el-col>
+
+      <!-- 分配菜单区域 -->
+      <el-col :span="13">
+        <el-card class="role_menu_menu_class">
+          <el-row class="app-container-toolbar">
+            <div class="tool-btn-three">
+              <el-button
+                type="primary"
+                icon="el-icon-sunny"
+                @click="saveRoleMenu"
+              >
+                {{ defaultSettings.btnSave }}
+              </el-button>
+            </div>
+          </el-row>
+          <div class="tree-class">
+            <el-tree
+              ref="menuTreeRef"
+              :data="treeData"
+              node-key="id"
+              default-expand-all
+              :default-checked-keys="select.menu"
+              :props="props"
+              check-strictly
+              show-checkbox
+            />
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
 
     <!-- 查看 -->
     <el-dialog :title="defaultSettings.btnView" :visible.sync="visibleConfig.view" width="50%">
@@ -152,8 +186,13 @@ import {
   doDelete,
   doEditSave,
   doView,
-  getPageList
+  getPageList,
+  getRoleMenu,
+  saveRoleMenu
 } from '@/api/system/sysrole/SysRole'
+import {
+  getPageList as getMenuTree
+} from '@/api/system/sysmenu/SysMenu'
 
 export default {
   name: 'SysRole',
@@ -191,11 +230,26 @@ export default {
       addForm: {},
 
       // 编辑对话框数据
-      editForm: {}
+      editForm: {},
+
+      /**
+       * 菜单树配置
+       */
+      props: {
+        label: 'menuName',
+        children: 'sub'
+      },
+      treeData: [],
+      // 选中的角色
+      select: {
+        menu: [],
+        role: null
+      }
     }
   },
   created() {
     this.getPageList()
+    this.initMenuTree()
   },
   methods: {
     // 列表查询
@@ -271,6 +325,50 @@ export default {
     // 编辑-关闭
     doEditClose() {
       this.$refs.editFormRef.resetFields()
+    },
+    // 角色表格行点击事件
+    async roleRowChangeClick(currentRow) {
+      // 重置右侧菜单面板
+      this.select.menu = []
+      await this.initMenuTree()
+      // 查询需要勾选的
+      if (currentRow == null) {
+        this.select.role = null
+      } else {
+        // 有选中的角色
+        this.select.role = currentRow
+        // 查询角色拥有的菜单
+        const { data } = await getRoleMenu(currentRow.id)
+        if (Object.keys(data).length !== 0) {
+          this.select.menu = data
+        }
+      }
+    },
+
+    /**
+     * 菜单树配置
+     */
+    // 初始化菜单树数据
+    async initMenuTree() {
+      const res = await getMenuTree()
+      this.treeData = res.data
+    },
+
+    // 保存角色权限关联
+    async saveRoleMenu() {
+      // 判读是否选择角色
+      if (this.select.role == null) {
+        this.$message.error('请选择角色')
+      }
+      // 获取选中菜单权限
+      const selectArr = this.$refs.menuTreeRef.getCheckedKeys()
+      const data = {
+        role: this.select.role.id,
+        menu: selectArr
+      }
+      await saveRoleMenu(data).then(() => {
+        this.$message.success(defaultSettings.successSave)
+      })
     }
   }
 }
@@ -278,4 +376,26 @@ export default {
 
 <style lang='scss' scoped>
 
+  .role_menu_role_class {
+    margin-right: -5px;
+  }
+
+  .role_menu_menu_class {
+    margin-left: -5px;
+    max-height: 780px;
+    overflow-y: auto;
+    .tree-class {
+        >.el-tree{
+          >.el-tree-node{
+            /*设置横向滚动条*/
+            min-width: 100%;
+            display: inline-block;
+            /*设置根节点隐藏*/
+            >.el-tree-node__content{
+              display: none;
+            }
+          }
+        }
+    }
+  }
 </style>
