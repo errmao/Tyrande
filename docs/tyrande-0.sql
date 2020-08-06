@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 05/08/2020 17:08:03
+ Date: 06/08/2020 13:52:59
 */
 
 SET NAMES utf8mb4;
@@ -338,6 +338,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '系统管理员', '系统管理员', '2020-08-05 09:53:28', '2020-08-05 09:53:32');
 INSERT INTO `sys_role` VALUES (2, '超级管理员', '超级管理员', '2020-08-05 09:56:46', '2020-08-05 09:56:46');
+INSERT INTO `sys_role` VALUES (3, '业务员', '业务员', '2020-08-06 10:00:12', '2020-08-06 10:00:14');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -359,6 +360,9 @@ INSERT INTO `sys_role_menu` VALUES (3, 1, 3);
 INSERT INTO `sys_role_menu` VALUES (4, 1, 4);
 INSERT INTO `sys_role_menu` VALUES (5, 1, 5);
 INSERT INTO `sys_role_menu` VALUES (6, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (13, 3, 1);
+INSERT INTO `sys_role_menu` VALUES (14, 3, 4);
+INSERT INTO `sys_role_menu` VALUES (15, 3, 5);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -374,9 +378,9 @@ CREATE TABLE `sys_user`  (
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '头像',
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '地址',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `valid_email` tinyint(0) NULL DEFAULT NULL COMMENT '邮箱是否验证 0-否 1-是',
+  `valid_email` tinyint(0) NULL DEFAULT 0 COMMENT '邮箱是否验证 0-否 1-是',
   `tel` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '电话',
-  `valid_tel` tinyint(0) NULL DEFAULT NULL COMMENT '电话是否验证 0-否 1-是',
+  `valid_tel` tinyint(0) NULL DEFAULT 0 COMMENT '电话是否验证 0-否 1-是',
   `status` tinyint(0) NULL DEFAULT NULL COMMENT '用户状态 0-未使用 1-正常 2-锁定 3-过期',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
@@ -402,7 +406,7 @@ INSERT INTO `sys_user` VALUES (14, 'test10', '$2a$10$rf4GAiq6/11gKyZENY2H6.Q7GiV
 INSERT INTO `sys_user` VALUES (19, 'hhhhhhhh', '$2a$10$PM3xTb8XcJsOJG/nmNnoI.MpdguhyNhUFkWeXnqSdkTSWPpDbrwDG', 'dddddd', 1, 1231, NULL, '123123', '', 0, '', 0, 1, '2020-05-14 11:23:35', '2020-05-14 11:23:35');
 INSERT INTO `sys_user` VALUES (20, 'gggggggg', '$2a$10$C2uEj30tvdcpegFVpCDSkOlJEvbjvohhps1TzBmB/bBniyQtqs6Ga', '12312', 1, 213, NULL, 'ddddd1111111', '', 0, '', 0, 1, '2020-05-14 12:07:43', '2020-05-14 12:07:50');
 INSERT INTO `sys_user` VALUES (21, 'fusheng', '$2a$10$KJbAWUjp36yqFtZA9RvoGuvQVnZ5WYh9qPOyZdx.a8uDXfZgFsAam', '浮生', 1, 18, NULL, '浙江杭州余杭区', '888@aliyun.com', 0, '19855699366', 0, 1, '2020-07-03 10:25:04', '2020-07-03 10:33:14');
-INSERT INTO `sys_user` VALUES (22, '1', '1', '1', 1, 1, '1', '1', '1', 1, '15990048640', 1, 1, '2020-08-03 14:46:05', '2020-08-03 14:46:05');
+INSERT INTO `sys_user` VALUES (23, '2', '', '2', 1, 22, '', '2', '2', NULL, '2', NULL, 2, '2020-08-06 13:36:28', '2020-08-06 13:52:33');
 
 -- ----------------------------
 -- Table structure for sys_user_role

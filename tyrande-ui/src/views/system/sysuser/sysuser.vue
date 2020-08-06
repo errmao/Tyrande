@@ -29,7 +29,7 @@
       </el-row>
 
       <!-- 数据表格 -->
-      <el-table border :data="gridData.list">
+      <el-table border :data="gridData.list" highlight-current-row>
         <el-table-column type="index" label="序号" width="50" />
         <el-table-column prop="loginCode" label="登陆账户" />
         <el-table-column prop="userName" label="用户名称" />
@@ -48,7 +48,7 @@
               type="text"
               icon="el-icon-view"
               size="small"
-              @click="visibleConfig.view =true, viewForm = scope.row"
+              @click="doView(scope.row)"
             >
               {{ defaultSettings.btnView }}
             </el-button>
@@ -91,10 +91,12 @@
             <el-input v-model="viewForm.userName" />
           </el-form-item>
           <el-form-item label="性别" prop="sex">
-            <el-input v-model="viewForm.sex" />
+            <el-select v-model="viewForm.sex">
+              <option-dict :dict="defaultSettings.dict.sex" />
+            </el-select>
           </el-form-item>
           <el-form-item label="年龄" prop="age">
-            <el-input v-model="viewForm.age" />
+            <el-input-number v-model="viewForm.age" :min="0" :max="150" />
           </el-form-item>
           <el-form-item label="头像" prop="avatar">
             <el-input v-model="viewForm.avatar" />
@@ -106,16 +108,22 @@
             <el-input v-model="viewForm.email" />
           </el-form-item>
           <el-form-item label="邮箱验证" prop="validEmail">
-            <el-input v-model="viewForm.validEmail" />
+            <el-select v-model="viewForm.validEmail">
+              <option-dict :dict="defaultSettings.dict.isOrNot" />
+            </el-select>
           </el-form-item>
           <el-form-item label="电话" prop="tel">
             <el-input v-model="viewForm.tel" />
           </el-form-item>
           <el-form-item label="电话验证" prop="validTel">
-            <el-input v-model="viewForm.validTel" />
+            <el-select v-model="viewForm.validTel">
+              <option-dict :dict="defaultSettings.dict.isOrNot" />
+            </el-select>
           </el-form-item>
           <el-form-item label="用户状态" prop="status">
-            <el-input v-model="viewForm.status" />
+            <el-select v-model="viewForm.status">
+              <option-dict :dict="defaultSettings.dict.userStatus" />
+            </el-select>
           </el-form-item>
         </el-form>
       </span>
@@ -147,10 +155,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="年龄" prop="age">
-            <el-input v-model="addForm.age" />
-          </el-form-item>
-          <el-form-item label="头像" prop="avatar">
-            <el-input v-model="addForm.avatar" />
+            <el-input-number v-model="addForm.age" :min="0" :max="150" />
           </el-form-item>
           <el-form-item label="地址" prop="address">
             <el-input v-model="addForm.address" />
@@ -191,20 +196,16 @@
           <el-form-item label="登陆账户" prop="loginCode">
             <el-input v-model="editForm.loginCode" />
           </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-input v-model="editForm.password" />
-          </el-form-item>
           <el-form-item label="用户名称" prop="userName">
             <el-input v-model="editForm.userName" />
           </el-form-item>
           <el-form-item label="性别" prop="sex">
-            <el-input v-model="editForm.sex" />
+            <el-select v-model="editForm.sex" placeholder="请选择">
+              <option-dict :dict="defaultSettings.dict.sex" />
+            </el-select>
           </el-form-item>
           <el-form-item label="年龄" prop="age">
             <el-input v-model="editForm.age" />
-          </el-form-item>
-          <el-form-item label="头像" prop="avatar">
-            <el-input v-model="editForm.avatar" />
           </el-form-item>
           <el-form-item label="地址" prop="address">
             <el-input v-model="editForm.address" />
@@ -216,7 +217,9 @@
             <el-input v-model="editForm.tel" />
           </el-form-item>
           <el-form-item label="用户状态" prop="status">
-            <el-input v-model="editForm.status" />
+            <el-select v-model="editForm.status" placeholder="请选择">
+              <option-dict :dict="defaultSettings.dict.userStatus" />
+            </el-select>
           </el-form-item>
         </el-form>
       </span>
@@ -266,13 +269,9 @@ export default {
         loginCode: [{ required: true, message: '请输入登陆账户', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         userName: [{ required: true, message: '请输入用户名称', trigger: 'blur' }],
-        sex: [{ required: true, message: '请输入性别 1-男 2-女', trigger: 'blur' }],
+        sex: [{ required: true, message: '请输入性别', trigger: 'blur' }],
         age: [{ required: true, message: '请输入年龄', trigger: 'blur' }],
-        avatar: [{ required: true, message: '请输入头像', trigger: 'blur' }],
-        address: [{ required: true, message: '请输入地址', trigger: 'blur' }],
-        email: [{ required: true, message: '请输入邮箱', trigger: 'blur' }],
-        tel: [{ required: true, message: '请输入电话', trigger: 'blur' }],
-        status: [{ required: true, message: '请输入用户状态 0-未使用 1-正常 2-锁定 3-过期', trigger: 'blur' }]
+        status: [{ required: true, message: '请输入用户状态', trigger: 'blur' }]
       },
 
       // 查看数据
@@ -307,6 +306,16 @@ export default {
     handleCurrentChange(newCurrent) {
       this.searchForm.current = newCurrent
       this.getPageList()
+    },
+
+    // 查看
+    doView(row) {
+      this.visibleConfig.view = true
+      this.viewForm = row
+      this.viewForm.sex = row.sex + ''
+      this.viewForm.validTel = row.validTel + ''
+      this.viewForm.validEmail = row.validEmail + ''
+      this.viewForm.status = row.status + ''
     },
 
     // 删除
@@ -346,6 +355,8 @@ export default {
     async doEdit(id) {
       const res = await doView(id)
       this.editForm = res.data
+      this.editForm.sex = res.data.sex + ''
+      this.editForm.status = res.data.status + ''
       this.visibleConfig.edit = true
     },
 
