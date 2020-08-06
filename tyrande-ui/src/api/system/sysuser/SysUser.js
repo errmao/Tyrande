@@ -45,3 +45,18 @@ export function doView(id) {
     }
   })
 }
+
+/**
+ * 查询用户角色信息
+ */
+export function getUserRoleInfo(id) {
+  return request.get('/sysuser/getUserRoleInfo', {
+    params: {
+      id: id
+    }
+  })
+}
+
+export function doConfigSave(data) {
+  return request.post('/sysuser/doConfigSave', qs.stringify(data))
+}

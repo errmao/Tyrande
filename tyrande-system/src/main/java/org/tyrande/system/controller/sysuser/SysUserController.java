@@ -3,6 +3,7 @@ package org.tyrande.system.controller.sysuser;
 import com.baomidou.mybatisplus.extension.api.R;
 import org.springframework.validation.annotation.Validated;
 import org.tyrande.system.model.sysuser.SysUserModel;
+import org.tyrande.system.model.sysuser.SysUserRole;
 import org.tyrande.system.vo.sysuser.SysUserVo;
 import org.tyrande.system.service.sysuser.SysUserService;
 import org.springframework.web.bind.annotation.*;
@@ -65,6 +66,23 @@ public class SysUserController {
     @DeleteMapping("delete")
     public R delete(@RequestParam @NotBlank(message = "主键ID不能为空") String id) {
         sysUserService.removeById(id);
+        return R.ok(null);
+    }
+
+    /**
+     * 查询用户角色信息
+     */
+    @GetMapping("getUserRoleInfo")
+    public R getUserRoleInfo(@RequestParam @NotBlank(message = "用户编号不能为空") String id) {
+        return R.ok(sysUserService.getUserRoleInfo(id));
+    }
+
+    /**
+     * 保存用户角色
+     */
+    @PostMapping("doConfigSave")
+    public R doConfigSave(@Valid SysUserRole role) {
+        sysUserService.doConfigSave(role);
         return R.ok(null);
     }
 }

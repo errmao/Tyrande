@@ -26,16 +26,27 @@
           @click="visibleConfig.add = true"
         >{{ defaultSettings.btnAdd }}
         </el-button>
+
+        <el-button
+          type="warning"
+          icon="el-icon-attract"
+          @click="doConfigRole"
+        >角色配置
+        </el-button>
       </el-row>
 
       <!-- 数据表格 -->
-      <el-table border :data="gridData.list" highlight-current-row>
+      <el-table border :data="gridData.list" highlight-current-row @current-change="doCurrentChange">
         <el-table-column type="index" label="序号" width="50" />
         <el-table-column prop="loginCode" label="登陆账户" />
         <el-table-column prop="userName" label="用户名称" />
         <el-table-column prop="sex" label="性别" :formatter="formatSex" />
         <el-table-column prop="age" label="年龄" />
-        <el-table-column prop="avatar" label="头像" />
+        <el-table-column prop="avatar" label="头像" width="70">
+          <template slot-scope="score">
+            <el-avatar shape="square" :size="30" :src="score.row.avatar"></el-avatar>
+          </template>
+        </el-table-column>
         <el-table-column prop="address" label="地址" />
         <el-table-column prop="email" label="邮箱" width="160" />
         <el-table-column prop="validEmail" label="邮箱验证" :formatter="formatIsOrNot" />
@@ -97,9 +108,6 @@
           </el-form-item>
           <el-form-item label="年龄" prop="age">
             <el-input-number v-model="viewForm.age" :min="0" :max="150" />
-          </el-form-item>
-          <el-form-item label="头像" prop="avatar">
-            <el-input v-model="viewForm.avatar" />
           </el-form-item>
           <el-form-item label="地址" prop="address">
             <el-input v-model="viewForm.address" />
@@ -234,12 +242,47 @@
       </span>
     </el-dialog>
 
+    <!-- 设置角色 -->
+    <el-dialog
+      title="角色设置"
+      :visible.sync="visibleConfig.roleConfig"
+      width="50%"
+      @close="doRoleConfigClose"
+    >
+      <span>
+        <el-form ref="configFormRef" :model="configForm" label-width="120px">
+          <el-form-item label="用户名称">
+            <el-input v-model="configForm.userName" disabled />
+          </el-form-item>
+          <el-form-item label="角色">
+            <el-select v-model="configForm.roles" multiple placeholder="请选择">
+              <el-option
+                v-for="item in configInitData.roleList"
+                :key="item.id"
+                :label="item.roleName"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
+        </el-form>
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button
+          @click="visibleConfig.roleConfig = false"
+        >{{ defaultSettings.cancelButtonText }}</el-button>
+        <el-button
+          type="primary"
+          @click="doConfigSave"
+        >{{ defaultSettings.confirmButtonText }}</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
 import defaultSettings from '@/settings'
-import { doAddSave, doDelete, doEditSave, doView, getPageList } from '@/api/system/sysuser/SysUser'
+import { doAddSave, doDelete, doEditSave, doView, getPageList, getUserRoleInfo, doConfigSave } from '@/api/system/sysuser/SysUser'
 
 export default {
   name: 'SysUser',
@@ -261,7 +304,8 @@ export default {
       visibleConfig: {
         add: false,
         edit: false,
-        view: false
+        view: false,
+        roleConfig: false
       },
 
       // 添加或编辑对话框校验规则
@@ -281,7 +325,18 @@ export default {
       addForm: {},
 
       // 编辑对话框数据
-      editForm: {}
+      editForm: {},
+
+      configForm: {
+        id: '',
+        userName: '',
+        roles: []
+      },
+      // 当前选中行
+      currentRow: null,
+      configInitData: {
+        roleList: []
+      }
     }
   },
   created() {
@@ -387,11 +442,40 @@ export default {
     },
     formatUserStatus(row, column, cellValue) {
       return this.$formatDict(cellValue, defaultSettings.dict.userStatus)
+    },
+    doCurrentChange(currentRow) {
+      this.currentRow = currentRow
+    },
+    async doConfigRole() {
+      if (this.currentRow == null) {
+        this.$message.error('请选择一条记录')
+        return
+      }
+      // 查询用户信息
+      const { data } = await getUserRoleInfo(this.currentRow.id)
+      this.configInitData = data
+      this.configForm.id = this.currentRow.id
+      this.configForm.userName = this.currentRow.userName
+      this.configForm.roles = data.userRole
+      this.visibleConfig.roleConfig = true
+    },
+
+    doRoleConfigClose() {
+      this.$refs.configFormRef.resetFields()
+    },
+
+    async doConfigSave() {
+      await doConfigSave(this.configForm)
+      this.$message.success(defaultSettings.successSave)
+      this.visibleConfig.roleConfig = false
     }
   }
 }
 </script>
 
 <style lang='scss' scoped>
-
+.el-avatar {
+  padding: 0;
+  margin: 0;
+}
 </style>
