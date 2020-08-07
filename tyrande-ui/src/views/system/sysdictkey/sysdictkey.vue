@@ -29,6 +29,13 @@
             >
               {{ defaultSettings.btnAdd }}
             </el-button>
+
+            <el-button
+              type="warning"
+              icon="el-icon-refresh"
+              @click="refreshCache"
+            >刷新缓存
+            </el-button>
           </el-row>
           <el-table
             ref="dictKeyTable"
@@ -501,6 +508,10 @@ export default {
     // 编辑-关闭
     doValueEditClose() {
       this.$refs.editValueFormRef.resetFields()
+    },
+
+    refreshCache() {
+      this.$dictMap = {}
     }
   }
 }
