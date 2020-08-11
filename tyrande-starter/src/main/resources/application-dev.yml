@@ -1,8 +1,4 @@
 spring:
-  # 炫彩日志
-  output:
-    ansi:
-      enabled: detect
   # 数据源
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -37,3 +33,6 @@ xxl:
     executor:
       appname: tyrande-job
 
+# 工作流配置
+flowable:
+  database-schema-update: true
