@@ -9,8 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>任务调度模块</description>
-
     <artifactId>tyrande-jobs</artifactId>
 
+    <dependencies>
+        <!-- 通用模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-common</artifactId>
+        </dependency>
 
+        <!-- xxl core -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>

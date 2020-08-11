@@ -27,3 +27,9 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:/mappers/**/*.xml, classpath*:/mappers/*.xml
+
+# 调度
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:60008/tyrande-job
