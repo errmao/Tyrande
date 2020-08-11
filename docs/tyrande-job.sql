@@ -13,6 +13,8 @@
 
  Date: 11/08/2020 14:28:21
 */
+CREATE database if NOT EXISTS `tyrande-job` default character set utf8mb4 collate utf8mb4_unicode_ci;
+use `tyrande-job`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
