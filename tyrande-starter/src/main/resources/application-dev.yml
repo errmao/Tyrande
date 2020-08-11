@@ -33,3 +33,5 @@ xxl:
   job:
     admin:
       addresses: http://localhost:60008/tyrande-job
+    executor:
+      appname: tyrande-job

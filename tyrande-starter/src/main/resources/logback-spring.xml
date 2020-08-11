@@ -61,12 +61,13 @@
         </filter>
     </appender>
 
-    <!-- 用户访问日志输出  -->
-    <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/sys-user.log</file>
+    <!-- 调度任务日志输出 -->
+    <appender name="tyrande-job" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/tyrande-job.log</file>
+        <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 按天回滚 daily -->
-            <fileNamePattern>${log.path}/sys-user.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志文件名格式 -->
+            <fileNamePattern>${log.path}/tyrande-job.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -74,8 +75,20 @@
             <pattern>${log.pattern}</pattern>
             <charset>UTF-8</charset>
         </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>INFO</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
     </appender>
 
+    <!-- 调度任务日志输出 -->
+    <logger name="org.tyrande.jobs" level="info" additivity="false">
+        <appender-ref ref="tyrande-job"></appender-ref>
+    </logger>
     <!-- 系统模块日志级别控制  -->
     <logger name="org.tyrande" level="info"/>
     <!-- Spring日志级别控制  -->
@@ -89,10 +102,7 @@
     <root level="info">
         <appender-ref ref="file_info"/>
         <appender-ref ref="file_error"/>
+        <appender-ref ref="tyrande-job"/>
     </root>
 
-    <!--系统用户操作日志-->
-    <logger name="sys-user" level="info">
-        <appender-ref ref="sys-user"/>
-    </logger>
 </configuration>
