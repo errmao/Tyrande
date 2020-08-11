@@ -21,6 +21,7 @@ spring:
         max-idle: 8
         max-wait: -1ms
         min-idle: 0
+
 # mybatis plus 配置
 mybatis-plus:
   configuration:
@@ -28,10 +29,11 @@ mybatis-plus:
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:/mappers/**/*.xml, classpath*:/mappers/*.xml
 
-# 调度
+# 调度任务
 xxl:
   job:
     admin:
       addresses: http://localhost:60008/tyrande-job
     executor:
       appname: tyrande-job
+
