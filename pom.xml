@@ -16,6 +16,8 @@
         <module>tyrande-system</module>
         <module>tyrande-generator</module>
         <module>tyrande-security</module>
+        <module>tyrande-jobs</module>
+        <module>tyrande-flow</module>
     </modules>
 
     <!-- 依赖版本 -->
@@ -112,6 +114,20 @@
             <dependency>
                 <groupId>org.tyrande</groupId>
                 <artifactId>tyrande-security</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 任务调度模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-jobs</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 工作流模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-flow</artifactId>
                 <version>${tyrande.version}</version>
             </dependency>
         </dependencies>
