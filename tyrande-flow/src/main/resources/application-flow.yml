@@ -1,4 +1,0 @@
-# 工作流配置
-flowable:
-  database-schema-update: false
-  database-schema: tyrande
