@@ -8,7 +8,7 @@ spring:
     name: tyrande
   profiles:
     active: dev
-    include: common,generator
+    include: common,generator,jobs
   cache:
     type: caffeine
   servlet:

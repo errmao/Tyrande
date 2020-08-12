@@ -1,0 +1,7 @@
+# 调度任务
+xxl:
+  job:
+    admin:
+      address: http://localhost:60008/tyrande-job
+    executor:
+      appname: tyrande-job

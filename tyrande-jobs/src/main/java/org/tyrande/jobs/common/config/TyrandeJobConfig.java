@@ -2,9 +2,9 @@ package org.tyrande.jobs.common.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.tyrande.jobs.model.TyrandeJobCenterConfigModel;
 import org.tyrande.jobs.model.TyrandeJobConfigModel;
 
 import javax.annotation.Resource;
@@ -18,8 +18,8 @@ import javax.annotation.Resource;
 @Configuration
 public class TyrandeJobConfig {
 
-    @Value("${xxl.job.admin.addresses}")
-    private String adminAddresses;
+    @Resource
+    private TyrandeJobCenterConfigModel tyrandeJobCenterConfigModel;
 
     @Resource
     private TyrandeJobConfigModel tyrandeJobConfigModel;
@@ -28,7 +28,7 @@ public class TyrandeJobConfig {
     public XxlJobSpringExecutor xxlJobExecutor() {
         log.info("[调度任务配置初始化...]");
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
-        xxlJobSpringExecutor.setAdminAddresses(adminAddresses);
+        xxlJobSpringExecutor.setAdminAddresses(tyrandeJobCenterConfigModel.getAddress());
         xxlJobSpringExecutor.setAppname(tyrandeJobConfigModel.getAppname());
         xxlJobSpringExecutor.setIp(tyrandeJobConfigModel.getIp());
         xxlJobSpringExecutor.setPort(tyrandeJobConfigModel.getPort());

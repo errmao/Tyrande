@@ -1,10 +1,24 @@
 spring:
   # 数据源
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:60006/tyrande-0?usrSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: 123456
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:60006/tyrande?usrSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
+        flow:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:60006/tyrande-flow?usrSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
+        job:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:60006/tyrande-job?usrSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
   # redis
   redis:
     host: localhost
@@ -24,15 +38,3 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:/mappers/**/*.xml, classpath*:/mappers/*.xml
-
-# 调度任务
-xxl:
-  job:
-    admin:
-      addresses: http://localhost:60008/tyrande-job
-    executor:
-      appname: tyrande-job
-
-# 工作流配置
-flowable:
-  database-schema-update: true

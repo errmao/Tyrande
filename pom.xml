@@ -37,6 +37,7 @@
         <fastjson.version>1.2.73</fastjson.version>
         <xxl.job.version>2.2.0</xxl.job.version>
         <flowable.version>6.5.0</flowable.version>
+        <dynamic.datasource.version>3.2.0</dynamic.datasource.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -49,6 +50,13 @@
                 <version>${springboot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- mybatis plus 多数据源 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic.datasource.version}</version>
             </dependency>
 
             <!-- 工作流 -->
