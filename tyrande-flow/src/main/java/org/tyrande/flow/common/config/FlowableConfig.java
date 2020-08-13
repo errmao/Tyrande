@@ -47,7 +47,8 @@ public class FlowableConfig implements EngineConfigurationConfigurer<SpringProce
     public CommandLineRunner init(final RepositoryService repositoryService,
                                   final TaskService taskService) {
         return strings -> {
-            log.info("[流程定义数量]：{} 个", repositoryService.createProcessDefinitionQuery().count());
+            log.info("[流程定义数量]：{} 个",
+                    repositoryService.createProcessDefinitionQuery().count());
             log.info("[流程任务数量]：{} 个", taskService.createTaskQuery().count());
         };
     }
