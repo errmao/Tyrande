@@ -62,7 +62,7 @@
             <!-- 工作流 -->
             <dependency>
                 <groupId>org.flowable</groupId>
-                <artifactId>flowable-spring-boot-starter</artifactId>
+                <artifactId>flowable-spring-boot-starter-process</artifactId>
                 <version>${flowable.version}</version>
             </dependency>
 

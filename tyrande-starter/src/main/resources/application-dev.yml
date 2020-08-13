@@ -46,3 +46,13 @@ xxl:
       address: http://localhost:60008/tyrande-job
     executor:
       appname: tyrande-job
+
+# 工作流
+flowable:
+  data-source: flow
+  database-schema-update: false
+  check-process-definitions: true
+  deployment-name: tyrande-flow
+  history-level: full
+  database-schema: tyrande_flow
+  async-executor-activate: false
