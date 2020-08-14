@@ -81,6 +81,8 @@ services:
       - D:\tools\docker\container\tyrande-nginx-entrance\conf\nginx.conf:/etc/nginx/nginx.conf
       - D:\tools\docker\container\tyrande-nginx-entrance\conf\default.conf:/etc/nginx/conf.d/default.conf
       - D:\tools\docker\container\tyrande-nginx-entrance\logs:/var/log/nginx
+    environment:
+      - NODE_ENV=production
     networks:
       - tyrande-bridge
 
@@ -94,5 +96,7 @@ services:
       - D:\tools\docker\container\tyrande-nginx-ui\conf\nginx.conf:/etc/nginx/nginx.conf
       - D:\tools\docker\container\tyrande-nginx-ui\conf\default.conf:/etc/nginx/conf.d/default.conf
       - D:\tools\docker\container\tyrande-nginx-ui\logs:/var/log/nginx
+    environment:
+      - NODE_ENV=production
     networks:
       - tyrande-bridge

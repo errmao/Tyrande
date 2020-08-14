@@ -7,7 +7,7 @@ import { getToken } from '@/utils/auth'
  * 创建 axios
  */
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: process.env.NODE_ENV === 'production' ? process.env['VUE_APP_HOST_URL'] + process.env['VUE_APP_BASE_API'] : process.env['VUE_APP_BASE_API'],
   // 超时时间
   timeout: 5000
 })

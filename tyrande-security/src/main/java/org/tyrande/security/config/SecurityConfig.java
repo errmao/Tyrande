@@ -47,6 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 允许跨域
+        http.cors();
         //登录过滤器
         JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(tyrandeSecurityProperty.getLoginUrl());
         jwtLoginFilter.setAuthenticationManager(this.authenticationManagerBean());
@@ -62,7 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //JWT校验过滤器
         JwtHeadFilter headFilter = new JwtHeadFilter();
-
         http
                 //身份验证入口,当需要登录却没登录时调用
                 //具体为,当抛出AccessDeniedException异常时且当前是匿名用户时调用
