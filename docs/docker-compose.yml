@@ -9,7 +9,7 @@ networks:
 # 服务
 services:
 
-  mysql:
+  tyrande-mysql:
     image: mysql:8.0
     container_name: tyrande-mysql
     privileged: true
@@ -22,7 +22,7 @@ services:
     networks:
       - tyrande-bridge
     
-  redis:
+  tyrande-redis:
     image: redis:6.0.6
     container_name: tyrande-redis
     ports:
@@ -44,7 +44,7 @@ services:
       - "7702:8080"
     container_name: tyrande-job
     depends_on:
-      - mysql
+      - tyrande-mysql
     volumes:
       - D:\tools\docker\container\tyrande-job:/tyrande-job
       - D:\tools\docker\tyrande-job:/data
@@ -61,11 +61,12 @@ services:
       - "7703:8080"
     container_name: tyrande-starter
     depends_on:
-      - mysql
-      - redis
+      - tyrande-mysql
+      - tyrande-redis
       - tyrande-job
     volumes:
       - D:\tools\docker\container\tyrande-starter:/tyrande
       - D:\tools\docker\tyrande-starter:/data
     networks:
-      - tyrande-bridge 
+      - tyrande-bridge
+
