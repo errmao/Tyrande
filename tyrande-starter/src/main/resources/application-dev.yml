@@ -22,7 +22,7 @@ spring:
   # redis
   redis:
     host: localhost
-    port: 7700
+    port: 7701
     password: redis123
     timeout: 3600
     jedis:
