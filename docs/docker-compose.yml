@@ -70,3 +70,29 @@ services:
     networks:
       - tyrande-bridge
 
+  # 需手动先复制两份配置文件出来
+  tyrande-nginx-entrance:
+    image: nginx:1.17.10
+    container_name: tyrande-nginx-entrance
+    ports:
+      - "80:80"
+    volumes:
+      - D:\tools\docker\container\tyrande-nginx-entrance\www:/usr/share/nginx/html
+      - D:\tools\docker\container\tyrande-nginx-entrance\conf\nginx.conf:/etc/nginx/nginx.conf
+      - D:\tools\docker\container\tyrande-nginx-entrance\conf\default.conf:/etc/nginx/conf.d/default.conf
+      - D:\tools\docker\container\tyrande-nginx-entrance\logs:/var/log/nginx
+    networks:
+      - tyrande-bridge
+
+  tyrande-nginx-ui:
+    image: nginx:1.17.10
+    container_name: tyrande-nginx-ui
+    ports:
+      - "7704:80"
+    volumes:
+      - D:\tools\docker\container\tyrande-nginx-ui\www:/usr/share/nginx/html
+      - D:\tools\docker\container\tyrande-nginx-ui\conf\nginx.conf:/etc/nginx/nginx.conf
+      - D:\tools\docker\container\tyrande-nginx-ui\conf\default.conf:/etc/nginx/conf.d/default.conf
+      - D:\tools\docker\container\tyrande-nginx-ui\logs:/var/log/nginx
+    networks:
+      - tyrande-bridge
