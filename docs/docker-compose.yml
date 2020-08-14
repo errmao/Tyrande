@@ -1,0 +1,71 @@
+# docker-compose.yml
+version: "3"
+
+# 网络
+networks:
+  tyrande-bridge:
+    driver: bridge
+
+# 服务
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: tyrande-mysql
+    privileged: true
+    ports:
+      - "7700:3306"
+    volumes:
+      - D:\tools\docker\container\mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    networks:
+      - tyrande-bridge
+    
+  redis:
+    image: redis:6.0.6
+    container_name: tyrande-redis
+    ports:
+      - "7701:6379"
+    volumes:
+      - D:\tools\docker\container\redis\data:/data
+      - D:\tools\docker\container\redis\conf:/etc/redis/redis.conf
+    command: --requirepass "redis123" --appendonly yes
+    networks:
+      - tyrande-bridge
+      
+  tyrande-job:
+    build:
+      context: ./tyrande-job
+      dockerfile: dockerfile-tyrande-job
+    image: tyrande-job:1.0.0
+    privileged: true
+    ports: 
+      - "7702:8080"
+    container_name: tyrande-job
+    depends_on:
+      - mysql
+    volumes:
+      - D:\tools\docker\container\tyrande-job:/tyrande-job
+      - D:\tools\docker\tyrande-job:/data
+    networks:
+      - tyrande-bridge
+      
+  tyrande-starter:
+    build:
+      context: ./tyrande-starter
+      dockerfile: Dockerfile
+    image: tyrande-starter:1.0.0
+    privileged: true
+    ports: 
+      - "7703:8080"
+    container_name: tyrande-starter
+    depends_on:
+      - mysql
+      - redis
+      - tyrande-job
+    volumes:
+      - D:\tools\docker\container\tyrande-starter:/tyrande
+      - D:\tools\docker\tyrande-starter:/data
+    networks:
+      - tyrande-bridge 
