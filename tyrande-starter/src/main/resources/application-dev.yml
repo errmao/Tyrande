@@ -55,3 +55,4 @@ flowable:
   deployment-name: tyrande-flow
   async-executor-activate: false
   async-history-executor-activate: false
+  check-process-definitions: false
