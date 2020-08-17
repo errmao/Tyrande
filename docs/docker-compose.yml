@@ -100,3 +100,13 @@ services:
       - NODE_ENV=production
     networks:
       - tyrande-bridge
+
+  tyrande-tomcat:
+    image: tomcat:10.0.0-M7
+    container_name: tyrande-tomcat
+    ports:
+      - "7705:8080"
+    volumes:
+      - D:\tools\docker\container\tyrande-tomcat\webapps:/usr/local/tomcat/webapps
+    networks:
+      - tyrande-bridge
