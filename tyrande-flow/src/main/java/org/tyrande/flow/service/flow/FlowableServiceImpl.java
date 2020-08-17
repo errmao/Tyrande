@@ -1,4 +1,4 @@
-package org.tyrande.flow.service;
+package org.tyrande.flow.service.flow;
 
 import org.flowable.engine.*;
 import org.springframework.stereotype.Service;
