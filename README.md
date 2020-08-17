@@ -25,3 +25,15 @@ docker run -d -p 60007:6379  \
 --name redis redis \
 --appendonly yes --requirepass "redis123"
 ```
+
+## 版本说明
+
+### v1.0.0
+
+- 基础模块（系统管理/通用模块/Security安全模块）
+- 整合基于 `xxl` 的调度系统
+- 整合基于 `Flowable 6.5.0` 的工作流应用
+
+### v1.0.1
+
+- 整合工作流 `Flowable-modeler-ui` 设计器
