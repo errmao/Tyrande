@@ -4,17 +4,15 @@
  Source Server         : docker-local
  Source Server Type    : MySQL
  Source Server Version : 80021
- Source Host           : localhost:60006
- Source Schema         : tyrande-0
+ Source Host           : localhost:7700
+ Source Schema         : tyrande
 
  Target Server Type    : MySQL
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 06/08/2020 14:55:35
+ Date: 18/08/2020 16:26:39
 */
-CREATE database if NOT EXISTS `tyrande` default character set utf8mb4 collate utf8mb4_unicode_ci;
-use `tyrande`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -87,7 +85,7 @@ CREATE TABLE `sys_menu`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -102,6 +100,9 @@ INSERT INTO `sys_menu` VALUES (7, '日志管理', 1, -1, '/logger', '2020-08-05 
 INSERT INTO `sys_menu` VALUES (8, '登录日志', 2, 7, 'loglogin', '2020-08-05 11:16:42', '2020-08-05 11:16:44');
 INSERT INTO `sys_menu` VALUES (9, '操作日志', 2, 7, 'logoperator', '2020-08-05 11:17:06', '2020-08-05 11:17:08');
 INSERT INTO `sys_menu` VALUES (16, '添加按钮', 3, 9, 'addBtn', '2020-08-05 16:53:56', '2020-08-05 16:53:56');
+INSERT INTO `sys_menu` VALUES (17, '工作流管理', 1, -1, '/flow', '2020-08-18 14:12:35', '2020-08-18 14:12:35');
+INSERT INTO `sys_menu` VALUES (18, '工作流设计器', 2, 17, 'flowui', '2020-08-18 14:18:32', '2020-08-18 14:18:32');
+INSERT INTO `sys_menu` VALUES (19, '流程管理', 2, 17, 'flowmanage', '2020-08-18 14:36:10', '2020-08-18 14:36:10');
 
 -- ----------------------------
 -- Table structure for sys_params
@@ -116,7 +117,7 @@ CREATE TABLE `sys_params`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 500003 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统参数表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统参数表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_params
@@ -351,20 +352,26 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '角色编号',
   `menu_id` bigint(0) NULL DEFAULT NULL COMMENT '菜单编号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色菜单关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色菜单关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES (1, 1, 1);
-INSERT INTO `sys_role_menu` VALUES (2, 1, 2);
-INSERT INTO `sys_role_menu` VALUES (3, 1, 3);
-INSERT INTO `sys_role_menu` VALUES (4, 1, 4);
-INSERT INTO `sys_role_menu` VALUES (5, 1, 5);
-INSERT INTO `sys_role_menu` VALUES (6, 1, 6);
 INSERT INTO `sys_role_menu` VALUES (13, 3, 1);
 INSERT INTO `sys_role_menu` VALUES (14, 3, 4);
 INSERT INTO `sys_role_menu` VALUES (15, 3, 5);
+INSERT INTO `sys_role_menu` VALUES (57, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (58, 1, 2);
+INSERT INTO `sys_role_menu` VALUES (59, 1, 3);
+INSERT INTO `sys_role_menu` VALUES (60, 1, 4);
+INSERT INTO `sys_role_menu` VALUES (61, 1, 5);
+INSERT INTO `sys_role_menu` VALUES (62, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (63, 1, 7);
+INSERT INTO `sys_role_menu` VALUES (64, 1, 8);
+INSERT INTO `sys_role_menu` VALUES (65, 1, 9);
+INSERT INTO `sys_role_menu` VALUES (66, 1, 17);
+INSERT INTO `sys_role_menu` VALUES (67, 1, 18);
+INSERT INTO `sys_role_menu` VALUES (68, 1, 19);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -387,7 +394,7 @@ CREATE TABLE `sys_user`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
@@ -419,7 +426,7 @@ CREATE TABLE `sys_user_role`  (
   `user_id` bigint(0) NULL DEFAULT NULL COMMENT '用户编号',
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '角色编号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户角色管理表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户角色管理表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_role
