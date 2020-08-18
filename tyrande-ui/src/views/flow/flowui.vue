@@ -14,7 +14,7 @@ export default {
     }
   },
   mounted() {
-    this.src = process.env['VUE_APP_HOST_URL'] + '/tyrande/flowable-modeler/index.html'
+    this.src = process.env['VUE_APP_HOST_URL'] + '/tyrande/flowui/index.html'
   },
   methods: {
   }
