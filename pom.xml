@@ -18,6 +18,7 @@
         <module>tyrande-security</module>
         <module>tyrande-jobs</module>
         <module>tyrande-flow</module>
+        <module>tyrande-flow-ui</module>
     </modules>
 
     <!-- 依赖版本 -->
@@ -65,6 +66,23 @@
                 <artifactId>flowable-spring-boot-starter-process</artifactId>
                 <version>${flowable.version}</version>
             </dependency>
+            <!-- 工作流 UI -->
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-ui-modeler-logic</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-ui-modeler-rest</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-ui-modeler-conf</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+
 
             <!-- 定时任务调度 -->
             <dependency>
@@ -152,6 +170,13 @@
             <dependency>
                 <groupId>org.tyrande</groupId>
                 <artifactId>tyrande-flow</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 工作流UI -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-flow-ui</artifactId>
                 <version>${tyrande.version}</version>
             </dependency>
 

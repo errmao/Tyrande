@@ -100,6 +100,29 @@ export const asyncRoutes = [
         meta: { title: '字典管理' }
       }
     ]
+  }, {
+    path: '/flow',
+    component: Layout,
+    redirect: '/flow/flowui',
+    name: '工作流管理',
+    meta: {
+      title: '工作流管理',
+      icon: 'flow'
+    },
+    children: [
+      {
+        path: 'flowmanage',
+        component: () => import('@/views/flow/flowmanage'),
+        name: '流程管理',
+        meta: { title: '流程管理' }
+      },
+      {
+        path: 'flowui',
+        component: () => import('@/views/flow/flowui'),
+        name: '流程定义',
+        meta: { title: '流程定义' }
+      }
+    ]
   },
 
   // 404 页面必须配置在最后 !!!

@@ -50,6 +50,12 @@
             <artifactId>tyrande-flow</artifactId>
         </dependency>
 
+        <!-- 工作流UI -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-flow-ui</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

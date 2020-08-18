@@ -37,8 +37,11 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
-  mapper-locations: classpath*:/mappers/**/*.xml, classpath*:/mappers/*.xml
-
+  mapper-locations: classpath*:/mappers/**/*.xml, classpath*:/mappers/*.xml, classpath:/META-INF/modeler-mybatis-mappings/*.xml
+  configuration-properties:
+    prefix:
+    blobType: BLOB
+    boolValue: TRUE
 # 调度任务
 xxl:
   job:
