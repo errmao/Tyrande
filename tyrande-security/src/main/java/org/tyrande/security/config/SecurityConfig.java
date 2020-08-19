@@ -4,13 +4,16 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.api.R;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.HeaderWriter;
 import org.tyrande.common.constant.NormalConstants;
 import org.tyrande.security.model.TyrandeSecurityProperty;
 import org.tyrande.security.security.JwtAuthenticationProvider;
@@ -22,6 +25,9 @@ import org.tyrande.security.security.handler.TyrandeLogoutSuccessHandler;
 import org.tyrande.security.service.jwt.JwtUserDetailServiceImpl;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.security.Policy;
 
 /**
  * Spring Security 配置类
@@ -48,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/flowui/**");
+        web.ignoring().antMatchers("/resources/**");
         super.configure(web);
     }
 
@@ -56,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // 允许跨域
         http.cors();
+
         //登录过滤器
         JwtLoginFilter jwtLoginFilter = new JwtLoginFilter(tyrandeSecurityProperty.getLoginUrl());
         jwtLoginFilter.setAuthenticationManager(this.authenticationManagerBean());
@@ -93,7 +100,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .and()
                 .authorizeRequests()
-
                 .anyRequest().access("@accessDecisionService.hasPermission(request , authentication)")
                 .and()
                 //将授权提供者注册到授权管理器中(AuthenticationManager)
@@ -102,6 +108,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(headFilter, JwtLoginFilter.class)
                 //禁用session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .headers().frameOptions().disable()
                 .and()
                 .csrf().disable()
                 .logout().logoutUrl(tyrandeSecurityProperty.getLogoutUrl()).logoutSuccessHandler(tyrandeLogoutSuccessHandler);

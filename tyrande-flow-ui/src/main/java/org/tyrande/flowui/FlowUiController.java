@@ -17,7 +17,7 @@ public class FlowUiController {
     /**
      * 获取当前登陆用户信息
      */
-    @GetMapping(value = "/app/rest/account")
+    @GetMapping(value = "/rest/account")
     public UserRepresentation getAccount() {
         JwtUser jwtUser = SecurityUserInfoUtil.getCurrentUser();
         UserRepresentation userRepresentation = new UserRepresentation();

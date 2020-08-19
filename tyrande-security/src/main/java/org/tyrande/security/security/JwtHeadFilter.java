@@ -36,6 +36,11 @@ public class JwtHeadFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        if (request.getRequestURI().startsWith("/tyrande/flowui/") || request.getRequestURI().startsWith("/tyrande/rest")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String token = request.getHeader("Authorization");
         if (token == null || token.isEmpty()) {
             response.setContentType(NormalConstants.JSON_UTF8);

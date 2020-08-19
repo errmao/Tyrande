@@ -59,3 +59,5 @@ flowable:
   async-executor-activate: false
   async-history-executor-activate: false
   check-process-definitions: false
+  modeler:
+    r

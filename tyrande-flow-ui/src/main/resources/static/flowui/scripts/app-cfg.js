@@ -18,11 +18,13 @@
 var FLOWABLE = FLOWABLE || {};
 
 var pathname = window.location.pathname.replace(/^(\/[^\/]*)(\/.*)?modeler\/?$/, '$1').replace(/\/$/, '');
+var hostname = window.location.origin;
 
 FLOWABLE.CONFIG = {
 	'onPremise' : true,
 	'contextRoot' : pathname,
-	'contextModelerRestRoot' : pathname + '/modeler-app',
+	// 修改为读取后台地址
+	'contextModelerRestRoot' : hostname + '/tyrande',
 	'webContextRoot' : pathname,
 	'datesLocalization' : false
 };
