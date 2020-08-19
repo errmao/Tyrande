@@ -10,7 +10,6 @@ import javax.annotation.Resource;
  *
  * @author Tyrande
  */
-@Service
 public class FlowableServiceImpl implements FlowableService {
 
     /**
