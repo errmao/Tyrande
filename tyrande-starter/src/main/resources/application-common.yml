@@ -1,0 +1,9 @@
+# 安全模块参数
+tyrande:
+  security:
+    # 登录请求地址
+    loginUrl: /login
+    # 登出请求地址
+    logoutUrl: /logout
+  # 默认用户头像
+  defaultAvatar: https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif

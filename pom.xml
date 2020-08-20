@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.tyrande</groupId>
+    <artifactId>tyrande-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <!-- 子模块 -->
+    <modules>
+        <module>tyrande-starter</module>
+        <module>tyrande-common</module>
+        <module>tyrande-system</module>
+        <module>tyrande-generator</module>
+        <module>tyrande-security</module>
+        <module>tyrande-jobs</module>
+        <module>tyrande-flow</module>
+    </modules>
+
+    <!-- 依赖版本 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <tyrande.version>1.0.0</tyrande.version>
+        <springboot.version>2.3.1.RELEASE</springboot.version>
+        <lombok.version>1.18.12</lombok.version>
+        <mybatisplus.version>3.3.2</mybatisplus.version>
+        <hutool.version>5.3.9</hutool.version>
+        <freemarker.version>2.3.1.RELEASE</freemarker.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <jedis.version>3.3.0</jedis.version>
+        <fastjson.version>1.2.73</fastjson.version>
+        <xxl.job.version>2.2.0</xxl.job.version>
+        <flowable.version>6.5.0</flowable.version>
+        <dynamic.datasource.version>3.2.0</dynamic.datasource.version>
+    </properties>
+
+    <!-- 依赖声明 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot的依赖配置-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- mybatis plus 多数据源 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic.datasource.version}</version>
+            </dependency>
+
+            <!-- 工作流 -->
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-spring-boot-starter-process</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+
+            <!-- 定时任务调度 -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl.job.version}</version>
+            </dependency>
+
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <!-- jwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- Mybatis Plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- 通用工具模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-common</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 系统管理模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-system</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 代码生成模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-generator</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 安全模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-security</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 任务调度模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-jobs</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 工作流模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-flow</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun central</name>
+            <url>https://maven.aliyun.com/repository/central</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

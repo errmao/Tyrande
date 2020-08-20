@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.tyrande.generator.dao.GeneratorDao">
+
+    <select id="getTableInfo" resultType="org.tyrande.generator.model.queryinfo.TableInfo">
+        SELECT table_name,
+               table_comment
+        FROM information_schema.TABLES
+        WHERE table_comment IS NOT NULL
+          AND table_schema = (SELECT database())
+          AND table_name = #{tableName}
+    </select>
+
+    <select id="getColumnInfo" resultType="org.tyrande.generator.model.queryinfo.ColumnInfo">
+        SELECT column_name,
+               (CASE WHEN column_key = 'PRI' THEN '1' ELSE '0' END) AS is_pk,
+               ordinal_position                                     AS sort,
+               column_comment,
+               column_type
+        FROM information_schema.COLUMNS
+        WHERE table_schema = (
+            SELECT database())
+          AND table_name = (#{tableName})
+        ORDER BY ordinal_position
+    </select>
+</mapper>

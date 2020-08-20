@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.tyrande.security.dao.jwt.JwtUserDao">
+
+    <select id="findByLoginCode" resultType="org.tyrande.common.model.JwtUser"
+            parameterType="string">
+        select id, login_code, user_name, password, status, avatar
+        from sys_user
+        where login_code = #{username}
+          and status != 0
+    </select>
+
+    <select id="getRoleList" resultType="java.lang.String" parameterType="long">
+        select role_id
+        from sys_user_role
+        where user_id = #{userId}
+    </select>
+</mapper>

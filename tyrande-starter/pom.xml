@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>tyrande-parent</artifactId>
+        <groupId>org.tyrande</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>tyrande-starter</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <description>web服务入口</description>
+
+    <dependencies>
+
+        <!-- 通用工具模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-common</artifactId>
+        </dependency>
+
+        <!-- 系统管理模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-system</artifactId>
+        </dependency>
+
+        <!-- 代码生成模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-generator</artifactId>
+        </dependency>
+
+        <!-- 安全模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-security</artifactId>
+        </dependency>
+
+        <!-- 任务调度模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-jobs</artifactId>
+        </dependency>
+
+        <!-- 工作流模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-flow</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.1.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
