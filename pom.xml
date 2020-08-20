@@ -7,7 +7,7 @@
     <groupId>org.tyrande</groupId>
     <artifactId>tyrande-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <!-- 子模块 -->
     <modules>
@@ -26,7 +26,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <tyrande.version>1.0.0</tyrande.version>
+        <tyrande.version>1.0.1</tyrande.version>
         <springboot.version>2.3.1.RELEASE</springboot.version>
         <lombok.version>1.18.12</lombok.version>
         <mybatisplus.version>3.3.2</mybatisplus.version>
@@ -171,6 +171,15 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
                 </configuration>
             </plugin>
         </plugins>
