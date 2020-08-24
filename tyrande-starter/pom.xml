@@ -43,13 +43,6 @@
             <groupId>org.tyrande</groupId>
             <artifactId>tyrande-jobs</artifactId>
         </dependency>
-
-        <!-- 工作流模块 -->
-        <dependency>
-            <groupId>org.tyrande</groupId>
-            <artifactId>tyrande-flow</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>

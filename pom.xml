@@ -148,13 +148,6 @@
                 <version>${tyrande.version}</version>
             </dependency>
 
-            <!-- 工作流模块 -->
-            <dependency>
-                <groupId>org.tyrande</groupId>
-                <artifactId>tyrande-flow</artifactId>
-                <version>${tyrande.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
