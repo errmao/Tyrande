@@ -9,11 +9,6 @@ spring:
           url: jdbc:mysql://localhost:7700/tyrande?usrSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
           username: root
           password: 123456
-        flow:
-          driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:7700/tyrande_flow?usrSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
-          username: root
-          password: 123456
         job:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://localhost:7700/tyrande_job?usrSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
