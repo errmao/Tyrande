@@ -1,4 +1,4 @@
-package org.turande.basemq.common.constant;
+package org.tyrande.basemq.common.constant;
 
 /**
  * 消息中间件枚举
