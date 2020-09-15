@@ -17,6 +17,7 @@
         <module>tyrande-generator</module>
         <module>tyrande-security</module>
         <module>tyrande-jobs</module>
+        <module>tyrande-base-mq</module>
     </modules>
 
     <!-- 依赖版本 -->
@@ -144,6 +145,13 @@
             <dependency>
                 <groupId>org.tyrande</groupId>
                 <artifactId>tyrande-jobs</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 消息中间件 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-base-mq</artifactId>
                 <version>${tyrande.version}</version>
             </dependency>
 
