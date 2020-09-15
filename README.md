@@ -26,6 +26,20 @@ docker run -d -p 60007:6379  \
 --appendonly yes --requirepass "redis123"
 ```
 
+## 访问地址
+
+> 后台管理系统
+
+`http://localhost:9528/`
+
+> 任务调度系统
+
+`http://localhost:7702/tyrande-job`
+
+> 消息中间件
+
+`http://localhost:15672/`
+
 ## 版本说明
 
 ### v1.0.0
