@@ -21,7 +21,7 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
     networks:
       - tyrande-bridge
-    
+
   tyrande-redis:
     image: redis:6.0.6
     container_name: tyrande-redis
@@ -33,7 +33,7 @@ services:
     command: --requirepass "redis123" --appendonly yes
     networks:
       - tyrande-bridge
-      
+
   tyrande-job:
     build:
       context: ./tyrande-job
@@ -41,7 +41,7 @@ services:
     image: tyrande-job:1.0.0
     privileged: true
     restart: always
-    ports: 
+    ports:
       - "7702:8080"
     container_name: tyrande-job
     depends_on:
@@ -51,14 +51,23 @@ services:
       - D:\tools\docker\tyrande-job:/data
     networks:
       - tyrande-bridge
-      
+
+  tyrande-rabbit:
+    image: rabbitmq:management
+    container_name: tyrande-rabbit
+    restart: always
+    ports:
+      - "7706:5672"
+    networks:
+      - tyrande-bridge
+
   tyrande-starter:
     build:
       context: ./tyrande-starter
       dockerfile: Dockerfile
     image: tyrande-starter:1.0.0
     privileged: true
-    ports: 
+    ports:
       - "7703:8080"
     container_name: tyrande-starter
     depends_on:
@@ -99,15 +108,5 @@ services:
       - D:\tools\docker\container\tyrande-nginx-ui\logs:/var/log/nginx
     environment:
       - NODE_ENV=production
-    networks:
-      - tyrande-bridge
-
-  tyrande-tomcat:
-    image: tomcat:8.5.57
-    container_name: tyrande-tomcat
-    ports:
-      - "7705:8080"
-    volumes:
-      - D:\tools\docker\container\tyrande-tomcat\webapps:/usr/local/tomcat/webapps
     networks:
       - tyrande-bridge
