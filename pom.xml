@@ -36,7 +36,6 @@
         <jedis.version>3.3.0</jedis.version>
         <fastjson.version>1.2.73</fastjson.version>
         <xxl.job.version>2.2.0</xxl.job.version>
-        <flowable.version>6.5.0</flowable.version>
         <dynamic.datasource.version>3.2.0</dynamic.datasource.version>
     </properties>
 
@@ -57,13 +56,6 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>${dynamic.datasource.version}</version>
-            </dependency>
-
-            <!-- 工作流 -->
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-spring-boot-starter-process</artifactId>
-                <version>${flowable.version}</version>
             </dependency>
 
             <!-- 定时任务调度 -->
