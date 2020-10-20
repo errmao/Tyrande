@@ -1,5 +1,6 @@
 package org.tyrande.common.confog;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -11,6 +12,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
  *
  * @author Tyrande
  */
+@Slf4j
 @Configuration
 public class RedisConfig {
 
@@ -19,6 +21,7 @@ public class RedisConfig {
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory factory) {
+        log.debug("===========这个是debug222");
         //配置redisTemplate
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(factory);

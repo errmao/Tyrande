@@ -27,6 +27,7 @@ public class TyrandeJobConfig {
     @Bean
     public XxlJobSpringExecutor xxlJobExecutor() {
         log.info("[调度任务配置初始化...]");
+        log.debug("===========这个是debug111");
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
         xxlJobSpringExecutor.setAdminAddresses(tyrandeJobCenterConfigModel.getAddress());
         xxlJobSpringExecutor.setAppname(tyrandeJobConfigModel.getAppname());

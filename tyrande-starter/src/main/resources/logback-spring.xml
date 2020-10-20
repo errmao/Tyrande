@@ -2,6 +2,8 @@
 <configuration>
     <!-- 日志存放路径 -->
     <property name="log.path" value="/tyrande/logs"/>
+    <!-- 定义日志文件名称 -->
+    <property name="log.name" value="tyrande"></property>
     <!-- 日志输出格式 -->
     <property name="log.pattern"
               value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
@@ -15,12 +17,12 @@
     </appender>
 
     <!-- 系统日志输出 -->
-    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/tyrande-info.log</file>
+    <appender name="sys-info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${log.name}-info.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/tyrande-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${log.name}-info.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -38,12 +40,36 @@
         </filter>
     </appender>
 
-    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/tyrande-error.log</file>
+    <!-- 系统日志输出 -->
+    <appender name="sys-debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${log.name}-debug.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/tyrande-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${log.name}-debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>DEBUG</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="sys-error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${log.name}-error.log</file>
+        <!-- 循环政策：基于时间创建日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名格式 -->
+            <fileNamePattern>${log.path}/${log.name}-error.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -62,12 +88,12 @@
     </appender>
 
     <!-- 调度任务日志输出 -->
-    <appender name="tyrande-job" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/tyrande-job.log</file>
+    <appender name="sys-job-info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${log.name}-job-info.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/tyrande-job.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${log.name}-job-info.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -85,51 +111,36 @@
         </filter>
     </appender>
 
-    <!-- 工作流日志输出 -->
-    <appender name="tyrande-flow" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/tyrande-flow.log</file>
-        <!-- 循环政策：基于时间创建日志文件 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/tyrande-flow.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <!-- 日志最大的历史 60天 -->
-            <maxHistory>60</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>${log.pattern}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <!-- 过滤的级别 -->
-            <level>INFO</level>
-            <!-- 匹配时的操作：接收（记录） -->
-            <onMatch>ACCEPT</onMatch>
-            <!-- 不匹配时的操作：拒绝（不记录） -->
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
-
-    <!-- 系统模块日志级别控制  -->
-    <logger name="org.tyrande" level="info"/>
-    <!-- Spring日志级别控制  -->
-    <logger name="org.springframework" level="warn"/>
-    <!-- 调度任务日志输出 -->
-    <logger name="org.tyrande.jobs" level="info">
-        <appender-ref ref="tyrande-job"></appender-ref>
+    <!-- 调度日志文件 -->
+    <!-- additivity:
+                - true: 下面root中会打印这个日志
+                - false: 下面root中不会打印这个日志
+                默认 true 打印这个日志
+    -->
+    <logger name="org.tyrande.jobs" level="info" additivity="true">
+        <appender-ref ref="sys-job-info"></appender-ref>
     </logger>
-    <!-- 工作流日志输出 -->
-    <logger name="org.tyrande.flow" level="info">
-        <appender-ref ref="tyrande-flow"></appender-ref>
-    </logger>
+    <logger name="org.tyrande" level="debug"/>
 
-    <root level="info">
-        <appender-ref ref="console"/>
-    </root>
-
-    <!--系统操作日志-->
-    <root level="info">
-        <appender-ref ref="file_info"/>
-        <appender-ref ref="file_error"/>
-    </root>
-
+    <springProfile name="dev">
+        <root level="info">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+    <springProfile name="test">
+        <root level="info">
+            <appender-ref ref="sys-info"/>
+            <appender-ref ref="sys-debug"/>
+            <appender-ref ref="sys-error"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+    <springProfile name="pro">
+        <root level="info">
+            <appender-ref ref="sys-info"/>
+            <appender-ref ref="sys-debug"/>
+            <appender-ref ref="sys-error"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
 </configuration>
