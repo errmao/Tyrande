@@ -8,9 +8,9 @@ import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.tyrande.common.constant.NormalConstants;
+import org.tyrande.common.model.JwtUser;
 import org.tyrande.common.utils.SpringContextUtil;
 import org.tyrande.security.common.JwtTokenUtil;
-import org.tyrande.common.model.JwtUser;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -43,15 +43,15 @@ public class JwtHeadFilter extends OncePerRequestFilter {
             return;
         }
         RedisTemplate redisTemplate = (RedisTemplate) SpringContextUtil.getBean("redisTemplate");
-        String redisToken = redisTemplate.opsForValue().get(token).toString();
+        Object redisTokenObj = redisTemplate.opsForValue().get(token);
 
         // 过期
-        if (StringUtils.isEmpty(redisToken)) {
+        if (StringUtils.isEmpty(redisTokenObj)) {
             response.setContentType(NormalConstants.JSON_UTF8);
             response.getWriter().write("token 失效");
             return;
         }
-
+        String redisToken = redisTokenObj.toString();
         String subject = JwtTokenUtil.getProperties(redisToken);
         JwtUser user = JSONObject.parseObject(subject, JwtUser.class);
         // 调用方法，刷新token
