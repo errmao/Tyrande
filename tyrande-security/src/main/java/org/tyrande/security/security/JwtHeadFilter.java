@@ -1,6 +1,8 @@
 package org.tyrande.security.security;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.extension.api.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -9,6 +11,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.tyrande.common.constant.NormalConstants;
 import org.tyrande.common.model.JwtUser;
+import org.tyrande.common.model.ierrorcode.ErrorCode60001;
+import org.tyrande.common.model.ierrorcode.ErrorCode60002;
 import org.tyrande.common.utils.SpringContextUtil;
 import org.tyrande.security.common.JwtTokenUtil;
 
@@ -17,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,7 +29,13 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Tyrande
  */
+@Slf4j
 public class JwtHeadFilter extends OncePerRequestFilter {
+
+    /**
+     * 可以直接访问通过的请求
+     */
+    private String[] allowRequest = {"/tyrande/send/customer"};
 
     /**
      * 作用：
@@ -36,10 +47,15 @@ public class JwtHeadFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        if (Arrays.asList(allowRequest).contains(request.getRequestURI())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         String token = request.getHeader("Authorization");
         if (token == null || token.isEmpty()) {
             response.setContentType(NormalConstants.JSON_UTF8);
-            response.getWriter().write("没有权限");
+            R r = R.failed(new ErrorCode60002());
+            response.getWriter().write(String.valueOf(r.getCode()));
             return;
         }
         RedisTemplate redisTemplate = (RedisTemplate) SpringContextUtil.getBean("redisTemplate");
@@ -48,7 +64,8 @@ public class JwtHeadFilter extends OncePerRequestFilter {
         // 过期
         if (StringUtils.isEmpty(redisTokenObj)) {
             response.setContentType(NormalConstants.JSON_UTF8);
-            response.getWriter().write("token 失效");
+            R r = R.failed(new ErrorCode60001());
+            response.getWriter().write(String.valueOf(r.getCode()));
             return;
         }
         String redisToken = redisTokenObj.toString();

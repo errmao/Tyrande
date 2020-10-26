@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.tyrande.common.constant.NormalConstants;
 import org.tyrande.security.model.TyrandeSecurityProperty;
@@ -86,13 +87,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .and()
                 .authorizeRequests()
-
                 .anyRequest().access("@accessDecisionService.hasPermission(request , authentication)")
                 .and()
                 //将授权提供者注册到授权管理器中(AuthenticationManager)
                 .authenticationProvider(provider)
                 .addFilterAfter(jwtLoginFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(headFilter, JwtLoginFilter.class)
+                .addFilterAfter(headFilter, FilterSecurityInterceptor.class)
                 //禁用session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
