@@ -102,14 +102,15 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/customer',
+    path: '/wealth',
     component: Layout,
-    redirect: '/customer/custlabel',
-    name: '客户管理',
+    redirect: '/wealth/ds',
+    name: '财富管理',
     meta: {
-      title: '客户管理',
-      icon: 'customer'
-    }
+      title: '财富管理',
+      icon: 'wealth'
+    },
+    children: []
   },
 
   // 404 页面必须配置在最后 !!!
