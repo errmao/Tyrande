@@ -51,6 +51,12 @@
             <artifactId>tyrande-base-mq</artifactId>
         </dependency>
         -->
+
+        <!-- 财富模块 -->
+        <dependency>
+            <groupId>org.tyrande</groupId>
+            <artifactId>tyrande-wealth</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

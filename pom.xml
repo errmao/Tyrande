@@ -18,6 +18,7 @@
         <module>tyrande-security</module>
         <module>tyrande-jobs</module>
         <module>tyrande-base-mq</module>
+        <module>tyrande-wealth</module>
     </modules>
 
     <!-- 依赖版本 -->
@@ -144,6 +145,13 @@
             <dependency>
                 <groupId>org.tyrande</groupId>
                 <artifactId>tyrande-base-mq</artifactId>
+                <version>${tyrande.version}</version>
+            </dependency>
+
+            <!-- 财富模块 -->
+            <dependency>
+                <groupId>org.tyrande</groupId>
+                <artifactId>tyrande-wealth</artifactId>
                 <version>${tyrande.version}</version>
             </dependency>
 
