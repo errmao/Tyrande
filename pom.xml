@@ -34,7 +34,7 @@
         <freemarker.version>2.3.1.RELEASE</freemarker.version>
         <jjwt.version>0.9.1</jjwt.version>
         <jedis.version>3.3.0</jedis.version>
-        <fastjson.version>1.2.73</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <xxl.job.version>2.2.0</xxl.job.version>
         <dynamic.datasource.version>3.2.0</dynamic.datasource.version>
     </properties>
